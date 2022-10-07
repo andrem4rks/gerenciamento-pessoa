@@ -1,10 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+* { 
+  font-family: 'Roboto', sans-serif;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     margin: 3%;
 }
 
-.linha-1 {
+.linha {
     display: flex;
     flex-direction: row;
 }
@@ -22,12 +27,30 @@
     width: 100%;
 }
 
+.sexo {
+  margin-right: 20px;
+}
+
 
 input {
     height: 25px;
     border-radius: 5px;
     border: solid 1px;
     width: 100%;
+}
+
+label {
+  color: #0c4f91;
+  font-weight: 500;
+  font-size: medium;
+}
+
+span {
+  color: rgb(182, 9, 9);
+}
+
+select {
+  width: 100%;
 }
 
 

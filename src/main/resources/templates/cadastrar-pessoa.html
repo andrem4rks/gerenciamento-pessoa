@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link th:href="@{/css/main.css}" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link th:href="@{/css/main.css}" rel="stylesheet" />
 
 </head>
 
@@ -12,77 +12,102 @@
 
 
 
-    <div class="container" id="form-cont">
+  <div class="container" id="form-cont">
 
-        <h2>Cadastrar usuário</h2>
+    <h2>Cadastrar usuário</h2>
 
-        <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <span th:text="${mensagem}"></span>
+    <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <span th:text="${mensagem}"></span>
+    </div>
+
+
+
+    <form action="#" th:action="@{/salvar}" th:object="${pessoa}" method="post">
+
+
+      <div class="linha">
+
+        <div class="row row-cpf">
+          <div class="input">
+            <label class="">CPF <span>*</span></label>
+          </div>
+          <div class="input">
+            <input type="text" class="input-cpf" th:field="*{cpf}">
+          </div>
         </div>
 
+        <div class="row row-nome">
+          <div class="input">
+            <label class="">Nome:</label>
+          </div>
+          <div class="input">
+            <input type="text" class="input-nome" th:field="*{nome}">
+          </div>
+        </div>
 
+      </div>
 
-        <form action="#" th:action="@{/salvar}" th:object="${pessoa}" method="post">
+      <div class="linha">
+        <div class="sexo">
+          <div class="input">
+            <label>Sexo <span>*</span></label>
+          </div>
+          <div class="input">
+            <select name="sexo">
+              <option th:each="sexo : ${listaSexo}" th:value="${sexo.id}" th:text="${sexo.descricao}" name="sexo">
+              </option>
+            </select>
+          </div>
+        </div>
 
-
-            <div class="linha-1">
-
-                <div class="row row-cpf">
-                    <div class="input">
-                        <label class="">CPF:</label>
-                    </div>
-                    <div class="input">
-                        <input type="text" class="input-cpf" th:field="*{cpf}">
-                    </div>
-                </div>
-
-                <div class="row row-nome">
-                    <div class="input">
-                        <label class="">Nome:</label>
-                    </div>
-                    <div class="input">
-                        <input type="text" class="input-nome" th:field="*{nome}">
-                    </div>
-                </div>
-
-            </div>
-
-
-
-
-            
-
-            <!--<span class="mensagem" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>-->
-
-
-
-
-            <div class="col">
-                <label class="col-sm-1 col-form-label">Nascimento:</label>
-                <input type="text" class="form-control" th:field="*{dataNascimento}">
-                <span class="mensagem" th:if="${#fields.hasErrors('dataNascimento')}"
-                    th:errors="*{dataNascimento}"></span>
-            </div>
-
-
-            <label class="col-sm-1 col-form-label">Nome Social:</label>
-            <input type="text" class="form-control" th:field="*{nomeSocial}">
+        <div class="raca">
+          <div class="input">
+            <label>Raca <span>*</span></label>
+          </div>
+          <div class="input">
+            <select name="raca">
+              <option th:each="raca : ${listaRaca}" th:value="${raca.id}" th:text="${raca.descricao}" name="raca">
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
 
 
 
 
 
 
-            <div class="row px-3">
-                <input type="submit" class="btn btn-info btn-fluid mt-2 mb-2" value="Cadastrar">
-            </div>
-        </form>
-
-    </div>
+      <!--<span class="mensagem" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>-->
 
 
-    </div>
+
+
+      <div class="col">
+        <label class="col-sm-1 col-form-label">Nascimento:</label>
+        <input type="text" class="form-control" th:field="*{dataNascimento}">
+        <span class="mensagem" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></span>
+      </div>
+
+
+      <label class="col-sm-1 col-form-label">Nome Social:</label>
+      <input type="text" class="form-control" th:field="*{nomeSocial}">
+
+
+
+
+
+
+      <div class="row px-3">
+        <input type="submit" class="btn btn-info btn-fluid mt-2 mb-2" value="Cadastrar">
+      </div>
+    </form>
+
+  </div>
+
+
+  </div>
 
 
 
