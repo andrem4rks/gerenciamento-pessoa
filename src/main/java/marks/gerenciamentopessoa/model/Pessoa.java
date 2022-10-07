@@ -25,6 +25,55 @@ public class Pessoa extends PessoaPrincipal {
     @JoinColumn(name = "id_raca")
     private Raca raca;
 
+    @OneToOne
+    @JoinColumn(name = "id_estado_civil")
+    private EstadoCivil estadoCivil;
+
+    
+    @OneToOne
+    @JoinColumn(name = "id_pais_nascimento")
+    private Pais paisNascimento;
+
+    @OneToOne
+    @JoinColumn(name = "id_pais_nacionalidade")
+    private Pais paisNacionalidade;
+
+    @OneToOne
+    @JoinColumn(name = "id_endereco")
+    private Endereco endereco;
+
+    public Endereco getEndereco() {
+      return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+      this.endereco = endereco;
+    }
+
+    public Pais getPaisNascimento() {
+      return paisNascimento;
+    }
+
+    public void setPaisNascimento(Pais paisNascimento) {
+      this.paisNascimento = paisNascimento;
+    }
+
+    public Pais getPaisNacionalidade() {
+      return paisNacionalidade;
+    }
+
+    public void setPaisNacionalidade(Pais paisNacionalidade) {
+      this.paisNacionalidade = paisNacionalidade;
+    }
+
+    public EstadoCivil getEstadoCivil() {
+      return estadoCivil;
+    }
+
+    public void setEstadoCivil(EstadoCivil estadoCivil) {
+      this.estadoCivil = estadoCivil;
+    }
+
     public Raca getRaca() {
       return raca;
     }
