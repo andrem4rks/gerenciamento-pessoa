@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import marks.gerenciamentopessoa.model.CEP;
 import marks.gerenciamentopessoa.model.Endereco;
 import marks.gerenciamentopessoa.model.EstadoCivil;
 import marks.gerenciamentopessoa.model.Pais;
@@ -23,6 +24,8 @@ import marks.gerenciamentopessoa.model.Pessoa;
 import marks.gerenciamentopessoa.model.Raca;
 import marks.gerenciamentopessoa.model.Sexo;
 import marks.gerenciamentopessoa.model.TipoEndereco;
+import marks.gerenciamentopessoa.repository.cepRepository;
+import marks.gerenciamentopessoa.repository.enderecoRepository;
 import marks.gerenciamentopessoa.repository.estadoCivilRepository;
 import marks.gerenciamentopessoa.repository.paisRepository;
 import marks.gerenciamentopessoa.repository.pessoaRepository;
@@ -50,6 +53,12 @@ public class PessoaController {
     
     @Autowired
     private estadoCivilRepository estadoCivilRepository;
+
+    @Autowired
+    private cepRepository cepRepository;
+
+    @Autowired
+    private enderecoRepository enderecoRepository;
     
     @GetMapping("/novo")
     public String adicionarPessoa(Model model){
@@ -62,10 +71,12 @@ public class PessoaController {
       model.addAttribute("listaTipoEndereco", tipoEnderecoRepository.findAll());
       return "cadastrar-pessoa";
     } 
+
     
     @PostMapping("/salvar")
     public String salvarPessoa(@Valid Pessoa pessoa, 
                                @Valid Endereco endereco,
+                               @Valid CEP cep,
                                 BindingResult result,
                                 Model model, 
                                 RedirectAttributes attributes, 
@@ -102,10 +113,22 @@ public class PessoaController {
 
       Optional<TipoEndereco> tipoEnderecoOptional = tipoEnderecoRepository.findById(tipoEndereco_id);
       TipoEndereco tipoEndereco = tipoEnderecoOptional.get();
-      endereco.setTipoEndereco(tipoEndereco);
+      cep.setTipoEndereco(tipoEndereco);
+
+      CEP cepTmp = cepRepository.findByCep(cep.getNumero_cep());
+
+      if(cepTmp != null) {
+        if(cep.getEstado() == cepTmp.getEstado() && cep.getMunicipio() == cepTmp.getMunicipio() && cep.getBairro() == cepTmp.getBairro()) {
+          endereco.setCep(cepTmp);
+        } 
+      } else {
+        cepRepository.save(cep);
+        endereco.setCep(cep);
+      }
+
+      enderecoRepository.save(endereco);
 
       pessoa.setEndereco(endereco);
-
       pessoaRepository.save(pessoa);
 
       return "redirect:/novo";

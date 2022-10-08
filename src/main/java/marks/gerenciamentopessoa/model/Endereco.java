@@ -15,113 +15,68 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean localResidencia;
-
-    @NotNull
-    private String cep;
-
-    @OneToOne
-    @JoinColumn(name = "id_tipoEndereco")
-    private TipoEndereco tipoEndereco;
-
-    @NotNull
-    private String logradouro;
-
     @NotNull
     private Integer numero;
 
+    @NotNull
+    private String rua;
+
     private String complemento;
 
-    private String bairro;
-
-    @NotNull
-    private String uf;
-
-    @NotNull
-    private String municipio;
+    @OneToOne
+    @JoinColumn(name = "id_cep")
+    private CEP cep;
 
     public Long getId() {
-        return this.id;
+      return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Boolean isLocalResidencia() {
-        return this.localResidencia;
-    }
-
-    public Boolean getLocalResidencia() {
-        return this.localResidencia;
-    }
-
-    public void setLocalResidencia(Boolean localResidencia) {
-        this.localResidencia = localResidencia;
-    }
-
-    public String getCep() {
-        return this.cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public TipoEndereco getTipoEndereco() {
-        return this.tipoEndereco;
-    }
-
-    public void setTipoEndereco(TipoEndereco tipoEndereco) {
-        this.tipoEndereco = tipoEndereco;
-    }
-
-    public String getLogradouro() {
-        return this.logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
+      this.id = id;
     }
 
     public Integer getNumero() {
-        return this.numero;
+      return numero;
     }
 
     public void setNumero(Integer numero) {
-        this.numero = numero;
+      this.numero = numero;
+    }
+
+    public String getRua() {
+      return rua;
+    }
+
+    public void setRua(String rua) {
+      this.rua = rua;
     }
 
     public String getComplemento() {
-        return this.complemento;
+      return complemento;
     }
 
     public void setComplemento(String complemento) {
-        this.complemento = complemento;
+      this.complemento = complemento;
     }
 
-    public String getBairro() {
-        return this.bairro;
+    public CEP getCep() {
+      return cep;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setCep(CEP cep) {
+      this.cep = cep;
     }
 
-    public String getUf() {
-        return this.uf;
+    public Endereco(Long id, @NotNull Integer numero, @NotNull String rua, String complemento, CEP cep) {
+      this.id = id;
+      this.numero = numero;
+      this.rua = rua;
+      this.complemento = complemento;
+      this.cep = cep;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public Endereco() {
     }
 
-    public String getMunicipio() {
-        return this.municipio;
-    }
-
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }
-
+    
 }
