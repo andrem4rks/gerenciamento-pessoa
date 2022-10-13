@@ -127,7 +127,7 @@
       </div>
     </form>
 
-    <form action="#" th:action="@{/salvar}" th:object="${endereco}" method="post">
+    <form action="#" th:action="@{/salvar}" th:object="${cep}" method="post">
 
       <div class="formularioEndereco">
 
@@ -148,12 +148,61 @@
           </div>
 
           <div class="input">
-              <label class="">CEP <span>*</span></label>
-              <input type="text" class="form-control" th:field="*{cep}">  
+            <label class="">CEP <span>*</span></label>
+            <input type="text" class="form-control" th:field="*{cep}">
           </div>
-          
+
         </div>
 
+        <div class="linha">
+          <div class="input">
+            <label class="">UF <span>*</span></label>
+            <input type="text" class="form-control" th:field="*{estado}">
+          </div>
+          <div class="input">
+            <label class="">Municipio <span>*</span></label>
+            <input type="text" class="form-control" th:field="*{municipio}">
+          </div>
+        </div>
+
+        <div class="linha">
+          <div class="input">
+            <label for="" class="tipoEndereco">Tipo <span>*</span></label>
+            <select name="tipoEndereco">
+              <option th:each="local: ${listaLocais}" th:value="${local.id}" th:text="${local.descricao}"
+                name="tipoEndereco">
+              </option>
+            </select>
+          </div>
+          <div class="input">
+            <div class="input">
+              <label class="">Bairro </label>
+              <input type="text" class="form-control" th:field="*{bairro}">
+            </div>
+          </div>
+
+
+        </div>
+
+        <div th:object="${endereco}" class="linha">
+
+          <div class="input">
+            <label class="">Logradouro <span>*</span></label>
+            <input type="text" class="form-control" th:field="*{logradouro}">
+          </div>
+
+
+          <div class="input">
+            <label class="">Numero <span>*</span></label>
+            <input type="text" class="form-control" th:field="*{numero}">
+          </div>
+
+          <div class="input">
+            <label class="">Complemento </label>
+            <input type="text" class="form-control" th:field="*{complemento}">
+          </div>
+
+        </div>
 
 
       </div>

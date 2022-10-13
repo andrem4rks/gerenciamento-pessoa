@@ -16,7 +16,7 @@ public class CEP {
   private Long id;
 
   @NotNull
-  private String numero_cep;
+  private String cep;
 
   @NotNull
   private String estado;
@@ -37,10 +37,10 @@ public class CEP {
   public CEP() {
   }
 
-  public CEP(Long id, @NotNull String numero_cep, @NotNull String estado, @NotNull String municipio,
+  public CEP(Long id, @NotNull String cep, @NotNull String estado, @NotNull String municipio,
       @NotNull String bairro) {
     this.id = id;
-    this.numero_cep = numero_cep;
+    this.cep = cep;
     this.estado = estado;
     this.municipio = municipio;
     this.bairro = bairro;
@@ -54,12 +54,12 @@ public class CEP {
     this.id = id;
   }
 
-  public String getNumero_cep() {
-    return numero_cep;
+  public String getCep() {
+    return cep;
   }
 
-  public void setNumero_cep(String numero_cep) {
-    this.numero_cep = numero_cep;
+  public void setCep(String cep) {
+    this.cep = cep;
   }
 
   public String getEstado() {

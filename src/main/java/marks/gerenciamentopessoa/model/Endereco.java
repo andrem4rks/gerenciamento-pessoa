@@ -19,7 +19,7 @@ public class Endereco {
     private Integer numero;
 
     @NotNull
-    private String rua;
+    private String logradouro;
 
     private String complemento;
 
@@ -43,12 +43,12 @@ public class Endereco {
       this.numero = numero;
     }
 
-    public String getRua() {
-      return rua;
+    public String getLogradouro() {
+      return logradouro;
     }
 
-    public void setRua(String rua) {
-      this.rua = rua;
+    public void setLogradouro(String logradouro) {
+      this.logradouro = logradouro;
     }
 
     public String getComplemento() {
@@ -67,10 +67,10 @@ public class Endereco {
       this.cep = cep;
     }
 
-    public Endereco(Long id, @NotNull Integer numero, @NotNull String rua, String complemento, CEP cep) {
+    public Endereco(Long id, @NotNull Integer numero, @NotNull String logradouro, String complemento, CEP cep) {
       this.id = id;
       this.numero = numero;
-      this.rua = rua;
+      this.logradouro = logradouro;
       this.complemento = complemento;
       this.cep = cep;
     }

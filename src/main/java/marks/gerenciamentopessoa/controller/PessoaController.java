@@ -64,6 +64,7 @@ public class PessoaController {
     public String adicionarPessoa(Model model){
       model.addAttribute("pessoa", new Pessoa());
       model.addAttribute("endereco", new Endereco());
+      model.addAttribute("cep", new CEP());
       model.addAttribute("listaSexo", sexoRepository.findAll());
       model.addAttribute("listaRaca", racaRepository.findAll());
       model.addAttribute("listaEstadoCivil", estadoCivilRepository.findAll());
@@ -115,7 +116,7 @@ public class PessoaController {
       TipoEndereco tipoEndereco = tipoEnderecoOptional.get();
       cep.setTipoEndereco(tipoEndereco);
 
-      CEP cepTmp = cepRepository.findByCep(cep.getNumero_cep());
+      CEP cepTmp = cepRepository.findByCep(cep.getCep());
 
       if(cepTmp != null) {
         if(cep.getEstado() == cepTmp.getEstado() && cep.getMunicipio() == cepTmp.getMunicipio() && cep.getBairro() == cepTmp.getBairro()) {
@@ -141,7 +142,7 @@ public class PessoaController {
     }
 
     @GetMapping("/apagar/{id}")
-    public String apagarUsuario(@PathVariable("id") Long id ,Model model) {
+    public String apagarUsuario(@PathVariable("id") Long id, Model model) {
       pessoaRepository.deleteById(id);
       return "redirect:/listar";
     }
