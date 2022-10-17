@@ -1,6 +1,5 @@
 package marks.gerenciamentopessoa.controller;
 
-import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import marks.gerenciamentopessoa.model.CEP;
+import marks.gerenciamentopessoa.model.CadastroPessoa;
 import marks.gerenciamentopessoa.model.Endereco;
 import marks.gerenciamentopessoa.model.EstadoCivil;
 import marks.gerenciamentopessoa.model.Pais;
@@ -62,36 +62,43 @@ public class PessoaController {
     
     @GetMapping("/novo")
     public String adicionarPessoa(Model model){
-      model.addAttribute("pessoa", new Pessoa());
-      model.addAttribute("endereco", new Endereco());
-      model.addAttribute("cep", new CEP());
+      
+      model.addAttribute("cadastroPessoa", new CadastroPessoa());
       model.addAttribute("listaSexo", sexoRepository.findAll());
       model.addAttribute("listaRaca", racaRepository.findAll());
       model.addAttribute("listaEstadoCivil", estadoCivilRepository.findAll());
       model.addAttribute("listaPaises", paisRepository.findAll());
       model.addAttribute("listaTipoEndereco", tipoEnderecoRepository.findAll());
-      return "cadastrar-pessoa";
+      return "/cadastrar-pessoa";
     } 
 
     
     @PostMapping("/salvar")
-    public String salvarPessoa(@Valid Pessoa pessoa, 
-                               @Valid Endereco endereco,
-                               @Valid CEP cep,
+    public String salvarPessoa( @Valid CadastroPessoa cadastroPessoa,
                                 BindingResult result,
-                                Model model, 
-                                RedirectAttributes attributes, 
-                                @RequestParam (value = "sexo", required = true) Long sexo_id,
-                                @RequestParam (value = "raca", required = true) Long raca_id,
-                                @RequestParam (value = "estadoCivil", required = true) Long estadoCivil_id,
-                                @RequestParam (value = "paisNascimento", required = true) Long paisNascimento_id, 
-                                @RequestParam (value = "paisNacionalidade", required = true) Long paisNacionalidade_id,
-                                @RequestParam (value = "tipoEndereco", required = true) Long tipoEndereco_id ) {
-      if(result.hasErrors()) {
-        return "redirect:/novo";
-      }
+                                RedirectAttributes attributes )  
+                                {
+      
+      if (result.hasErrors()) {
+			  return "cadastrar-pessoa";
+		  }
 
+      return "redirect:/novo";
+    }
 
+    @RequestMapping("/listar")
+    public String listarPessoas(Model model) {
+      model.addAttribute("pessoas", pessoaRepository.findAll());
+      return "listar-pessoas";
+    }
+
+    @GetMapping("/apagar/{id}")
+    public String apagarUsuario(@PathVariable("id") Long id, Model model) {
+      pessoaRepository.deleteById(id);
+      return "redirect:/listar";
+    }
+
+    public void setRelations(Pessoa pessoa,Endereco endereco, Long sexo_id, Long raca_id, Long estadoCivil_id, Long paisNascimento_id, Long paisNacionalidade_id, Long tipoEndereco_id) {
       Optional<Sexo> sexoOptional = sexoRepository.findById(sexo_id);
       Sexo sexo = sexoOptional.get();
       pessoa.setSexo(sexo);
@@ -115,9 +122,11 @@ public class PessoaController {
       Optional<TipoEndereco> tipoEnderecoOptional = tipoEnderecoRepository.findById(tipoEndereco_id);
       TipoEndereco tipoEndereco = tipoEnderecoOptional.get();
       endereco.setTipoEndereco(tipoEndereco);
+    }
+}
 
+ /*setRelations(pessoa, endereco, sexo_id, raca_id, estadoCivil_id, paisNascimento_id, paisNacionalidade_id, tipoEndereco_id);
       CEP cepTmp = cepRepository.findByCep(cep.getCep());
-
       if(cepTmp != null) {
         if(cep.getEstado() == cepTmp.getEstado() && cep.getMunicipio() == cepTmp.getMunicipio() && cep.getBairro() == cepTmp.getBairro()) {
           endereco.setCep(cepTmp);
@@ -126,24 +135,7 @@ public class PessoaController {
         cepRepository.save(cep);
         endereco.setCep(cep);
       }
-
       enderecoRepository.save(endereco);
-
       pessoa.setEndereco(endereco);
       pessoaRepository.save(pessoa);
-
-      return "redirect:/novo";
-    }
-
-    @RequestMapping("/listar")
-    public String listarPessoas(Model model) {
-      model.addAttribute("pessoas", pessoaRepository.findAll());
-      return "listar-pessoas";
-    }
-
-    @GetMapping("/apagar/{id}")
-    public String apagarUsuario(@PathVariable("id") Long id, Model model) {
-      pessoaRepository.deleteById(id);
-      return "redirect:/listar";
-    }
-}
+      */

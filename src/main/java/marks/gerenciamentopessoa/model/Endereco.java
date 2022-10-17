@@ -6,7 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Endereco {
@@ -15,10 +17,8 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private Integer numero;
+    private String numero;
 
-    @NotNull
     private String logradouro;
 
     private String complemento;
@@ -27,18 +27,22 @@ public class Endereco {
     @JoinColumn(name = "id_tipo_endereco")
     private TipoEndereco tipoEndereco;
 
-   
-
     @OneToOne
     @JoinColumn(name = "id_cep")
     private CEP cep;
 
-    public TipoEndereco getTipoEndereco() {
-      return tipoEndereco;
+    public Endereco(Long id, @NotNull @Size(min = 3, message = "O nome deve ter no mínimo 3 carateres") String numero,
+        @NotNull @Size(min = 3, message = "O nome deve ter no mínimo 3 carateres") String logradouro,
+        String complemento, TipoEndereco tipoEndereco, CEP cep) {
+      this.id = id;
+      this.numero = numero;
+      this.logradouro = logradouro;
+      this.complemento = complemento;
+      this.tipoEndereco = tipoEndereco;
+      this.cep = cep;
     }
 
-    public void setTipoEndereco(TipoEndereco tipoEndereco) {
-      this.tipoEndereco = tipoEndereco;
+    public Endereco() {
     }
 
     public Long getId() {
@@ -49,11 +53,11 @@ public class Endereco {
       this.id = id;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
       return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
       this.numero = numero;
     }
 
@@ -73,6 +77,14 @@ public class Endereco {
       this.complemento = complemento;
     }
 
+    public TipoEndereco getTipoEndereco() {
+      return tipoEndereco;
+    }
+
+    public void setTipoEndereco(TipoEndereco tipoEndereco) {
+      this.tipoEndereco = tipoEndereco;
+    }
+
     public CEP getCep() {
       return cep;
     }
@@ -81,16 +93,7 @@ public class Endereco {
       this.cep = cep;
     }
 
-    public Endereco(Long id, @NotNull Integer numero, @NotNull String logradouro, String complemento, CEP cep) {
-      this.id = id;
-      this.numero = numero;
-      this.logradouro = logradouro;
-      this.complemento = complemento;
-      this.cep = cep;
-    }
 
-    public Endereco() {
-    }
 
     
 }

@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class CEP {
@@ -15,16 +16,12 @@ public class CEP {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotNull
   private String cep;
 
-  @NotNull
   private String estado;
 
-  @NotNull
   private String municipio;
 
-  @NotNull
   private String bairro;
 
   public CEP() {

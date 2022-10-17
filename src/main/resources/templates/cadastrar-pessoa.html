@@ -26,24 +26,29 @@
 
 
 
-    <form action="#" th:action="@{/salvar}" th:object="${pessoa}" method="post" class="form">
+    <form action="#" th:action="@{/salvar}" th:object="${cadastroPessoa}" method="post">
 
       <div class="mb-5" name="Cadastro_Principal">
 
         <div class="row mb-2">
+
           <div class="col-sm-3">
             <label class="form-label">CPF <span>*</span></label>
             <input type="text" class="form-control" th:field="*{cpf}">
+            <span class="erro" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
           </div>
-
-
           <div class="col-sm-9">
             <label class="form-label">Nome <span>*</span></label>
             <input type="text" class="form-control" th:field="*{nome}">
+            <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
           </div>
+          <div class="col-sm-5">
+          </div>
+
         </div>
 
         <div class="row mb-2">
+
           <div class="col-sm-2 d-flex flex-column">
             <label class="form-label">Sexo <span>*</span></label>
             <select name="sexo" class="form-select">
@@ -51,7 +56,6 @@
               </option>
             </select>
           </div>
-
           <div class="col-sm-3 d-flex flex-column">
             <label class="form-label">Raca <span>*</span></label>
             <select name="raca" class="form-select">
@@ -59,7 +63,6 @@
               </option>
             </select>
           </div>
-
           <div class="col d-flex flex-column">
             <label class="form-label">Estado Civil <span>*</span></label>
             <select name="estadoCivil" class="form-select">
@@ -68,90 +71,86 @@
               </option>
             </select>
           </div>
+
         </div>
 
         <div class="row">
+
           <div class="col-sm-9">
             <label class="form-label">Nome Social:</label>
-            <input type="text" class="form-control" th:field="*{nomeSocial}">
+            <input type="text" class="form-control" th:field="*{nome_social}">
           </div>
-
           <div class="col">
             <label class="form-label">Data Nascimento <span>*</span></label>
-            <input type="date" class="form-control" th:field="*{dataNascimento}">
+            <input type="date" class="form-control" th:field="*{data_nascimento}">
             <!--<span class="mensagem" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></span>-->
           </div>
+
         </div>
 
       </div>
 
-      <div class="row mb-3">
-        <div class="col">
-          <label for="" class="form-label">Pais Nascimento <span>*</span></label>
-          <select name="paisNascimento" class="form-select">
-            <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
-              name="paisNascimento">
-            </option>
-          </select>
+      <div class="CadastroEndereco">
+
+        <div class="row mb-3">
+
+          <div class="col">
+            <label for="" class="form-label">Pais Nascimento <span>*</span></label>
+            <select name="paisNascimento" class="form-select">
+              <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
+                name="paisNascimento">
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">Pais Nacionalidade <span>*</span></label>
+            <select name="paisNacionalidade" class="form-select">
+              <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
+                name="paisNacionalidade">
+              </option>
+            </select>
+          </div>
+
         </div>
 
-        <div class="col">
-          <label for="" class="form-label">Pais Nacionalidade <span>*</span></label>
-          <select name="paisNacionalidade" class="form-select">
-            <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
-              name="paisNacionalidade">
-            </option>
-          </select>
-        </div>
-      </div>
+        <div class="row mb-3">
 
-
-    </form>
-
-    <form action="#" th:action="@{/salvar}" th:object="${cep}" method="post" class="form">
-
-      <div class="row mb-3">
-
-        <div class="col-sm-2">
-          <label class="form-label">Local de residencia: </label>
-          <div class="row">
-            <div class="col-sm-4 ms-3 form-check">
-              <input class="form-check-input" type="radio" value="true" name="localResidencia">
-              <label class="form-check-label" id="form-label-margin">Brasil</label>
-            </div>
-            <div class="col ms-3 form-check">
-              <input class="form-check-input " type="radio" value="false" name="localResidencia">
-              <label class="form-check-label">Exterior</label>
+          <div class="col-sm-2">
+            <label class="form-label">Local de residencia: </label>
+            <div class="row">
+              <div class="col-sm-4 ms-3 form-check">
+                <input class="form-check-input" type="radio" value="true" name="localResidencia">
+                <label class="form-check-label" id="form-label-margin">Brasil</label>
+              </div>
+              <div class="col ms-3 form-check">
+                <input class="form-check-input " type="radio" value="false" name="localResidencia">
+                <label class="form-check-label">Exterior</label>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-2">
-          <label class="form-label">CEP <span>*</span></label>
-          <input type="text" class="form-control" th:field="*{cep}">
-        </div>
-        <div class="col">
-          <label class="form-label">UF <span>*</span></label>
-          <input type="text" class="form-control" th:field="*{estado}">
-        </div>
+          <div class="col-sm-2">
+            <label class="form-label">CEP <span>*</span></label>
+            <input type="text" class="form-control" th:field="*{cep}">
+          </div>
+          <div class="col">
+            <label class="form-label">UF <span>*</span></label>
+            <input type="text" class="form-control" th:field="*{estado}">
+          </div>
 
-
-      </div>
-
-      <div class="row mb-3">
-
-
-        <div class="col">
-          <label class="form-label">Municipio <span>*</span></label>
-          <input type="text" class="form-control" th:field="*{municipio}">
-        </div>
-        <div class="col">
-          <label class="form-label">Bairro </label>
-          <input type="text" class="form-control" th:field="*{bairro}">
         </div>
 
-      </div>
+        <div class="row mb-3">
 
-      <div th:object="${endereco}" class="mb-2">
+          <div class="col">
+            <label class="form-label">Municipio <span>*</span></label>
+            <input type="text" class="form-control" th:field="*{municipio}">
+          </div>
+          <div class="col">
+            <label class="form-label">Bairro </label>
+            <input type="text" class="form-control" th:field="*{bairro}">
+          </div>
+
+        </div>
 
         <div class="row mb-3">
           <div class="col-sm-3">
@@ -182,23 +181,24 @@
       </div>
 
       <div class="col">
-          <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" value="Cadastrar">
+        <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" value="Cadastrar">
       </div>
 
-  </div>
 
-
-  </form>
+    </form>
 
   </div>
 
 
-  </form>
-
-  </div>
 
 
-  </div>
+
+
+
+
+
+
+
 
 
 
