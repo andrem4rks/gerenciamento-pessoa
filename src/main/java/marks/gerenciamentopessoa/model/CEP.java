@@ -27,13 +27,6 @@ public class CEP {
   @NotNull
   private String bairro;
 
-  @OneToOne
-  @JoinColumn(name = "id_tipo_endereco")
-  private TipoEndereco tipoEndereco;
-
-
- 
-
   public CEP() {
   }
 
@@ -86,11 +79,4 @@ public class CEP {
     this.bairro = bairro;
   }
 
-  public TipoEndereco getTipoEndereco() {
-    return tipoEndereco;
-  }
-
-  public void setTipoEndereco(TipoEndereco tipoEndereco) {
-    this.tipoEndereco = tipoEndereco;
-  }
 }

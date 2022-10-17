@@ -24,8 +24,22 @@ public class Endereco {
     private String complemento;
 
     @OneToOne
+    @JoinColumn(name = "id_tipo_endereco")
+    private TipoEndereco tipoEndereco;
+
+   
+
+    @OneToOne
     @JoinColumn(name = "id_cep")
     private CEP cep;
+
+    public TipoEndereco getTipoEndereco() {
+      return tipoEndereco;
+    }
+
+    public void setTipoEndereco(TipoEndereco tipoEndereco) {
+      this.tipoEndereco = tipoEndereco;
+    }
 
     public Long getId() {
       return id;

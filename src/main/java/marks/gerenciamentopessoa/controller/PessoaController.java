@@ -114,7 +114,7 @@ public class PessoaController {
 
       Optional<TipoEndereco> tipoEnderecoOptional = tipoEnderecoRepository.findById(tipoEndereco_id);
       TipoEndereco tipoEndereco = tipoEnderecoOptional.get();
-      cep.setTipoEndereco(tipoEndereco);
+      endereco.setTipoEndereco(tipoEndereco);
 
       CEP cepTmp = cepRepository.findByCep(cep.getCep());
 

@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <link th:href="@{/css/main.css}" rel="stylesheet" />
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 </head>
 
@@ -12,7 +15,7 @@
 
 
 
-  <div class="container" id="form-cont">
+  <div class="container mt-4" id="form-cont">
 
     <h2>Cadastrar usuário</h2>
 
@@ -23,202 +26,173 @@
 
 
 
-    <form action="#" th:action="@{/salvar}" th:object="${pessoa}" method="post">
+    <form action="#" th:action="@{/salvar}" th:object="${pessoa}" method="post" class="form">
 
-      <div class="formularioPrincipal">
-        <div class="linha">
+      <div class="mb-5" name="Cadastro_Principal">
 
-          <div class="row row-cpf">
-            <div class="input">
-              <label class="">CPF <span>*</span></label>
-            </div>
-            <div class="input">
-              <input type="text" class="input-cpf" th:field="*{cpf}">
-            </div>
+        <div class="row mb-2">
+          <div class="col-sm-3">
+            <label class="form-label">CPF <span>*</span></label>
+            <input type="text" class="form-control" th:field="*{cpf}">
           </div>
 
-          <div class="row row-nome">
-            <div class="input">
-              <label class="">Nome <span>*</span></label>
-            </div>
-            <div class="input">
-              <input type="text" class="input-nome" th:field="*{nome}">
-            </div>
-          </div>
 
+          <div class="col-sm-9">
+            <label class="form-label">Nome <span>*</span></label>
+            <input type="text" class="form-control" th:field="*{nome}">
+          </div>
         </div>
 
-        <div class="linha">
-
-          <div class="sexo">
-            <div class="input">
-              <label>Sexo <span>*</span></label>
-              <select name="sexo">
-                <option th:each="sexo : ${listaSexo}" th:value="${sexo.id}" th:text="${sexo.descricao}" name="sexo">
-                </option>
-              </select>
-            </div>
+        <div class="row mb-2">
+          <div class="col-sm-2 d-flex flex-column">
+            <label class="form-label">Sexo <span>*</span></label>
+            <select name="sexo" class="form-select">
+              <option th:each="sexo : ${listaSexo}" th:value="${sexo.id}" th:text="${sexo.descricao}" name="sexo">
+              </option>
+            </select>
           </div>
 
-          <div class="raca">
-            <div class="input">
-              <label>Raca <span>*</span></label>
-              <select name="raca">
-                <option th:each="raca : ${listaRaca}" th:value="${raca.id}" th:text="${raca.descricao}" name="raca">
-                </option>
-              </select>
-            </div>
+          <div class="col-sm-3 d-flex flex-column">
+            <label class="form-label">Raca <span>*</span></label>
+            <select name="raca" class="form-select">
+              <option th:each="raca : ${listaRaca}" th:value="${raca.id}" th:text="${raca.descricao}" name="raca">
+              </option>
+            </select>
           </div>
 
-          <div class="estadoCivil">
-            <div class="input">
-              <label>Estado Civil <span>*</span></label>
-              <select name="estadoCivil">
-                <option th:each="estadoCivil: ${listaEstadoCivil}" th:value="${estadoCivil.id}"
-                  th:text="${estadoCivil.descricao}" name="raca">
-                </option>
-              </select>
-            </div>
+          <div class="col d-flex flex-column">
+            <label class="form-label">Estado Civil <span>*</span></label>
+            <select name="estadoCivil" class="form-select">
+              <option th:each="estadoCivil: ${listaEstadoCivil}" th:value="${estadoCivil.id}"
+                th:text="${estadoCivil.descricao}" name="raca">
+              </option>
+            </select>
           </div>
-
         </div>
 
-        <div class="linha">
-          <div class="input">
-            <label class="col-sm-1 col-form-label">Nome Social:</label>
+        <div class="row">
+          <div class="col-sm-9">
+            <label class="form-label">Nome Social:</label>
             <input type="text" class="form-control" th:field="*{nomeSocial}">
           </div>
-        </div>
 
-        <div class="linha">
-
-          <div class="dataNascimento">
-            <div class="input">
-              <label class="dataNascimento">Data Nascimento <span>*</span></label>
-              <input type="text" class="form-control" th:field="*{dataNascimento}">
-              <!--<span class="mensagem" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></span>-->
-            </div>
+          <div class="col">
+            <label class="form-label">Data Nascimento <span>*</span></label>
+            <input type="date" class="form-control" th:field="*{dataNascimento}">
+            <!--<span class="mensagem" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></span>-->
           </div>
-
-          <div class="paisNascimento">
-            <div class="input">
-              <label for="" class="paisNascimento">Pais Nascimento <span>*</span></label>
-              <select name="paisNascimento">
-                <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
-                  name="paisNascimento">
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div class="paisNacionalidade">
-            <div class="input">
-              <label for="" class="paisNacionalidade">Pais Nacionalidade <span>*</span></label>
-              <select name="paisNacionalidade">
-                <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
-                  name="paisNacionalidade">
-                </option>
-              </select>
-            </div>
-          </div>
-
         </div>
 
       </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label for="" class="form-label">Pais Nascimento <span>*</span></label>
+          <select name="paisNascimento" class="form-select">
+            <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
+              name="paisNascimento">
+            </option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label for="" class="form-label">Pais Nacionalidade <span>*</span></label>
+          <select name="paisNacionalidade" class="form-select">
+            <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
+              name="paisNacionalidade">
+            </option>
+          </select>
+        </div>
+      </div>
+
+
     </form>
 
-    <form action="#" th:action="@{/salvar}" th:object="${cep}" method="post">
+    <form action="#" th:action="@{/salvar}" th:object="${cep}" method="post" class="form">
 
-      <div class="formularioEndereco">
+      <div class="row mb-3">
 
-        <div class="linha">
-
-          <div class="localResidencia">
-            <div class="input">
-              <label>Local de residencia: </label>
-              <div class="input-radio-container">
-                <div class="input-radio-row">
-                  <input class="input-radio" type="radio" value="true">
-                  <label class="input-label">Brasil</label>
-                  <input class="input-radio" type="radio" value="false">
-                  <label class="input-label">Exterior</label>
-                </div>
-              </div>
+        <div class="col-sm-2">
+          <label class="form-label">Local de residencia: </label>
+          <div class="row">
+            <div class="col-sm-4 ms-3 form-check">
+              <input class="form-check-input" type="radio" value="true" name="localResidencia">
+              <label class="form-check-label" id="form-label-margin">Brasil</label>
+            </div>
+            <div class="col ms-3 form-check">
+              <input class="form-check-input " type="radio" value="false" name="localResidencia">
+              <label class="form-check-label">Exterior</label>
             </div>
           </div>
-
-          <div class="input">
-            <label class="">CEP <span>*</span></label>
-            <input type="text" class="form-control" th:field="*{cep}">
-          </div>
-
+        </div>
+        <div class="col-sm-2">
+          <label class="form-label">CEP <span>*</span></label>
+          <input type="text" class="form-control" th:field="*{cep}">
+        </div>
+        <div class="col">
+          <label class="form-label">UF <span>*</span></label>
+          <input type="text" class="form-control" th:field="*{estado}">
         </div>
 
-        <div class="linha">
-          <div class="input">
-            <label class="">UF <span>*</span></label>
-            <input type="text" class="form-control" th:field="*{estado}">
-          </div>
-          <div class="input">
-            <label class="">Municipio <span>*</span></label>
-            <input type="text" class="form-control" th:field="*{municipio}">
-          </div>
+
+      </div>
+
+      <div class="row mb-3">
+
+
+        <div class="col">
+          <label class="form-label">Municipio <span>*</span></label>
+          <input type="text" class="form-control" th:field="*{municipio}">
+        </div>
+        <div class="col">
+          <label class="form-label">Bairro </label>
+          <input type="text" class="form-control" th:field="*{bairro}">
         </div>
 
-        <div class="linha">
-          <div class="input">
-            <label for="" class="tipoEndereco">Tipo <span>*</span></label>
-            <select name="tipoEndereco">
-              <option th:each="local: ${listaLocais}" th:value="${local.id}" th:text="${local.descricao}"
+      </div>
+
+      <div th:object="${endereco}" class="mb-2">
+
+        <div class="row mb-3">
+          <div class="col-sm-3">
+            <label for="" class="form-label">Tipo <span>*</span></label>
+            <select name="tipoEndereco" class="form-select">
+              <option th:each="tipo: ${listaTipoEndereco}" th:value="${tipo.id}" th:text="${tipo.descricao}"
                 name="tipoEndereco">
               </option>
             </select>
           </div>
-          <div class="input">
-            <div class="input">
-              <label class="">Bairro </label>
-              <input type="text" class="form-control" th:field="*{bairro}">
-            </div>
-          </div>
 
-
-        </div>
-
-        <div th:object="${endereco}" class="linha">
-
-          <div class="input">
-            <label class="">Logradouro <span>*</span></label>
+          <div class="col">
+            <label class="form-label">Logradouro <span>*</span></label>
             <input type="text" class="form-control" th:field="*{logradouro}">
           </div>
 
 
-          <div class="input">
-            <label class="">Numero <span>*</span></label>
+          <div class="col">
+            <label class="form-label">Numero <span>*</span></label>
             <input type="text" class="form-control" th:field="*{numero}">
           </div>
-
-          <div class="input">
-            <label class="">Complemento </label>
-            <input type="text" class="form-control" th:field="*{complemento}">
-          </div>
-
         </div>
 
-
+        <div class="col">
+          <label class="form-label">Complemento </label>
+          <textarea type="text" class="form-control" th:field="*{complemento}"></textarea>
+        </div>
       </div>
 
-    </form>
+      <div class="col">
+          <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" value="Cadastrar">
+      </div>
 
   </div>
 
 
+  </form>
 
-
-
-
-  <div class="row px-3">
-    <input type="submit" class="btn btn-info btn-fluid mt-2 mb-2" value="Cadastrar">
   </div>
+
+
   </form>
 
   </div>
