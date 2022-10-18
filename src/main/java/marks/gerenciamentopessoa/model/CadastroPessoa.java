@@ -55,9 +55,12 @@ public class CadastroPessoa {
     private Long municipio;
 
     @Size(min = 3, message = "Insira um bairro válido!")
-    private String Bairro;
+    private String Bairro; 
 
-    @NotNull(message = "Insira um tipo de logradouro válido!")
+    @NotNull(message= "Insira um tipo de logradouro válido!")
+    private String tipoLogradoudo;
+
+    @NotNull(message = "Insira logradouro válido!")
     private String logradouro;
 
     @NotNull(message = "Insira um número válido para a residência!")

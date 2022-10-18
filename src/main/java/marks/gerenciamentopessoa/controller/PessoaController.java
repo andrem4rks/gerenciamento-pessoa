@@ -62,13 +62,8 @@ public class PessoaController {
     
     @GetMapping("/novo")
     public String adicionarPessoa(Model model){
-      
       model.addAttribute("cadastroPessoa", new CadastroPessoa());
-      model.addAttribute("listaSexo", sexoRepository.findAll());
-      model.addAttribute("listaRaca", racaRepository.findAll());
-      model.addAttribute("listaEstadoCivil", estadoCivilRepository.findAll());
-      model.addAttribute("listaPaises", paisRepository.findAll());
-      model.addAttribute("listaTipoEndereco", tipoEnderecoRepository.findAll());
+      popularAtributos(model);
       return "/cadastrar-pessoa";
     } 
 
@@ -76,9 +71,10 @@ public class PessoaController {
     @PostMapping("/salvar")
     public String salvarPessoa( @Valid CadastroPessoa cadastroPessoa,
                                 BindingResult result,
-                                RedirectAttributes attributes )  
+                                RedirectAttributes attributes,
+                                Model model )  
                                 {
-      
+      popularAtributos(model);                          
       if (result.hasErrors()) {
 			  return "cadastrar-pessoa";
 		  }
@@ -122,6 +118,17 @@ public class PessoaController {
       Optional<TipoEndereco> tipoEnderecoOptional = tipoEnderecoRepository.findById(tipoEndereco_id);
       TipoEndereco tipoEndereco = tipoEnderecoOptional.get();
       endereco.setTipoEndereco(tipoEndereco);
+    }
+    
+
+
+
+    public void popularAtributos(Model model) {
+      model.addAttribute("listaSexo", sexoRepository.findAll());
+      model.addAttribute("listaRaca", racaRepository.findAll());
+      model.addAttribute("listaEstadoCivil", estadoCivilRepository.findAll());
+      model.addAttribute("listaPaises", paisRepository.findAll());
+      model.addAttribute("listaTipoEndereco", tipoEnderecoRepository.findAll());
     }
 }
 

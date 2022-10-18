@@ -17,7 +17,7 @@
 
   <div class="container mt-4" id="form-cont">
 
-    <h2>Cadastrar usuário</h2>
+    <h2 class="">Cadastrar usuário</h2>
 
     <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -35,12 +35,12 @@
           <div class="col-sm-3">
             <label class="form-label">CPF <span>*</span></label>
             <input type="text" class="form-control" th:field="*{cpf}">
-            <span class="erro" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+            <span class="blink-1" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
           </div>
           <div class="col-sm-9">
             <label class="form-label">Nome <span>*</span></label>
             <input type="text" class="form-control" th:field="*{nome}">
-            <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+            <span class="blink-1" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
           </div>
           <div class="col-sm-5">
           </div>
