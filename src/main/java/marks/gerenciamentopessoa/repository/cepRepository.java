@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import marks.gerenciamentopessoa.model.CEP;
 
 public interface cepRepository extends JpaRepository<CEP, Long>{
-  CEP findByCep(String cep);
+  CEP findByNumeroCep(String cep);
 }

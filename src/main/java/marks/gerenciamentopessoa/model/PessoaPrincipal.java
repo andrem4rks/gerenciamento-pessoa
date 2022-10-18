@@ -2,6 +2,7 @@ package marks.gerenciamentopessoa.model;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,64 +16,34 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @MappedSuperclass
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PessoaPrincipal {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @CPF(message = "CPF inválido!")
     private String cpf;
 
     @NotNull
-    @Size(min = 3, message = "O nome deve ter no mínimo 3 caracteres")
+    @Size(min = 3, message = "O nome deve ter no mínimo 3 caracteres!")
     private String nome;
 
+    @NotNull(message = "Informe a data de nascimento!")
+    @Basic
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dataNascimento;
-
-    public PessoaPrincipal() {
-    }
-
-    public PessoaPrincipal(Long id, @NotNull String cpf, @NotNull String nome, @NotNull Date dataNascimento) {
-        this.id = id;
-        this.cpf = cpf;
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
 
 
 }

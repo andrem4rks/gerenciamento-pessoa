@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import marks.gerenciamentopessoa.model.CEP;
-import marks.gerenciamentopessoa.model.CadastroPessoa;
 import marks.gerenciamentopessoa.model.Endereco;
 import marks.gerenciamentopessoa.model.EstadoCivil;
 import marks.gerenciamentopessoa.model.Pais;
@@ -62,19 +61,24 @@ public class PessoaController {
     
     @GetMapping("/novo")
     public String adicionarPessoa(Model model){
-      model.addAttribute("cadastroPessoa", new CadastroPessoa());
+      model.addAttribute("pessoa", new Pessoa());
       popularAtributos(model);
       return "/cadastrar-pessoa";
     } 
 
     
     @PostMapping("/salvar")
-    public String salvarPessoa( @Valid CadastroPessoa cadastroPessoa,
+    public String salvarPessoa( @Valid Pessoa pessoa,
                                 BindingResult result,
                                 RedirectAttributes attributes,
                                 Model model )  
                                 {
-      popularAtributos(model);                          
+      popularAtributos(model);      
+      
+      CEP cepInfo = pessoa.getEndereco().getCep();
+
+      cepInfo.getNumeroCep();
+
       if (result.hasErrors()) {
 			  return "cadastrar-pessoa";
 		  }

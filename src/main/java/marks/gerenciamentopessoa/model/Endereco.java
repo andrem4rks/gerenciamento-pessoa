@@ -1,5 +1,6 @@
 package marks.gerenciamentopessoa.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,90 +11,40 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Informe um número!")
     private String numero;
 
+    @NotNull
+    @Size(min = 3, message = "O logradouro precisa ter no minimo 3 caracteres!")
     private String logradouro;
 
     private String complemento;
 
+    @NotNull(message = "Informe um tipo de endereço!")
     @OneToOne
     @JoinColumn(name = "id_tipo_endereco")
     private TipoEndereco tipoEndereco;
 
-    @OneToOne
+    @NotNull(message = "Informe um CEP!")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_cep")
     private CEP cep;
-
-    public Endereco(Long id, @NotNull @Size(min = 3, message = "O nome deve ter no mínimo 3 carateres") String numero,
-        @NotNull @Size(min = 3, message = "O nome deve ter no mínimo 3 carateres") String logradouro,
-        String complemento, TipoEndereco tipoEndereco, CEP cep) {
-      this.id = id;
-      this.numero = numero;
-      this.logradouro = logradouro;
-      this.complemento = complemento;
-      this.tipoEndereco = tipoEndereco;
-      this.cep = cep;
-    }
-
-    public Endereco() {
-    }
-
-    public Long getId() {
-      return id;
-    }
-
-    public void setId(Long id) {
-      this.id = id;
-    }
-
-    public String getNumero() {
-      return numero;
-    }
-
-    public void setNumero(String numero) {
-      this.numero = numero;
-    }
-
-    public String getLogradouro() {
-      return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-      this.logradouro = logradouro;
-    }
-
-    public String getComplemento() {
-      return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-      this.complemento = complemento;
-    }
-
-    public TipoEndereco getTipoEndereco() {
-      return tipoEndereco;
-    }
-
-    public void setTipoEndereco(TipoEndereco tipoEndereco) {
-      this.tipoEndereco = tipoEndereco;
-    }
-
-    public CEP getCep() {
-      return cep;
-    }
-
-    public void setCep(CEP cep) {
-      this.cep = cep;
-    }
-
-
 
     
 }
