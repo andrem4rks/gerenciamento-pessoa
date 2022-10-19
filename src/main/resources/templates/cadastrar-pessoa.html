@@ -49,29 +49,35 @@
 
         <div class="row mb-2">
 
-          <div class="col-sm-2 d-flex flex-column">
+          <div class="col-sm-3 d-flex flex-column">
             <label class="form-label">Sexo <span>*</span></label>
             <select name="sexo" class="form-select">
-              <option th:each="sexo : ${listaSexo}" th:value="${sexo}" th:text="${sexo.descricao}"
-                th.field="${pessoa.sexo}" name="sexo">
+              <!--<option selected="selected" th:value="${null}">Escolha um sexo</option>-->
+              <option th:each="item : ${listaSexo}" th:value="${item}" th:text="${item.descricao}"
+                th:field="*{sexo}" name="sexo">
               </option>
             </select>
+            <span class="blink-1" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></span>
           </div>
           <div class="col-sm-3 d-flex flex-column">
             <label class="form-label">Raca <span>*</span></label>
             <select name="raca" class="form-select">
-              <option th:each="raca : ${listaRaca}" th:value="${raca}" th:text="${raca.descricao}"
-                th.field="${pessoa.raca}" name="raca">
+              <option selected th:value="${null}">Escolha uma raça</option>
+              <option th:each="raca : ${listaRaca}" th:value="${raca.id}" th:text="${raca.descricao}"
+                th.field="${idRaca}" name="raca">
               </option>
             </select>
+            <span class="blink-1" th:if="${#fields.hasErrors('raca')}" th:errors="*{raca}"></span>
           </div>
           <div class="col d-flex flex-column">
             <label class="form-label">Estado Civil <span>*</span></label>
             <select name="estadoCivil" class="form-select">
+              <option selected th:value="${null}">Escolha um estado civil</option>
               <option th:each="estadoCivil: ${listaEstadoCivil}" th:value="${estadoCivil}"
-                th:text="${estadoCivil.descricao}" th.field="${pessoa.estadoCivil}" name="estadoCivil">
+                th:text="${estadoCivil.descricao}" th.field="*{estadoCivil}" name="estadoCivil">
               </option>
             </select>
+            <span class="blink-1" th:if="${#fields.hasErrors('estadoCivil')}" th:errors="*{estadoCivil}"></span>
           </div>
 
         </div>
@@ -80,12 +86,12 @@
 
           <div class="col-sm-9">
             <label class="form-label">Nome Social:</label>
-            <input type="text" class="form-control" th:field="${pessoa.nomeSocial}">
+            <input type="text" class="form-control" th:field="*{nomeSocial}">
           </div>
           <div class="col">
             <label class="form-label">Data Nascimento <span>*</span></label>
-            <input type="date" class="form-control" th:field="${pessoa.dataNascimento}">
-            <!--<span class="mensagem" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></span>-->
+            <input type="date" class="form-control" th:field="*{dataNascimento}">
+            <span class="blink-1" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></span>
           </div>
 
         </div>
@@ -103,6 +109,7 @@
                 th:field="${pessoa.paisNascimento}" name="paisNascimento">
               </option>
             </select>
+            <span class="blink-1" th:if="${#fields.hasErrors('paisNascimento')}" th:errors="*{paisNascimento}"></span>
           </div>
           <div class="col">
             <label for="" class="form-label">Pais Nacionalidade <span>*</span></label>
@@ -111,6 +118,7 @@
                 th:field="${pessoa.paisNacionalidade}" name="paisNacionalidade">
               </option>
             </select>
+            <span class="blink-1" th:if="${#fields.hasErrors('paisNacionalidade')}" th:errors="*{paisNacionalidade}"></span>
           </div>
 
         </div>
@@ -120,19 +128,22 @@
           <div class="col-sm-2">
             <label class="form-label">CEP <span>*</span></label>
             <input type="text" class="form-control" th:field="*{endereco.cep.numeroCep}">
-            <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.numeroCep')}" th:errors="*{numeroCep}"></span>
+            <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.numeroCep')}" th:errors="*{endereco.cep.numeroCep}"></span>
           </div>
           <div class="col-sm-3">
             <label for="" class="form-label">Tipo <span>*</span></label>
             <select name="tipoEndereco" class="form-select">
+              <option selected="selected" th:value="${null}">Escolha um tipo</option>
               <option th:each="tipo: ${listaTipoEndereco}" th:value="${tipo}" th:text="${tipo.descricao}"
                 th:field="*{endereco.tipoEndereco}" name="tipoEndereco">
               </option>
             </select>
+            <span class="blink-1" th:if="${#fields.hasErrors('endereco.tipoEndereco')}" th:errors="*{endereco.tipoEndereco}"></span>
           </div>
           <div class="col">
             <label class="form-label">Logradouro <span>*</span></label>
             <input type="text" class="form-control" th:field="*{endereco.logradouro}">
+            <span class="blink-1" th:if="${#fields.hasErrors('endereco.logradouro')}" th:errors="*{endereco.logradouro}"></span>
           </div>
 
         </div>
@@ -142,10 +153,12 @@
           <div class="col-sm-2">
             <label class="form-label">Numero <span>*</span></label>
             <input type="text" class="form-control" th:field="*{endereco.numero}">
+            <span class="blink-1" th:if="${#fields.hasErrors('endereco.numero')}" th:errors="*{endereco.numero}"></span>
           </div>
           <div class="col-sm-8">
             <label class="form-label">Complemento </label>
             <input type="text" class="form-control" th:field="*{endereco.complemento}"></input>
+            <span class="blink-1" th:if="${#fields.hasErrors('endereco.complemento')}" th:errors="*{endereco.complemento}"></span>
           </div>
 
           <div class="col">
@@ -160,10 +173,12 @@
           <div class="col">
             <label class="form-label">UF <span>*</span></label>
             <input type="text" class="form-control" th:field="*{endereco.cep.estado}">
+            <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.estado')}" th:errors="*{endereco.cep.estado}"></span>
           </div>
           <div class="col">
             <label class="form-label">Municipio <span>*</span></label>
             <input type="text" class="form-control" th:field="*{endereco.cep.municipio}">
+            <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.municipio')}" th:errors="*{endereco.cep.municipio}"></span>
           </div>
         </div>
 
@@ -177,20 +192,6 @@
     </form>
 
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 

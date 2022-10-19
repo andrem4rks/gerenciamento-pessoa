@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -25,13 +26,13 @@ public class CEP {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotNull(message = "Informe um CEP!")
+  @NotEmpty(message = "Informe um CEP!")
   private String numeroCep;
 
-  @NotNull
-  
+  @NotEmpty(message = "Informe um estado!")
   private String estado;
 
+  @NotEmpty(message = "Informe um município!")
   private String municipio;
 
   private String bairro;

@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,7 +28,7 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Informe um número!")
+    @NotEmpty(message = "Informe um número!")
     private String numero;
 
     @NotNull
@@ -40,7 +41,8 @@ public class Endereco {
     @OneToOne
     @JoinColumn(name = "id_tipo_endereco")
     private TipoEndereco tipoEndereco;
-
+    
+    @Valid
     @NotNull(message = "Informe um CEP!")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_cep")
