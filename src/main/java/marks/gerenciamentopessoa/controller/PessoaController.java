@@ -1,5 +1,6 @@
 package marks.gerenciamentopessoa.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -111,13 +112,18 @@ public class PessoaController {
     }
 
     public Pessoa verifCepExiste(Pessoa pessoa) {
-      CEP tmpRepoCep = cepRepository.findByNumeroCep(pessoa.getEndereco().getCep().getNumeroCep());
-      if(tmpRepoCep != null) {
-        CEP tmpPessoaCep = pessoa.getEndereco().getCep();
-        if(tmpRepoCep.getEstado() == tmpPessoaCep.getEstado() && tmpRepoCep.getMunicipio() == tmpPessoaCep.getMunicipio() && tmpRepoCep.getBairro() == tmpPessoaCep.getBairro()) {
-          pessoa.getEndereco().setCep(tmpRepoCep);
+      List<CEP> tempRepoCep  = cepRepository.findAllByNumeroCep(pessoa.getEndereco().getCep().getNumeroCep());
+    
+      for (CEP item : tempRepoCep) {
+        if(item != null) {
+          CEP tmpPessoaCep = pessoa.getEndereco().getCep();
+          if(item.getEstado() == tmpPessoaCep.getEstado() && item.getMunicipio() == tmpPessoaCep.getMunicipio() && item.getBairro() == tmpPessoaCep.getBairro()) {
+            pessoa.getEndereco().setCep(item);
+            return pessoa;
+          }
         }
       }
+      cepRepository.save(pessoa.getEndereco().getCep());
       return pessoa;
     }
 }

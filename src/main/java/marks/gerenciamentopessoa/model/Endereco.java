@@ -45,7 +45,7 @@ public class Endereco {
     
     @Valid
     @NotNull(message = "Informe um CEP!")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_cep")
     private CEP cep;
 
