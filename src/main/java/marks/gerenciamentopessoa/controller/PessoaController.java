@@ -75,12 +75,12 @@ public class PessoaController {
                                 )  
                                 {
       popularAtributos(model);      
-      
 
       if (result.hasErrors()) {
 			  return "cadastrar-pessoa";
 		  }
       verifCepExiste(pessoa);
+      pessoaRepository.save(pessoa);
       //setRelations(pessoa);
 
       return "redirect:/novo";

@@ -37,8 +37,9 @@ public class Endereco {
 
     private String complemento;
 
+    @Valid
     @NotNull(message = "Informe um tipo de endereço!")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_tipo_endereco")
     private TipoEndereco tipoEndereco;
     

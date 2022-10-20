@@ -51,30 +51,30 @@
 
           <div class="col-sm-3 d-flex flex-column">
             <label class="form-label">Sexo <span>*</span></label>
-            <select name="sexo" class="form-select">
-              <!--<option selected="selected" th:value="${null}">Escolha um sexo</option>-->
-              <option th:each="item : ${listaSexo}" th:value="${item}" th:text="${item.descricao}"
-                th:field="*{sexo}" name="sexo">
+            <select id="pais" class="form-select" th:field="*{sexo}">
+              <option selected th:value="${null}">Escolha um sexo</option>
+              <option th:each="sexo : ${listaSexo}" th:value="${sexo.id}" th:text="${sexo.descricao}"
+                 name="sexo">
               </option>
             </select>
             <span class="blink-1" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></span>
           </div>
           <div class="col-sm-3 d-flex flex-column">
             <label class="form-label">Raca <span>*</span></label>
-            <select name="raca" class="form-select">
+            <select name="raca" class="form-select" th.field="${raca}">
               <option selected th:value="${null}">Escolha uma raça</option>
               <option th:each="raca : ${listaRaca}" th:value="${raca.id}" th:text="${raca.descricao}"
-                th.field="${idRaca}" name="raca">
+                name="raca">
               </option>
             </select>
             <span class="blink-1" th:if="${#fields.hasErrors('raca')}" th:errors="*{raca}"></span>
           </div>
           <div class="col d-flex flex-column">
             <label class="form-label">Estado Civil <span>*</span></label>
-            <select name="estadoCivil" class="form-select">
+            <select name="estadoCivil" class="form-select" th.field="*{estadoCivil}">
               <option selected th:value="${null}">Escolha um estado civil</option>
-              <option th:each="estadoCivil: ${listaEstadoCivil}" th:value="${estadoCivil}"
-                th:text="${estadoCivil.descricao}" th.field="*{estadoCivil}" name="estadoCivil">
+              <option th:each="estadoCivil: ${listaEstadoCivil}" th:value="${estadoCivil.id}" th:text="${estadoCivil.descricao}"
+                 name="estadoCivil">
               </option>
             </select>
             <span class="blink-1" th:if="${#fields.hasErrors('estadoCivil')}" th:errors="*{estadoCivil}"></span>
@@ -104,18 +104,18 @@
 
           <div class="col">
             <label for="" class="form-label">Pais Nascimento <span>*</span></label>
-            <select name="paisNascimento" class="form-select">
-              <option th:each="pais: ${listaPaises}" th:value="${paisNascimento}" th:text="${pais.descricao}"
-                th:field="${pessoa.paisNascimento}" name="paisNascimento">
+            <select name="paisNascimento" class="form-select" th:field="*{paisNascimento}">
+              <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
+                 name="paisNascimento">
               </option>
             </select>
             <span class="blink-1" th:if="${#fields.hasErrors('paisNascimento')}" th:errors="*{paisNascimento}"></span>
           </div>
           <div class="col">
             <label for="" class="form-label">Pais Nacionalidade <span>*</span></label>
-            <select name="paisNacionalidade" class="form-select">
-              <option th:each="pais: ${listaPaises}" th:value="${paisNacionalidade}" th:text="${pais.descricao}"
-                th:field="${pessoa.paisNacionalidade}" name="paisNacionalidade">
+            <select name="paisNacionalidade" class="form-select" th:field="*{paisNacionalidade}">
+              <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
+                 name="paisNacionalidade">
               </option>
             </select>
             <span class="blink-1" th:if="${#fields.hasErrors('paisNacionalidade')}" th:errors="*{paisNacionalidade}"></span>
@@ -131,11 +131,10 @@
             <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.numeroCep')}" th:errors="*{endereco.cep.numeroCep}"></span>
           </div>
           <div class="col-sm-3">
-            <label for="" class="form-label">Tipo <span>*</span></label>
-            <select name="tipoEndereco" class="form-select">
-              <option selected="selected" th:value="${null}">Escolha um tipo</option>
-              <option th:each="tipo: ${listaTipoEndereco}" th:value="${tipo}" th:text="${tipo.descricao}"
-                th:field="*{endereco.tipoEndereco}" name="tipoEndereco">
+            <label class="form-label">Tipo <span>*</span></label>
+            <select th:field="*{endereco.tipoEndereco}" class="form-select" >
+              <option selected th:value="${null}">Escolha um tipo</option>
+              <option th:each="tipo: ${listaTipoEndereco}" th:value="${tipo.id}" th:text="${tipo.descricao}" >
               </option>
             </select>
             <span class="blink-1" th:if="${#fields.hasErrors('endereco.tipoEndereco')}" th:errors="*{endereco.tipoEndereco}"></span>

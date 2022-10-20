@@ -42,7 +42,7 @@ public class PessoaPrincipal {
     @NotNull(message = "Informe a data de nascimento!")
     @Basic
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
 
 
