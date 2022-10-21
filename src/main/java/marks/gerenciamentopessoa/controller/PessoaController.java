@@ -117,7 +117,10 @@ public class PessoaController {
       for (CEP item : tempRepoCep) {
         if(item != null) {
           CEP tmpPessoaCep = pessoa.getEndereco().getCep();
-          if(item.getEstado() == tmpPessoaCep.getEstado() && item.getMunicipio() == tmpPessoaCep.getMunicipio() && item.getBairro() == tmpPessoaCep.getBairro()) {
+          if ( normalizaString(item.getEstado()).equals(normalizaString(tmpPessoaCep.getEstado()))
+              && normalizaString(item.getMunicipio()).equals(normalizaString(tmpPessoaCep.getMunicipio())) 
+              && normalizaString(item.getBairro()).equals(normalizaString(tmpPessoaCep.getBairro()))    
+             )  {
             pessoa.getEndereco().setCep(item);
             return pessoa;
           }
@@ -126,5 +129,12 @@ public class PessoaController {
       cepRepository.save(pessoa.getEndereco().getCep());
       return pessoa;
     }
+
+    public String normalizaString(String s) {
+      return  s = s.toLowerCase().trim();
+    }
 }
 
+/*
+              
+ */

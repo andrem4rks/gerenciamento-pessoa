@@ -26,7 +26,7 @@
 
 
 
-    <form action="#" th:action="@{/salvar}" th:object="${pessoa}" method="post">
+    <form action="#" th:action="@{/salvar}" th:object="${pessoa}" method="post" id="formCadastrar">
 
       <div class="mb-5" name="Cadastro_Principal">
 
@@ -34,12 +34,12 @@
 
           <div class="col-sm-3">
             <label class="form-label">CPF <span>*</span></label>
-            <input type="text" class="form-control" th:field="*{cpf}">
+            <input name="cpf" type="text" class="form-control" th:field="*{cpf}">
             <span class="blink-1" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
           </div>
           <div class="col-sm-9">
             <label class="form-label">Nome <span>*</span></label>
-            <input type="text" class="form-control" th:field="*{nome}">
+            <input name="nome" type="text" class="form-control" th:field="*{nome}">
             <span class="blink-1" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
           </div>
           <div class="col-sm-5">
@@ -51,8 +51,8 @@
 
           <div class="col-sm-3 d-flex flex-column">
             <label class="form-label">Sexo <span>*</span></label>
-            <select id="pais" class="form-select" th:field="*{sexo}">
-              <option selected th:value="${null}">Escolha um sexo</option>
+            <select name="sexo" id="pais" class="form-select" th:field="*{sexo}">
+              <option selected th:value="${null}"d>Escolha um sexo</option>
               <option th:each="sexo : ${listaSexo}" th:value="${sexo.id}" th:text="${sexo.descricao}"
                  name="sexo">
               </option>
@@ -90,7 +90,7 @@
           </div>
           <div class="col">
             <label class="form-label">Data Nascimento <span>*</span></label>
-            <input type="date" class="form-control" th:field="*{dataNascimento}">
+            <input name="dataNascimento" type="date" class="form-control" th:field="*{dataNascimento}">
             <span class="blink-1" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></span>
           </div>
 
@@ -105,6 +105,7 @@
           <div class="col">
             <label for="" class="form-label">Pais Nascimento <span>*</span></label>
             <select name="paisNascimento" class="form-select" th:field="*{paisNascimento}">
+              <option selected th:value="${null}">Escolha um pais de nascimento</option>
               <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
                  name="paisNascimento">
               </option>
@@ -114,6 +115,7 @@
           <div class="col">
             <label for="" class="form-label">Pais Nacionalidade <span>*</span></label>
             <select name="paisNacionalidade" class="form-select" th:field="*{paisNacionalidade}">
+              <option selected th:value="${null}">Escolha um pais de nacionalidade</option>
               <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
                  name="paisNacionalidade">
               </option>
@@ -127,12 +129,12 @@
 
           <div class="col-sm-2">
             <label class="form-label">CEP <span>*</span></label>
-            <input type="text" class="form-control" th:field="*{endereco.cep.numeroCep}">
+            <input id="cep" type="text" class="form-control" th:field="*{endereco.cep.numeroCep}">
             <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.numeroCep')}" th:errors="*{endereco.cep.numeroCep}"></span>
           </div>
           <div class="col-sm-3">
             <label class="form-label">Tipo <span>*</span></label>
-            <select th:field="*{endereco.tipoEndereco}" class="form-select" >
+            <select name="tipoEndereco" th:field="*{endereco.tipoEndereco}" class="form-select" >
               <option selected th:value="${null}">Escolha um tipo</option>
               <option th:each="tipo: ${listaTipoEndereco}" th:value="${tipo.id}" th:text="${tipo.descricao}" >
               </option>
@@ -141,7 +143,7 @@
           </div>
           <div class="col">
             <label class="form-label">Logradouro <span>*</span></label>
-            <input type="text" class="form-control" th:field="*{endereco.logradouro}">
+            <input id="logradouro" type="text" class="form-control" th:field="*{endereco.logradouro}" >
             <span class="blink-1" th:if="${#fields.hasErrors('endereco.logradouro')}" th:errors="*{endereco.logradouro}"></span>
           </div>
 
@@ -156,13 +158,13 @@
           </div>
           <div class="col-sm-8">
             <label class="form-label">Complemento </label>
-            <input type="text" class="form-control" th:field="*{endereco.complemento}"></input>
+            <input id="complemento" type="text" class="form-control" th:field="*{endereco.complemento}"></input>
             <span class="blink-1" th:if="${#fields.hasErrors('endereco.complemento')}" th:errors="*{endereco.complemento}"></span>
           </div>
 
           <div class="col">
             <label class="form-label">Bairro </label>
-            <input type="text" class="form-control" th:field="*{endereco.cep.bairro}">
+            <input id="bairro" type="text" class="form-control" th:field="*{endereco.cep.bairro}">
           </div>
 
         </div>
@@ -171,12 +173,12 @@
 
           <div class="col">
             <label class="form-label">UF <span>*</span></label>
-            <input type="text" class="form-control" th:field="*{endereco.cep.estado}">
+            <input id="uf" type="text" class="form-control" th:field="*{endereco.cep.estado}">
             <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.estado')}" th:errors="*{endereco.cep.estado}"></span>
           </div>
           <div class="col">
             <label class="form-label">Municipio <span>*</span></label>
-            <input type="text" class="form-control" th:field="*{endereco.cep.municipio}">
+            <input id="localidade" type="text" class="form-control" th:field="*{endereco.cep.municipio}">
             <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.municipio')}" th:errors="*{endereco.cep.municipio}"></span>
           </div>
         </div>
@@ -193,5 +195,97 @@
   </div>
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+<script language="javascript">
+  $(document).ready(function () {
+  $("#formCadastrar").validate({
+    onsubmit: true,
+    rules: {
+      cpf: { 
+        cpf: true,
+        required: true 
+      },
+      nome: {
+        required: true,
+        minlength: 3
+      },
+      sexo: {
+        required: true
+      },
+      raca: {
+        required: true
+      },
+      estadoCivil: {
+        required: true
+      },
+      dataNascimento: {
+        required: true
+      },
+      paisNascimento: {
+        required: true
+      },
+      paisNacionalidade: {
+        required: true
+      },
+      '[[@{endereco.cep.numeroCep}]]': {
+        required: true
+      },
+      tipoEndereco: {
+        required: true
+      }
+
+    },
+    messages: {
+      cpf: { cpf: "Por valor, insira um CPF válido!", required: "Por valor, insira um CPF!" },
+      nome: { required: "Por favor, insira um nome!", minlength: "O nome deve ter no mínimo 3 caracteres!" },
+      sexo: { required: "Por favor, insira o sexo!"},
+      raca: { required: "Por favor, insira a raça!"},
+      estadoCivil: { required: "Por favor, insira o estado civil!"},
+      dataNascimento: { required: "Por favor, insira a data de nascimento!"},
+      paisNascimento: { required: "Por favor, insira a data de nascimento!"},
+      paisNacionalidade: { required: "Por favor, insira a data de nascimento!"},
+      '[[@{endereco.cep.numeroCep}]]': { required: "Por favor, insira o CEP!"},
+      tipoEndereco: { required: "Por favor, insira a data de nascimento!"}
+    }
+  })
+
+
+
+  jQuery.validator.addMethod("cpf", function (value, element) {
+    value = jQuery.trim(value);
+
+    value = value.replace('.', '');
+    value = value.replace('.', '');
+    cpf = value.replace('-', '');
+    while (cpf.length < 11) cpf = "0" + cpf;
+    var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
+    var a = [];
+    var b = new Number;
+    var c = 11;
+    for (i = 0; i < 11; i++) {
+      a[i] = cpf.charAt(i);
+      if (i < 9) b += (a[i] * --c);
+    }
+    if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11 - x }
+    b = 0;
+    c = 11;
+    for (y = 0; y < 10; y++) b += (a[y] * c--);
+    if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11 - x; }
+
+    var retorno = true;
+    if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
+
+    return this.optional(element) || retorno;
+
+  }, "Informe um CPF válido");
+
+});
+</script>
+<script type="text/javascript" th:src="@{/js/endereco.js}">
+  
+</script>
+
 
 </html>
