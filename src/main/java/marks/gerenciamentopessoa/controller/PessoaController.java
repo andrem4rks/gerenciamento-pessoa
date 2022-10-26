@@ -34,6 +34,7 @@ import marks.gerenciamentopessoa.repository.tipoEnderecoRepository;
 import marks.gerenciamentopessoa.repository.racaRepository;
 
 @Controller
+@RequestMapping("/pessoa")
 public class PessoaController {
 
     @Autowired

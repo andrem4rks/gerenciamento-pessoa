@@ -30,12 +30,6 @@ public class Pessoa extends PessoaPrincipal {
     @OneToMany
     private List<Dependente> dependente;
 
-    @Valid
-    @NotNull(message = "Selecione pelo menos uma opção")
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_sexo")
-    private Sexo sexo;
-
     @NotNull(message = "Selecione pelo menos uma opção")
     @OneToOne
     @JoinColumn(name = "id_raca")
