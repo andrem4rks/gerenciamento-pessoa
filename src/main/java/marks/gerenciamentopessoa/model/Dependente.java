@@ -1,5 +1,6 @@
 package marks.gerenciamentopessoa.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -22,7 +23,7 @@ public class Dependente extends PessoaPrincipal {
     @JoinColumn(name = "id_tipo_dependente")
     private TipoDependente tipoDependente;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_deficiencia")
     private Deficiencia deficiencias;
 }
