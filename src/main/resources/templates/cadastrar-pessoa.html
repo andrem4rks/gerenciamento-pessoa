@@ -12,6 +12,8 @@
 
 <body>
 
+  <div th:insert="fragments/nav :: nav"></div>
+
 
 
   <div class="container mt-4" id="form-cont">
@@ -403,7 +405,10 @@
         $("#cep").removeClass("is-valid").addClass("is-invalid")
       }
 
-    })
+    }),
+
+    $('#cadastrar').addClass('active');
+    
   })
 
 

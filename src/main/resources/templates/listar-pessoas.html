@@ -10,12 +10,16 @@
 </head>
 
 <body>
+  <div th:insert="fragments/nav :: nav"></div>
   <div class="container">
     <div class="row justify-content-md-center">
-      <div class="col">
+      <div class="col mt-4">
         <h1>Lista de Pessoas</h1>
 
-        <table class="table table-striped " id="table1">
+        <div>
+          <h3 th:if="${pessoas.empty}">Sem Pessoas Cadastradas!</h3>
+        </div>
+        <table class="table table-striped " id="table1" th:if="${!pessoas.empty}">
           <thead>
             <tr>
               <th>CPF</th>
@@ -25,7 +29,7 @@
           </thead>
           <tbody>
             <tr th:if="${pessoas.empty}">
-              <td colspan="2">Sem usuários!</td>
+              
             </tr>
             <tr th:each="pessoa : ${pessoas}">
               <td><span th:text="${pessoa.cpf}"> CPF </span></td>
@@ -65,6 +69,7 @@
 <script type="text/javascript" charset="utf8" th:src="@{/extensions/datatable/js/datatables.js}"></script>
 <script>
   $(document).ready(function () {
+    $('#listar').addClass('active');
     $('#table1').DataTable({
       "language": {
         "emptyTable": "Nenhum registro encontrado",
@@ -313,7 +318,7 @@
 
 
 
-    });
+    })
   });
 </script>
 
