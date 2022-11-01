@@ -12,6 +12,7 @@
 <body>
 
 
+  <div th:insert="fragments/nav :: nav"></div>
 
   <div class="container mt-4" id="form-cont">
 
@@ -24,7 +25,7 @@
 
 
 
-    <form action="#" th:action="@{/salvar}" th:object="${dependente}" method="post" id="formCadastrar">
+    <form action="#" th:action="@{/dependente/salvar}" th:object="${dependente}" method="post" id="formCadastrar">
 
       <div class="mb-5" name="Cadastro_Principal">
 
@@ -58,6 +59,16 @@
               </option>
             </select>
             <span class="blink-1" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></span>
+          </div>
+
+          <div class="col-sm-3 d-flex flex-column">
+            <label class="form-label">Tipo Dependente <span>*</span></label>
+            <select th:id="@{tipoDependente}" th:field="*{tipoDependente}" class="form-select">
+              <option selected th:value="${null}">Escolha um tipo</option>
+              <option th:each="tipo : ${listaTipo}" th:value="${tipo.id}" th:text="${tipo.descricao}" name="tipo">
+              </option>
+            </select>
+            <span class="blink-1" th:if="${#fields.hasErrors('tipoDependente')}" th:errors="*{tipoDependente}"></span>
           </div>
         </div>
 
@@ -116,7 +127,7 @@
                 <input type="radio" class="form-check-input" th:field="*{deficiencias.deficienciaMental}"
                   th:value="${true}" />
                 <label for="" class="me-3">Sim</label>
-                <input type="radio" class="form-check-input" th:field="*{deficiencias.deficienciaFisica}"
+                <input type="radio" class="form-check-input" th:field="*{deficiencias.deficienciaMental}"
                   th:value="${false}" />
                 <label for="">Não</label>
             </div>

@@ -1,7 +1,6 @@
 package marks.gerenciamentopessoa.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -13,19 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import marks.gerenciamentopessoa.model.CEP;
-import marks.gerenciamentopessoa.model.Endereco;
-import marks.gerenciamentopessoa.model.EstadoCivil;
-import marks.gerenciamentopessoa.model.Pais;
 import marks.gerenciamentopessoa.model.Pessoa;
-import marks.gerenciamentopessoa.model.Raca;
-import marks.gerenciamentopessoa.model.Sexo;
-import marks.gerenciamentopessoa.model.TipoEndereco;
 import marks.gerenciamentopessoa.repository.cepRepository;
-import marks.gerenciamentopessoa.repository.enderecoRepository;
 import marks.gerenciamentopessoa.repository.estadoCivilRepository;
 import marks.gerenciamentopessoa.repository.paisRepository;
 import marks.gerenciamentopessoa.repository.pessoaRepository;
@@ -58,9 +49,6 @@ public class PessoaController {
     @Autowired
     private cepRepository cepRepository;
 
-    @Autowired
-    private enderecoRepository enderecoRepository;
-    
     @GetMapping("/novo")
     public String adicionarPessoa(Model model){
       model.addAttribute("pessoa", new Pessoa());
@@ -85,7 +73,7 @@ public class PessoaController {
       pessoaRepository.save(pessoa);
       //setRelations(pessoa);
 
-      return "redirect:/novo";
+      return "redirect:/pessoa/novo";
     }
 
     @RequestMapping("/listar")
@@ -97,12 +85,8 @@ public class PessoaController {
     @GetMapping("/apagar/{id}")
     public String apagarUsuario(@PathVariable("id") Long id, Model model) {
       pessoaRepository.deleteById(id);
-      return "redirect:/listar";
+      return "redirect:/pessoa/listar";
     }
-
-  
-
-
 
     public void popularAtributos(Model model) {
       model.addAttribute("listaSexo", sexoRepository.findAll());

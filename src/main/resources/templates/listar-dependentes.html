@@ -51,12 +51,25 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col mt-4">
-        <h1>Lista de Pessoas</h1>
+        <h1>Lista de Dependentes</h1>
+
+        
+        <div class="row">
+          <div class="col">
+            <a class="btn btn-success" href="" id="btn-dependente" th:href="@{/dependente/novo}">
+              Novo Dependente
+            </a>
+          </div>
+          <div class="col-sm-9 mb-3">
+            <h4>Representante: <span th:text="${nomeRepresentante}"></span></h4>
+          </div>
+        </div>
 
         <div>
-          <h3 th:if="${pessoas.empty}">Sem Pessoas Cadastradas!</h3>
+          <h3 th:if="${dependentes.empty}">Sem Dependentes Cadastrados!</h3>
         </div>
-        <table class="table table-striped " id="table1" th:if="${!pessoas.empty}">
+        
+        <table class="table table-striped " id="table1" th:if="${!dependentes.empty}">
           <thead>
             <tr>
               <th class="cpf">CPF</th>
@@ -65,28 +78,24 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:if="${pessoas.empty}">
+            <tr th:if="${dependentes.empty}">
 
             </tr>
-            <tr th:each="pessoa : ${pessoas}">
-              <td><span th:text="${pessoa.cpf}"> CPF </span></td>
-              <td><span th:text="${pessoa.nome}"> Nome </span></td>
+            <tr th:each="dependente : ${dependentes}">
+              <td><span th:text="${dependente.cpf}"> CPF </span></td>
+              <td><span th:text="${dependente.nome}"> Nome </span></td>
 
               <td>
-                <a class="btn btn-info btn-sm" href="" id="btn-dependente"
-                  th:href="@{/dependente/listar/{id}(id=${pessoa.id})}">
-                  Dependentes
-                </a>
 
                 <a class="btn btn-warning btn-sm" href="" id="btn-editar"
-                  th:href="@{pessoa/apagar/{id}(id=${pessoa.id})}"
-                  th:data-confirm-delete="|Você gostaria de apagar ${pessoa.nome}?|"
+                  th:href="@{dependente/apagar/{id}(id=${dependente.id})}"
+                  th:data-confirm-delete="|Você gostaria de apagar ${dependente.nome}?|"
                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
                   Editar
                 </a>
 
-                <a class="btn btn-danger btn-sm" href="" id="btn-apagar" th:href="@{apagar/{id}(id=${pessoa.id})}"
-                  th:data-confirm-delete="|Você gostaria de apagar ${pessoa.nome}?|"
+                <a class="btn btn-danger btn-sm" href="" id="btn-apagar" th:href="@{/dependente/apagar/{id}(id=${dependente.id})}"
+                  th:data-confirm-delete="|Você gostaria de apagar ${dependente.nome}?|"
                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
                   Apagar
                 </a>

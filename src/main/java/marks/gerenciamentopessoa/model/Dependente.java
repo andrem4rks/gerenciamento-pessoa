@@ -2,7 +2,9 @@ package marks.gerenciamentopessoa.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -26,4 +28,5 @@ public class Dependente extends PessoaPrincipal {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_deficiencia")
     private Deficiencia deficiencias;
+
 }
