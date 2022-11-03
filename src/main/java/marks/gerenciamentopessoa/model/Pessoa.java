@@ -58,4 +58,8 @@ public class Pessoa extends PessoaPrincipal {
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
+    @NotNull(message = "Selecione pelo menos uma opção")
+    @OneToOne
+    @JoinColumn(name = "id_instrucao")
+    private Instrucao instrucao;
 }

@@ -19,6 +19,7 @@ import marks.gerenciamentopessoa.model.CEP;
 import marks.gerenciamentopessoa.model.Pessoa;
 import marks.gerenciamentopessoa.repository.cepRepository;
 import marks.gerenciamentopessoa.repository.estadoCivilRepository;
+import marks.gerenciamentopessoa.repository.instrucaoRepository;
 import marks.gerenciamentopessoa.repository.paisRepository;
 import marks.gerenciamentopessoa.repository.pessoaRepository;
 import marks.gerenciamentopessoa.repository.sexoRepository;
@@ -50,6 +51,9 @@ public class PessoaController {
     @Autowired
     private cepRepository cepRepository;
 
+    @Autowired
+    private instrucaoRepository instrucaoRepository;
+
     @RequestMapping(path = "/novo", method = RequestMethod.GET)
     public String adicionarPessoa(Model model){
       model.addAttribute("pessoa", new Pessoa());
@@ -67,12 +71,14 @@ public class PessoaController {
                                 {
       popularAtributos(model);      
 
+      System.out.println("Logradouro: " + pessoa.getEndereco().getLogradouro());
+
       if (result.hasErrors()) {
 			  return "cadastrar-pessoa";
 		  }
+      
       verifCepExiste(pessoa);
       pessoaRepository.save(pessoa);
-      //setRelations(pessoa);
 
       return "redirect:/pessoa/novo";
     }
@@ -95,6 +101,7 @@ public class PessoaController {
       model.addAttribute("listaEstadoCivil", estadoCivilRepository.findAll());
       model.addAttribute("listaPaises", paisRepository.findAll());
       model.addAttribute("listaTipoEndereco", tipoEnderecoRepository.findAll());
+      model.addAttribute("listaInstrucao", instrucaoRepository.findAll());
     }
 
     public Pessoa verifCepExiste(Pessoa pessoa) {

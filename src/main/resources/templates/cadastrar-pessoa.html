@@ -11,6 +11,9 @@
     .container {
       width: 1100px;
     }
+    .readOnly {
+      background-color: rgb(230, 230, 230);
+    }
   </style>
 </head>
 
@@ -96,6 +99,21 @@
 
         </div>
 
+        <div class="row">
+          <div class="col">
+            <div class="col">
+              <label for="" class="form-label">Nível de Instrução <span>*</span></label>
+              <select th:id="@{instrucao}" th:field="*{instrucao}" class="form-select">
+                <option selected th:value="${null}">Escolha um nível de Instrução</option>
+                <option th:each="instrucao: ${listaInstrucao}" th:value="${instrucao.id}"
+                  th:text="${instrucao.descricao}" name="instrucao">
+                </option>
+              </select>
+              <span class="blink-1" th:if="${#fields.hasErrors('instrucao')}" th:errors="*{instrucao}"></span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="CadastroEndereco">
@@ -145,7 +163,7 @@
             <span class="blink-1" th:if="${#fields.hasErrors('endereco.tipoEndereco')}"
               th:errors="*{endereco.tipoEndereco}"></span>
           </div>
-          <div class="col">
+          <div class="col" id="logradouro">
             <label class="form-label">Logradouro <span>*</span></label>
             <input th:id="@{endereco.logradouro}" th:field="*{endereco.logradouro}" type="text" class="form-control" />
             <span class="blink-1" th:if="${#fields.hasErrors('endereco.logradouro')}"
@@ -196,7 +214,7 @@
       </div>
 
       <div class="col">
-        <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" value="Cadastrar" />
+        <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" value="Cadastrar" id="submeter"/>
       </div>
 
 
@@ -251,7 +269,7 @@
         },
         '[[@{endereco.logradouro}]]': {
           required: true,
-          minlength: 3
+          minlength: 3,
         },
         '[[@{endereco.numero}]]': {
           required: true
@@ -287,9 +305,20 @@
         '[[@{endereco.numero}]]': { required: "Por favor, insira numero!" },
         '[[@{endereco.cep.estado}]]': { required: "Por favor, insira o estado!" },
         '[[@{endereco.cep.municipio}]]': { required: "Por favor, insira municipio!" },
-      }
+      },
+      
+      
+
 
     })
+
+    $('input[id="[[@{endereco.cep.numeroCep}]]"]').on('blur', function() {
+      console.log("teste")
+      $('input[id="[[@{endereco.logradouro}]]"]').validate({
+        required: true
+      });
+    })
+   
 
     //metodo - validação de cpf
     jQuery.validator.addMethod("cpf", function (value, element) {
@@ -366,38 +395,42 @@
               if (!("erro" in data)) {
                 console.log("dfsdfaS")
                 $('input[id="[[@{endereco.cep.numeroCep}]]"]').addClass("is-valid");
-                if (data.logradouro !== "" || data.logradouro == null)
-                  $('input[id="[[@{endereco.logradouro}]]"]').val(data.logradouro).addClass("is-valid").prop("disabled", true);
+                if (data.logradouro !== ""){ 
+                  $('input[id="[[@{endereco.logradouro}]]"]').val(data.logradouro).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
+                  $('label[id="[[@{endereco.logradouro-error}]]"]').remove();
+                }  
                 else
-                  $('input[id="[[@{endereco.logradouro}]]"]').val("").removeClass("is-valid").prop("disabled", false);
+                  $('input[id="[[@{endereco.logradouro}]]"]').val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
 
                 if (data.complemento !== "")
-                  $('input[id="[[@{endereco.cep.complemento}]]"]').val(data.complemento).addClass("is-valid").prop("disabled", true);
+                  $('input[id="[[@{endereco.cep.complemento}]]"]').val(data.complemento).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
                 else
-                  $('input[id="[[@{endereco.cep.complemento}]]"]').val("").removeClass("is-valid").prop("disabled", false);
+                  $('input[id="[[@{endereco.cep.complemento}]]"]').val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
 
                 if (data.bairro !== "")
-                  $('input[id="[[@{endereco.cep.bairro}]]"]').val(data.bairro).addClass("is-valid").prop("disabled", true);
+                  $('input[id="[[@{endereco.cep.bairro}]]"]').val(data.bairro).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
                 else
-                  $('input[id="[[@{endereco.cep.bairro}]]"]').val("").removeClass("is-valid").prop("disabled", false);
+                  $('input[id="[[@{endereco.cep.bairro}]]"]').val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
 
-                if (data.localidade !== "")
-                  $('input[id="[[@{endereco.cep.municipio}]]"]').val(data.localidade).addClass("is-valid").prop("disabled", true);
-                else
-                  $('input[id="[[@{endereco.cep.municipio}]]"]').val("").removeClass("is-valid").prop("disabled", false);
+                if (data.localidade !== ""){ 
+                  $('input[id="[[@{endereco.cep.municipio}]]"]').val(data.localidade).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
+                  $('label[id="[[@{endereco.cep.municipio-error}]]"]').remove();
+                } else
+                  $('input[id="[[@{endereco.cep.municipio}]]"]').val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
 
-                if (data.uf !== "")
-                  $('input[id="[[@{endereco.cep.estado}]]"]').val(data.uf).removeClass("is-invalid").addClass("is-valid").prop("disabled", true);
-                else
-                  $('input[id="[[@{endereco.cep.estado}]]"]').val("").removeClass("is-valid").prop("disabled", false);
+                if (data.uf !== "") {
+                  $('input[id="[[@{endereco.cep.estado}]]"]').val(data.uf).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
+                  $('label[id="[[@{endereco.cep.estado-error}]]"]').remove();
+                } else
+                  $('input[id="[[@{endereco.cep.estado}]]"]').val("").val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
+
 
               } else {
-                $('input[id="[[@{endereco.logradouro}]]"]').val("").removeClass("is-valid").prop("disabled", false);
-                $('input[id="[[@{endereco.cep.complemento}]]"]').val("").removeClass("is-valid").prop("disabled", false);
-                $('input[id="[[@{endereco.cep.bairro}]]"]').val("").removeClass("is-valid").prop("disabled", false);
-                $('input[id="[[@{endereco.cep.municipio}]]"]').val("").removeClass("is-valid").prop("disabled", false);
-                $('input[id="[[@{endereco.cep.estado}]]"]').val("").removeClass("is-valid").prop("disabled", false);
-
+                $('input[id="[[@{endereco.logradouro}]]"]').removeClass("is-valid").attr('readOnly', false);
+                $('input[id="[[@{endereco.cep.complemento}]]"]').removeClass("is-valid").attr('readOnly', false);
+                $('input[id="[[@{endereco.cep.bairro}]]"]').removeClass("is-valid").attr('readOnly', false);
+                $('input[id="[[@{endereco.cep.municipio}]]"]').removeClass("is-valid").attr('readOnly', false);
+                $('input[id="[[@{endereco.cep.estado}]]"]').removeClass("is-valid").attr('readOnly', false);
               }
 
             }
