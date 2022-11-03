@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import marks.gerenciamentopessoa.model.CEP;
@@ -25,7 +26,7 @@ import marks.gerenciamentopessoa.repository.tipoEnderecoRepository;
 import marks.gerenciamentopessoa.repository.racaRepository;
 
 @Controller
-@RequestMapping("/pessoa")
+@RequestMapping(path = "/pessoa")
 public class PessoaController {
 
     @Autowired
@@ -49,7 +50,7 @@ public class PessoaController {
     @Autowired
     private cepRepository cepRepository;
 
-    @GetMapping("/novo")
+    @RequestMapping(path = "/novo", method = RequestMethod.GET)
     public String adicionarPessoa(Model model){
       model.addAttribute("pessoa", new Pessoa());
       popularAtributos(model);
@@ -57,7 +58,7 @@ public class PessoaController {
     } 
 
     
-    @PostMapping("/salvar")
+    @RequestMapping(path = "/salvar", method = RequestMethod.POST)
     public String salvarPessoa( @Valid Pessoa pessoa,
                                 BindingResult result,
                                 RedirectAttributes attributes,
@@ -76,13 +77,13 @@ public class PessoaController {
       return "redirect:/pessoa/novo";
     }
 
-    @RequestMapping("/listar")
+    @RequestMapping(path = "/listar", method = RequestMethod.GET)
     public String listarPessoas(Model model) {
       model.addAttribute("pessoas", pessoaRepository.findAll());
       return "listar-pessoas";
     }
 
-    @GetMapping("/apagar/{id}")
+    @RequestMapping(path = "/apagar/{id}", method = RequestMethod.DELETE)
     public String apagarUsuario(@PathVariable("id") Long id, Model model) {
       pessoaRepository.deleteById(id);
       return "redirect:/pessoa/listar";
