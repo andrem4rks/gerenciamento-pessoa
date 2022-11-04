@@ -79,8 +79,8 @@
                 </a>
 
                 <a class="btn btn-warning btn-sm" href="" id="btn-editar"
-                  th:href="@{pessoa/apagar/{id}(id=${pessoa.id})}"
-                  th:data-confirm-delete="|Você gostaria de apagar ${pessoa.nome}?|"
+                  th:href="@{editar/{id}(id=${pessoa.id})}"
+                  th:data-confirm-delete="|Você gostaria de editar ${pessoa.nome}?|"
                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
                   Editar
                 </a>

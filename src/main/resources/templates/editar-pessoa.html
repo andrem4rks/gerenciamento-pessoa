@@ -11,6 +11,7 @@
     .container {
       width: 1100px;
     }
+
     .readOnly {
       background-color: rgb(230, 230, 230);
     }
@@ -23,20 +24,27 @@
 
   <div class="container mt-4" id="form-cont">
 
-    <h2 class="page-header mb-3" th:text="${pessoa.id == null} ? 'Cadastrar Pessoa' : 'Editar Pessoa'"></h2>
+    <h2 class="">Cadastrar Pessoa</h2>
 
     <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       <span th:text="${mensagem}"></span>
     </div>
 
+    <!--  -->
 
-
-    <form action="#" th:action="${id != null} ? @{/pessoa/salvar} : @{/pessoa/editar/{id}(id=${id})}" th:object="${pessoa}" method="post" id="formCadastrar">
+    <form action="#" th:action="@{/pessoa/editar/{id}(id=${id})}" th:object="${pessoa}" method="post"
+      id="formEditar">
 
       <div class="mb-5" name="Cadastro_Principal">
 
         <div class="row mb-2">
+
+          <div class="col-sm-3">
+            <label class="form-label">ID <span>*</span></label>
+            <input th:id="@{id}" th:field="*{id}" type="text" class="form-control" maxlength="14" autocomplete="off" />
+            <span class="blink-1" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+          </div>
 
           <div class="col-sm-3">
             <label class="form-label">CPF <span>*</span></label>
@@ -213,8 +221,8 @@
 
       </div>
 
-      <div class="col">
-        <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" value="Cadastrar" id="submeter"/>
+      <div class="col mb-5">
+        <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" value="Cadastrar" id="submeter" />
       </div>
 
 
@@ -226,6 +234,8 @@
 
 <script type="text/javascript" th:src="@{/extensions/jquery/jquery-3.6.1.min.js}"></script>
 <script type="text/javascript" th:src="@{/extensions/jquery/validate/jquery.validate.min.js}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <script language="javascript">
   $(document).ready(function () {
@@ -306,14 +316,32 @@
         '[[@{endereco.cep.estado}]]': { required: "Por favor, insira o estado!" },
         '[[@{endereco.cep.municipio}]]': { required: "Por favor, insira municipio!" },
       },
-      
-      
+
+
 
 
     }),
 
-   
-   
+
+
+      $('#submeter').click(function (e) {
+        if ($("#formEditar").valid()) {
+          console.log("dfjadfka")
+          e.preventDefault();
+          Swal.fire({
+            title: 'Usuário Salvo Com Sucesso!',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          setTimeout(function () {
+            $("#formCadastrar").submit();
+          }, 1000);
+        }
+      })
+
+
+
     //metodo - validação de cpf
     jQuery.validator.addMethod("cpf", function (value, element) {
       value = jQuery.trim(value);
@@ -389,10 +417,10 @@
               if (!("erro" in data)) {
                 console.log("dfsdfaS")
                 $('input[id="[[@{endereco.cep.numeroCep}]]"]').addClass("is-valid");
-                if (data.logradouro !== ""){ 
+                if (data.logradouro !== "") {
                   $('input[id="[[@{endereco.logradouro}]]"]').val(data.logradouro).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
                   $('label[id="[[@{endereco.logradouro-error}]]"]').remove();
-                }  
+                }
                 else
                   $('input[id="[[@{endereco.logradouro}]]"]').val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
 
@@ -406,7 +434,7 @@
                 else
                   $('input[id="[[@{endereco.cep.bairro}]]"]').val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
 
-                if (data.localidade !== ""){ 
+                if (data.localidade !== "") {
                   $('input[id="[[@{endereco.cep.municipio}]]"]').val(data.localidade).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
                   $('label[id="[[@{endereco.cep.municipio-error}]]"]').remove();
                 } else

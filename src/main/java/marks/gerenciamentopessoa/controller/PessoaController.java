@@ -1,6 +1,7 @@
 package marks.gerenciamentopessoa.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -81,6 +82,24 @@ public class PessoaController {
       pessoaRepository.save(pessoa);
 
       return "redirect:/pessoa/novo";
+    }
+
+    @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
+    public String editarPessoa(@PathVariable("id") Long id, Model model) {
+      Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+      model.addAttribute("pessoa", pessoa);
+      popularAtributos(model);
+      System.out.println("Id pessoa = " + pessoa.get().getId());
+      return "editar-pessoa";
+    }
+
+    @RequestMapping(path = "/editar/{id}", method = RequestMethod.POST)
+    public String editarPessoa(@PathVariable("id") Long id, @Valid Pessoa pessoa, BindingResult result) {
+      if(result.hasErrors()) {
+        return "editar-pessoa";
+      }
+      pessoaRepository.save(pessoa);
+      return "redirect:/pessoa/listar";
     }
 
     @RequestMapping(path = "/listar", method = RequestMethod.GET)
