@@ -465,3 +465,16 @@ INSERT INTO tipo_endereco (descricao) VALUES
 (' Via de Pedestre '),
 (' Variante '),
 (' Zigue-Zague ');
+
+INSERT INTO tipo_dependente (descricao) VALUES 
+(' Cônjuge '),
+(' Companheiro(a) com o(a) qual tenha filho ou viva há mais de 5 (cinco) anos ou possua declaração de união estável '),
+(' Filho(a) ou enteado(a) '),
+(' Filho(a) ou enteado(a), universitário(a) ou cursando escola técnica de 2° grau '),
+(' Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, do(a) qual detenha a guarda judicial '),
+(' Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, universitário(a) ou cursando escola técnica de 2°; grau, do(a) qual detenha a guarda judicial '),
+(' Pais, avós e bisavós '),
+(' Menor pobre do qual detenha a guarda judicial '),
+(' A pessoa absolutamente incapaz, da qual seja tutor ou curador '),
+(' Ex cônjuge '),
+(' Agregado/Outros ');
