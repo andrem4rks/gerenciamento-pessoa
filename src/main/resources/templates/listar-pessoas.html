@@ -6,7 +6,7 @@
   <title>Lista de Usuários</title>
   <link th:href="@{/css/main.css}" rel="stylesheet" />
   <link th:href="@{/extensions/bootstrap/css/bootstrap.css}" rel="stylesheet" />
-  <script type="text/javascript" th:src="@{/extensions/bootstrap/js/bootstrap.js}"></script>
+
   <style>
     .container {
       width: 1100px;
@@ -78,18 +78,15 @@
                   Dependentes
                 </a>
 
-                <a class="btn btn-warning btn-sm" href="" id="btn-editar"
-                  th:href="@{editar/{id}(id=${pessoa.id})}"
-                  th:data-confirm-delete="|Você gostaria de editar ${pessoa.nome}?|"
-                  onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
+                <button class="btn btn-warning btn-sm" id="btn-editar"
+                  th:onclick="editarModal([[${pessoa.id}]],[[${pessoa.nome}]])">
                   Editar
-                </a>
+                </button>
 
-                <a class="btn btn-danger btn-sm" href="" id="btn-apagar" th:href="@{apagar/{id}(id=${pessoa.id})}"
-                  th:data-confirm-delete="|Você gostaria de apagar ${pessoa.nome}?|"
-                  onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
+                <button class="btn btn-danger btn-sm" id="btn-apagar"
+                  th:onclick="apagarModal([[${pessoa.id}]],[[${pessoa.nome}]])">
                   Apagar
-                </a>
+                </button>
               </td>
 
             </tr>
@@ -103,6 +100,45 @@
           </tfoot>
         </table>
 
+        <!-- Modal -->
+
+        <div class="modal fade" id="editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Confirmação</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Realmente Deseja Editar <strong id="bold-nome-editar"></strong> ?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <a type="button" class="btn btn-success" id="btn-editar-confirmar">Confirmar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="apagar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Confirmação</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Realmente Deseja Apagar <strong id="bold-nome-apagar"></strong> ?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <a type="button" class="btn btn-success" id="btn-apagar-confirmar">Confirmar</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -112,11 +148,48 @@
 
 <!--datable implements-->
 
+
+<script type="text/javascript" th:src="@{/extensions/bootstrap/js/bootstrap.js}"></script>
 <script type="text/javascript" th:src="@{/extensions/jquery/jquery-3.6.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/extensions/sweetalert/sweetalert2.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/extensions/datatable/css/datatables.css}">
 <script type="text/javascript" charset="utf8" th:src="@{/extensions/datatable/js/datatables.js}"></script>
 <script>
+  function editarModal(id, nome) {
+    console.log(nome + " editar");
+    $('#bold-nome-editar').text(nome);
+    $('#btn-editar-confirmar').attr('href', 'editar/' + id);
+    $('#editar').modal('show');
+  }
+  function apagarModal(id, nome) {
+    console.log(nome + " apgar");
+    $('#bold-nome-apagar').text(nome);
+    $('#apagar').modal('show');
+    // $('#btn-apagar-confirmar').attr('href', 'apagar/' + id);
+    $('#btn-apagar-confirmar').click(function (e) {
+      e.preventDefault;
+      animacao(id);
+    })
+  }
+
+  function animacao(id) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Usuario Apagado com Sucesso!',
+      showConfirmButton: false,
+    })
+    setInterval(function () { window.location.href = 'apagar/' + id }, 1000);
+  }
+
   $(document).ready(function () {
+
+    $('#btn-apagar-confirmar').click(function (e) {
+      e.preventDefault();
+
+
+    })
+
+
     $('#listar').addClass('active');
     $('#table1').DataTable({
       "language": {

@@ -62,7 +62,6 @@ public class PessoaController {
       return "/cadastrar-pessoa";
     } 
 
-    
     @RequestMapping(path = "/salvar", method = RequestMethod.POST)
     public String salvarPessoa( @Valid Pessoa pessoa,
                                 BindingResult result,
@@ -71,35 +70,12 @@ public class PessoaController {
                                 )  
                                 {
       popularAtributos(model);      
-
-      System.out.println("Logradouro: " + pessoa.getEndereco().getLogradouro());
-
       if (result.hasErrors()) {
 			  return "cadastrar-pessoa";
 		  }
-      
       verifCepExiste(pessoa);
       pessoaRepository.save(pessoa);
-
       return "redirect:/pessoa/novo";
-    }
-
-    @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
-    public String editarPessoa(@PathVariable("id") Long id, Model model) {
-      Optional<Pessoa> pessoa = pessoaRepository.findById(id);
-      model.addAttribute("pessoa", pessoa);
-      popularAtributos(model);
-      System.out.println("Id pessoa = " + pessoa.get().getId());
-      return "editar-pessoa";
-    }
-
-    @RequestMapping(path = "/editar/{id}", method = RequestMethod.POST)
-    public String editarPessoa(@PathVariable("id") Long id, @Valid Pessoa pessoa, BindingResult result) {
-      if(result.hasErrors()) {
-        return "editar-pessoa";
-      }
-      pessoaRepository.save(pessoa);
-      return "redirect:/pessoa/listar";
     }
 
     @RequestMapping(path = "/listar", method = RequestMethod.GET)
@@ -108,7 +84,25 @@ public class PessoaController {
       return "listar-pessoas";
     }
 
-    @RequestMapping(path = "/apagar/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
+    public String editarPessoa(@PathVariable("id") Long id, Model model) {
+      Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+      model.addAttribute("pessoa", pessoa);
+      popularAtributos(model);
+      System.out.println("Id pessoa = " + pessoa.get().getId());
+      return "cadastrar-pessoa";
+    }
+
+    @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
+    public String editarPessoa(@PathVariable("id") Long id, @Valid Pessoa pessoa, BindingResult result) {
+      if(result.hasErrors()) {
+        return "cadastrar-dependente";
+      }
+      pessoaRepository.save(pessoa);
+      return "redirect:/pessoa/listar";
+    }
+
+    @RequestMapping(path = "/apagar/{id}", method = RequestMethod.GET)
     public String apagarUsuario(@PathVariable("id") Long id, Model model) {
       pessoaRepository.deleteById(id);
       return "redirect:/pessoa/listar";

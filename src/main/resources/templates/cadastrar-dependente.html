@@ -30,7 +30,7 @@
 
 
 
-    <form action="#" th:action="@{/dependente/salvar}" th:object="${dependente}" method="post" id="formCadastrar">
+    <form action="#" th:action="${id == null} ? @{/dependente/salvar} : @{/dependente/editar/{id}(id=${id})}" th:object="${dependente}" method="post" id="formCadastrar">
 
       <div class="mb-5" name="Cadastro_Principal">
 
@@ -192,7 +192,7 @@
         </div>
 
         <div class="col">
-          <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" value="Cadastrar" />
+          <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" th:value="${id == null} ? 'Cadastrar' : 'Editar'" id="submeter" />
         </div>
 
     </form>
@@ -203,10 +203,26 @@
 
 <script type="text/javascript" th:src="@{/extensions/jquery/jquery-3.6.1.min.js}"></script>
 <script type="text/javascript" th:src="@{/extensions/jquery/validate/jquery.validate.min.js}"></script>
+<script type="text/javascript" th:src="@{/extensions/sweetalert/sweetalert2.js}"></script>
 
 <script language="javascript">
   $(document).ready(function () {
-
+    $('#submeter').click(function (e) {
+        e.preventDefault();
+        if ($('#formCadastrar').valid()) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Dependente Cadastrado com Sucesso!',
+              showConfirmButton: false,
+            })
+            setInterval(function () { $("#formCadastrar").submit() }, 1000);
+          } else {
+            Swal.fire({
+              icon: 'info',
+              title: 'Insira as Informações Corretamente!',
+            })
+          }
+        })
 
     // Jquery Validator
     $("#formCadastrar").validate({
