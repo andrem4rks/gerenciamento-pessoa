@@ -56,9 +56,12 @@ public class PessoaController {
     private instrucaoRepository instrucaoRepository;
 
     @RequestMapping(path = "/novo", method = RequestMethod.GET)
-    public String adicionarPessoa(Model model){
+    public String adicionarPessoa(RedirectAttributes attributes, Model model){
       model.addAttribute("pessoa", new Pessoa());
+
       popularAtributos(model);
+      // attributes.addFlashAttribute("success", "Pessoa Cadastrada Com Sucesso!");
+
       return "/cadastrar-pessoa";
     } 
 
@@ -75,6 +78,8 @@ public class PessoaController {
 		  }
       verifCepExiste(pessoa);
       pessoaRepository.save(pessoa);
+
+      attributes.addFlashAttribute("cadastroSucess", "Pessoa Cadastrada Com Sucesso!");
       return "redirect:/pessoa/novo";
     }
 
@@ -94,17 +99,19 @@ public class PessoaController {
     }
 
     @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
-    public String editarPessoa(@PathVariable("id") Long id, @Valid Pessoa pessoa, BindingResult result) {
+    public String editarPessoa(@PathVariable("id") Long id, @Valid Pessoa pessoa, BindingResult result, Model model, RedirectAttributes attr) {
       if(result.hasErrors()) {
         return "cadastrar-dependente";
       }
       pessoaRepository.save(pessoa);
+      attr.addFlashAttribute("alertMessage", "editar");
       return "redirect:/pessoa/listar";
     }
 
     @RequestMapping(path = "/apagar/{id}", method = RequestMethod.GET)
-    public String apagarUsuario(@PathVariable("id") Long id, Model model) {
+    public String apagarUsuario(@PathVariable("id") Long id, Model model, RedirectAttributes attr) {
       pessoaRepository.deleteById(id);
+      attr.addFlashAttribute("alertMessage", "apagar");
       return "redirect:/pessoa/listar";
     }
 

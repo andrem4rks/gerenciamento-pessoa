@@ -1,6 +1,5 @@
 package marks.gerenciamentopessoa.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,14 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import marks.gerenciamentopessoa.model.Dependente;
+import marks.gerenciamentopessoa.model.Pessoa;
 import marks.gerenciamentopessoa.repository.dependenteRepository;
 import marks.gerenciamentopessoa.repository.pessoaRepository;
 import marks.gerenciamentopessoa.repository.sexoRepository;
@@ -60,12 +58,12 @@ public class DependenteController {
     }
     dependenteRepository.save(dependente);
 
-    // List<Dependente> dependentes = new ArrayList<Dependente>();
-    // dependentes = pessoaRepository.findById(globalId).get().getDependentes();
-    // dependentes.add(dependente);
-    // dependenteRepository.save(dependente);
-    // pessoaRepository.findById(globalId).get().setDependentes(dependentes);
-    // setRelations(pessoa);
+    Pessoa pessoa = pessoaRepository.findById(globalId).get();
+    List<Dependente> dependentesLst = pessoa.getDependentes();
+    dependentesLst.add(dependente);
+    pessoa.setDependentes(dependentesLst);
+    pessoaRepository.save(pessoa);
+
     return "redirect:/dependente/listar/" + globalId;
   }
 
@@ -86,13 +84,13 @@ public class DependenteController {
   }
 
   @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
-    public String editarPessoa(@PathVariable("id") Long id, @Valid Dependente dependente, BindingResult result) {
+  public String editarDependente(@PathVariable("id") Long id, @Valid Dependente dependente, BindingResult result) {
       if(result.hasErrors()) {
         return "editar-dependente";
       }
       dependenteRepository.save(dependente);
       return "redirect:/dependente/listar";
-    }
+  }
 
   @RequestMapping(path = "/apagar/{id}", method = RequestMethod.GET)
   public String apagarDependente(@PathVariable("id") Long id, Model model) {

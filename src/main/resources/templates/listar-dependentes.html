@@ -17,7 +17,7 @@
     }
 
     .acoes {
-      width: 27%;
+      width: 10%;
     }
 
     span {
@@ -61,7 +61,7 @@
             </a>
           </div>
           <div class="col-sm-9 mb-3">
-            <h4>Representante: <span th:text="${nomeRepresentante}"></span></h4>
+            <h4 class="text-end">Representante: <span th:text="${nomeRepresentante}"></span></h4>
           </div>
         </div>
 
@@ -91,13 +91,17 @@
                   th:href="@{dependente/apagar/{id}(id=${dependente.id})}"
                   th:data-confirm-delete="|Você gostaria de apagar ${dependente.nome}?|"
                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
-                  Editar
+                  <span style="font-size: 15px; color: rgb(35, 39, 43);">
+                    <i class="fa-regular fa-pen-to-square"></i> 
+                  </span>
                 </a>
 
                 <a class="btn btn-danger btn-sm" href="" id="btn-apagar" th:href="@{/dependente/apagar/{id}(id=${dependente.id})}"
                   th:data-confirm-delete="|Você gostaria de apagar ${dependente.nome}?|"
                   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
-                  Apagar
+                  <span style="font-size: 15px; color: rgb(35, 39, 43);">
+                    <i class="fa-solid fa-trash"></i>
+                  </span>
                 </a>
               </td>
 
@@ -124,6 +128,7 @@
 <script type="text/javascript" th:src="@{/extensions/jquery/jquery-3.6.1.min.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/extensions/datatable/css/datatables.css}">
 <script type="text/javascript" charset="utf8" th:src="@{/extensions/datatable/js/datatables.js}"></script>
+<script type="text/javascript" th:src="@{/extensions/icons/icons.js}" crossorigin="anonymous"></script>
 <script>
   $(document).ready(function () {
     $('#listar').addClass('active');

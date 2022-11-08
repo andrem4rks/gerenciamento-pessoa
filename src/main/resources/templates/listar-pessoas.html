@@ -7,9 +7,13 @@
   <link th:href="@{/css/main.css}" rel="stylesheet" />
   <link th:href="@{/extensions/bootstrap/css/bootstrap.css}" rel="stylesheet" />
 
+
   <style>
+
     .container {
-      width: 1100px;
+      max-width: 1100px;
+      min-width: 580px;
+      width: auto !important;
     }
 
     .cpf {
@@ -17,19 +21,11 @@
     }
 
     .acoes {
-      width: 27%;
+      width: 21%;
     }
 
     span {
       color: black;
-    }
-
-    #btn-dependente {
-      margin-right: 10%;
-    }
-
-    #btn-apagar {
-      margin-left: 5%;
     }
 
     .table {
@@ -43,6 +39,13 @@
     input {
       border-radius: 4px;
     }
+
+    @media (max-width: 1040px) {
+      #btn-dependente {
+        margin-top: 10px;
+      }
+    }
+
   </style>
 </head>
 
@@ -50,7 +53,6 @@
   <div th:insert="fragments/nav :: nav"></div>
   <div class="container">
     <div class="row justify-content-md-center">
-      <div class="col mt-4">
         <h1>Lista de Pessoas</h1>
 
         <div>
@@ -65,28 +67,31 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:if="${pessoas.empty}">
-
-            </tr>
             <tr th:each="pessoa : ${pessoas}">
               <td><span th:text="${pessoa.cpf}"> CPF </span></td>
               <td><span th:text="${pessoa.nome}"> Nome </span></td>
 
               <td>
+                <button class="btn btn-warning btn-sm me-2" id="btn-editar"
+                  th:onclick="editarModal([[${pessoa.id}]],[[${pessoa.nome}]])">
+                  <span style="font-size: 15px; color: rgb(35, 39, 43);">
+                    <i class="fa-regular fa-pen-to-square"></i> 
+                  </span>
+                </button>
+
+                <button class="btn btn-danger btn-sm me-2" id="btn-apagar"
+                  th:onclick="apagarModal([[${pessoa.id}]],[[${pessoa.nome}]])">
+                  <span style="font-size: 15px; color: rgb(35, 39, 43);">
+                    <i class="fa-solid fa-trash"></i>
+                  </span>
+                </button>
+
                 <a class="btn btn-info btn-sm" href="" id="btn-dependente"
                   th:href="@{/dependente/listar/{id}(id=${pessoa.id})}">
-                  Dependentes
+                  <span style="font-size: 15px">
+                    Dependentes
+                  </span>
                 </a>
-
-                <button class="btn btn-warning btn-sm" id="btn-editar"
-                  th:onclick="editarModal([[${pessoa.id}]],[[${pessoa.nome}]])">
-                  Editar
-                </button>
-
-                <button class="btn btn-danger btn-sm" id="btn-apagar"
-                  th:onclick="apagarModal([[${pessoa.id}]],[[${pessoa.nome}]])">
-                  Apagar
-                </button>
               </td>
 
             </tr>
@@ -139,8 +144,6 @@
             </div>
           </div>
         </div>
-
-      </div>
     </div>
   </div>
 </body>
@@ -154,7 +157,26 @@
 <script type="text/javascript" th:src="@{/extensions/sweetalert/sweetalert2.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/extensions/datatable/css/datatables.css}">
 <script type="text/javascript" charset="utf8" th:src="@{/extensions/datatable/js/datatables.js}"></script>
+<script type="text/javascript" th:src="@{/extensions/icons/icons.js}" crossorigin="anonymous"></script>
+
 <script>
+  switch ('[[${alertMessage}]]') {
+    case 'apagar':
+      sweetIcon("success","Usuário deletado com sucesso!");
+      break;
+    case 'editar':
+      sweetIcon("success","Usuário editado com sucesso!");
+      break;
+  }
+
+  function sweetIcon(iconText,titleText) {
+    Swal.fire({
+      icon: iconText,
+      title: titleText,
+      showConfirmButton: true
+    });
+  }
+ 
   function editarModal(id, nome) {
     console.log(nome + " editar");
     $('#bold-nome-editar').text(nome);

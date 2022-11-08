@@ -30,7 +30,8 @@
 
 
 
-    <form action="#" th:action="${id == null} ? @{/dependente/salvar} : @{/dependente/editar/{id}(id=${id})}" th:object="${dependente}" method="post" id="formCadastrar">
+    <form action="#" th:action="${id == null} ? @{/dependente/salvar} : @{/dependente/editar/{id}(id=${id})}"
+      th:object="${dependente}" method="post" id="formCadastrar">
 
       <div class="mb-5" name="Cadastro_Principal">
 
@@ -123,7 +124,8 @@
                   th:value="${false}" />
                 <label for="">Não</label>
             </div>
-            <label id="deficiencias.deficienciaAuditiva-error" class="error" for="deficiencias.deficienciaAuditiva"></label>
+            <label id="deficiencias.deficienciaAuditiva-error" class="error"
+              for="deficiencias.deficienciaAuditiva"></label>
           </div>
 
           <div class="col">
@@ -141,7 +143,7 @@
         </div>
 
         <div class="row">
-          
+
 
           <div class="col">
             <div class="form-check-label">
@@ -153,7 +155,8 @@
                   th:value="${false}" />
                 <label for="">Não</label>
             </div>
-            <label id="deficiencias.deficienciaIntelectual-error" class="error" for="deficiencias.deficienciaIntelectual"></label>
+            <label id="deficiencias.deficienciaIntelectual-error" class="error"
+              for="deficiencias.deficienciaIntelectual"></label>
           </div>
 
           <div class="col">
@@ -171,28 +174,28 @@
           <div class="col">
             <div class="form-check-label">
               <h6>Preenche Cota </h4>
-                <input type="radio" class="form-check-input" th:field="*{deficiencias.cota}"
-                  th:value="${true}" />
+                <input type="radio" class="form-check-input" th:field="*{deficiencias.cota}" th:value="${true}" />
                 <label for="" class="me-3">Sim</label>
-                <input type="radio" class="form-check-input" th:field="*{deficiencias.cota}"
-                  th:value="${false}"/>
-                <label for="" >Não</label>
+                <input type="radio" class="form-check-input" th:field="*{deficiencias.cota}" th:value="${false}" />
+                <label for="">Não</label>
             </div>
           </div>
           <div class="col"></div>
 
-          
+
         </div>
 
         <div class="row">
           <div class="col">
             <label for="@{deficiencias.observacao}">Observação</label>
-            <textarea class="form-control" th:field="*{deficiencias.observacao}" th:id="@{deficiencias.observacao}"  rows="3"></textarea>  
+            <textarea class="form-control" th:field="*{deficiencias.observacao}" th:id="@{deficiencias.observacao}"
+              rows="3"></textarea>
           </div>
         </div>
 
         <div class="col">
-          <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" th:value="${id == null} ? 'Cadastrar' : 'Editar'" id="submeter" />
+          <input type="submit" class="w-100 btn btn-primary btn-lg mt-3"
+            th:value="${id == null} ? 'Cadastrar' : 'Editar'" id="submeter" />
         </div>
 
     </form>
@@ -207,22 +210,22 @@
 
 <script language="javascript">
   $(document).ready(function () {
-    $('#submeter').click(function (e) {
-        e.preventDefault();
-        if ($('#formCadastrar').valid()) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Dependente Cadastrado com Sucesso!',
-              showConfirmButton: false,
-            })
-            setInterval(function () { $("#formCadastrar").submit() }, 1000);
-          } else {
-            Swal.fire({
-              icon: 'info',
-              title: 'Insira as Informações Corretamente!',
-            })
-          }
-        })
+  //   $('#submeter').click(function (e) {
+  //     e.preventDefault();
+  //     if ($('#formCadastrar').valid()) {
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'Dependente Cadastrado com Sucesso!',
+  //         showConfirmButton: false,
+  //       })
+  //       setInterval(function () { $("#formCadastrar").submit() }, 1000);
+  //     } else {
+  //       Swal.fire({
+  //         icon: 'info',
+  //         title: 'Insira as Informações Corretamente!',
+  //       })
+  //     }
+  //   })
 
     // Jquery Validator
     $("#formCadastrar").validate({
@@ -271,12 +274,12 @@
 
       },
       highlight: function (element) {
-        if(element.type !== "radio")
-        $(element).removeClass("is-valid").addClass("is-invalid");
+        if (element.type !== "radio")
+          $(element).removeClass("is-valid").addClass("is-invalid");
       },
       unhighlight: function (element) {
-        if(element.type !== "radio")
-        $(element).removeClass("is-invalid").addClass("is-valid");
+        if (element.type !== "radio")
+          $(element).removeClass("is-invalid").addClass("is-valid");
       },
 
       messages: {
@@ -285,12 +288,12 @@
         '[[@{sexo}]]': { required: "Por favor, insira o sexo!" },
         '[[@{dataNascimento}]]': { required: "Por favor, insira a data de nascimento!" },
         '[[@{tipoDependente}]]': { required: "Por favor, insira o tipo de dependente!" },
-        '[[@{deficiencias.deficienciaFisica}]]': { required: "Escolha uma opção!"},
-        '[[@{deficiencias.deficienciaVisual}]]': { required: "Escolha uma opção!"},
-        '[[@{deficiencias.deficienciaAuditiva}]]': { required: "Escolha uma opção!"},
-        '[[@{deficiencias.deficienciaMental}]]': { required: "Escolha uma opção!"},
-        '[[@{deficiencias.deficienciaIntelectual}]]': { required: "Escolha uma opção!"},
-        '[[@{deficiencias.reabilitado}]]': { required: "Escolha uma opção!"},
+        '[[@{deficiencias.deficienciaFisica}]]': { required: "Escolha uma opção!" },
+        '[[@{deficiencias.deficienciaVisual}]]': { required: "Escolha uma opção!" },
+        '[[@{deficiencias.deficienciaAuditiva}]]': { required: "Escolha uma opção!" },
+        '[[@{deficiencias.deficienciaMental}]]': { required: "Escolha uma opção!" },
+        '[[@{deficiencias.deficienciaIntelectual}]]': { required: "Escolha uma opção!" },
+        '[[@{deficiencias.reabilitado}]]': { required: "Escolha uma opção!" },
       }
 
     })
