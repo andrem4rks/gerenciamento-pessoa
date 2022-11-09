@@ -1,182 +1,21 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-  <meta charset="UTF-8">
-  <title>Lista de Usuários</title>
-  <link th:href="@{/css/main.css}" rel="stylesheet" />
-  <link th:href="@{/extensions/bootstrap/css/bootstrap.css}" rel="stylesheet" />
-
-
-  <style>
-
-    .container {
-      max-width: 1100px;
-      min-width: 580px;
-      width: auto !important;
-    }
-
-    .cpf {
-      width: 20%;
-    }
-
-    .acoes {
-      width: 21%;
-    }
-
-    span {
-      color: black;
-    }
-
-    .table {
-      --bs-table-striped-bg: rgba(235, 231, 231, 0.05);
-    }
-
-    .paginate_button {
-      border-radius: 4px;
-    }
-
-    input {
-      border-radius: 4px;
-    }
-
-    @media (max-width: 1040px) {
-      #btn-dependente {
-        margin-top: 10px;
-      }
-    }
-
-  </style>
-</head>
-
-<body>
-  <div th:insert="fragments/nav :: nav"></div>
-  <div class="container">
-    <div class="row justify-content-md-center">
-        <h1>Lista de Pessoas</h1>
-
-        <div>
-          <h3 th:if="${pessoas.empty}">Sem Pessoas Cadastradas!</h3>
-        </div>
-        <table class="table table-striped " id="table1" th:if="${!pessoas.empty}">
-          <thead>
-            <tr>
-              <th class="cpf">CPF</th>
-              <th>Nome</th>
-              <th class="acoes">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="pessoa : ${pessoas}">
-              <td><span th:text="${pessoa.cpf}"> CPF </span></td>
-              <td><span th:text="${pessoa.nome}"> Nome </span></td>
-
-              <td>
-                <button class="btn btn-warning btn-sm me-2" id="btn-editar"
-                  th:onclick="editarModal([[${pessoa.id}]],[[${pessoa.nome}]])">
-                  <span style="font-size: 15px; color: rgb(35, 39, 43);">
-                    <i class="fa-regular fa-pen-to-square"></i> 
-                  </span>
-                </button>
-
-                <button class="btn btn-danger btn-sm me-2" id="btn-apagar"
-                  th:onclick="apagarModal([[${pessoa.id}]],[[${pessoa.nome}]])">
-                  <span style="font-size: 15px; color: rgb(35, 39, 43);">
-                    <i class="fa-solid fa-trash"></i>
-                  </span>
-                </button>
-
-                <a class="btn btn-info btn-sm" href="" id="btn-dependente"
-                  th:href="@{/dependente/listar/{id}(id=${pessoa.id})}">
-                  <span style="font-size: 15px">
-                    Dependentes
-                  </span>
-                </a>
-              </td>
-
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>CPF</th>
-              <th>Nome</th>
-              <th>Ações</th>
-            </tr>
-          </tfoot>
-        </table>
-
-        <!-- Modal -->
-
-        <div class="modal fade" id="editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Confirmação</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                Realmente Deseja Editar <strong id="bold-nome-editar"></strong> ?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <a type="button" class="btn btn-success" id="btn-editar-confirmar">Confirmar</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal fade" id="apagar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Confirmação</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                Realmente Deseja Apagar <strong id="bold-nome-apagar"></strong> ?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <a type="button" class="btn btn-success" id="btn-apagar-confirmar">Confirmar</a>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
-</body>
-
-
-<!--datable implements-->
-
-
-<script type="text/javascript" th:src="@{/extensions/bootstrap/js/bootstrap.js}"></script>
-<script type="text/javascript" th:src="@{/extensions/jquery/jquery-3.6.1.min.js}"></script>
-<script type="text/javascript" th:src="@{/extensions/sweetalert/sweetalert2.js}"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/extensions/datatable/css/datatables.css}">
-<script type="text/javascript" charset="utf8" th:src="@{/extensions/datatable/js/datatables.js}"></script>
-<script type="text/javascript" th:src="@{/extensions/icons/icons.js}" crossorigin="anonymous"></script>
-
-<script>
+<script th:fragment="datatable">
   switch ('[[${alertMessage}]]') {
     case 'apagar':
-      sweetIcon("success","Usuário deletado com sucesso!");
+      sweetIcon("success", "Usuário deletado com sucesso!");
       break;
     case 'editar':
-      sweetIcon("success","Usuário editado com sucesso!");
+      sweetIcon("success", "Usuário editado com sucesso!");
       break;
   }
 
-  function sweetIcon(iconText,titleText) {
+  function sweetIcon(iconText, titleText) {
     Swal.fire({
       icon: iconText,
       title: titleText,
       showConfirmButton: true
     });
   }
- 
+
   function editarModal(id, nome) {
     console.log(nome + " editar");
     $('#bold-nome-editar').text(nome);
@@ -464,6 +303,3 @@
     })
   });
 </script>
-
-
-</html>

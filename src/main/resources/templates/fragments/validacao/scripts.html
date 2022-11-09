@@ -1,0 +1,197 @@
+  <script th:fragment="validacao">
+    $(document).ready(function () {
+
+      //validate-rules
+      $("#formCadastrar").validate({
+        rules: {
+          '[[@{cpf}]]': {
+            cpf: true,
+            required: true
+          },
+          '[[@{nome}]]': {
+            required: true,
+            minlength: 3
+          },
+          '[[@{sexo}]]': {
+            required: true
+          },
+          '[[@{raca}]]': {
+            required: true
+          },
+          '[[@{estadoCivil}]]': {
+            required: true
+          },
+          '[[@{dataNascimento}]]': {
+            required: true
+          },
+          '[[@{paisNascimento}]]': {
+            required: true
+          },
+          '[[@{paisNacionalidade}]]': {
+            required: true
+          },
+          '[[@{endereco.cep.numeroCep}]]': {
+            required: true,
+            minlength: 9
+          },
+          '[[@{endereco.tipoEndereco}]]': {
+            required: true
+          },
+          '[[@{endereco.logradouro}]]': {
+            required: true,
+            minlength: 3,
+          },
+          '[[@{endereco.numero}]]': {
+            required: true
+          },
+          '[[@{endereco.cep.estado}]]': {
+            required: true
+          },
+          '[[@{endereco.cep.municipio}]]': {
+            required: true
+          }
+        },
+        highlight: function (element) {
+          $(element).removeClass("is-valid").addClass("is-invalid");
+        },
+        unhighlight: function (element) {
+          $(element).removeClass("is-invalid").addClass("is-valid");
+        },
+
+        messages: {
+          '[[@{cpf}]]': { cpf: "Por valor, insira um CPF válido!", required: "Por valor, insira um CPF!" },
+          '[[@{nome}]]': { required: "Por favor, insira um nome!", minlength: "O nome deve ter no mínimo 3 caracteres!" },
+          '[[@{sexo}]]': { required: "Por favor, insira o sexo!" },
+          '[[@{raca}]]': { required: "Por favor, insira a raça!" },
+          '[[@{estadoCivil}]]': { required: "Por favor, insira o estado civil!" },
+          '[[@{dataNascimento}]]': { required: "Por favor, insira a data de nascimento!" },
+          '[[@{paisNascimento}]]': { required: "Por favor, insira a data de nascimento!" },
+          '[[@{paisNacionalidade}]]': { required: "Por favor, insira a data de nascimento!" },
+          '[[@{endereco.cep.numeroCep}]]': { required: "Por favor, insira o CEP!", minlength: "O CEP deve estar completo!" },
+          '[[@{endereco.tipoEndereco}]]': { required: "Por favor, insira a data de nascimento!" },
+          '[[@{endereco.logradouro}]]': { required: "Por favor, insira o logradouro!" },
+          '[[@{endereco.numero}]]': { required: "Por favor, insira numero!" },
+          '[[@{endereco.cep.estado}]]': { required: "Por favor, insira o estado!" },
+          '[[@{endereco.cep.municipio}]]': { required: "Por favor, insira municipio!" },
+        },
+      }),
+
+      jQuery.validator.addMethod("cpf", function (value, element) {
+        value = jQuery.trim(value);
+
+        value = value.replace('.', '');
+        value = value.replace('.', '');
+        cpf = value.replace('-', '');
+        while (cpf.length < 11) cpf = "0" + cpf;
+        var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
+        var a = [];
+        var b = new Number;
+        var c = 11;
+        for (i = 0; i < 11; i++) {
+          a[i] = cpf.charAt(i);
+          if (i < 9) b += (a[i] * --c);
+        }
+        if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11 - x }
+        b = 0;
+        c = 11;
+        for (y = 0; y < 10; y++) b += (a[y] * c--);
+        if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11 - x; }
+
+        var retorno = true;
+        if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
+
+        return this.optional(element) || retorno;
+
+      }, "Informe um CPF válido");
+
+      //formatacao de inputs
+      $('input[id="[[@{cpf}]]"]').on('keypress', function (e) {
+        let tecla = (event.keyCode || event.charCode);
+        let input = $('input[id="[[@{cpf}]]"]').val();
+        let inputLength = input.length;
+        if ((tecla > 47 && tecla < 58)) {
+          if (inputLength === 3 || inputLength === 7) {
+            $('input[id="[[@{cpf}]]"]').val(input + ".");
+          } else if (inputLength === 11) {
+            $('input[id="[[@{cpf}]]"]').val(input + "-");
+          }
+        } else {
+          e.preventDefault();
+        }
+      })
+      $('input[id="[[@{endereco.cep.numeroCep}]]"]').on('keypress', function (e) {
+        let tecla = (event.keyCode || event.charCode);
+        let input = $('input[id="[[@{endereco.cep.numeroCep}]]"]').val();
+
+        let inputLength = input.length;
+        if ((tecla > 47 && tecla < 58)) {
+          if (inputLength === 5)
+            $('input[id="[[@{endereco.cep.numeroCep}]]"]').val(input + "-");
+        } else {
+          e.preventDefault();
+        }
+      })
+
+      //ajax viacep
+      $('input[id="[[@{endereco.cep.numeroCep}]]"]').on("keyup", () => {
+        let cep = $('input[id="[[@{endereco.cep.numeroCep}]]"]').val();
+        let cepLength = cep.length;
+        if (cepLength === 9) {
+          let cepFormatado = cep.replace("-", "")
+          $.ajax({
+            url: "https://viacep.com.br/ws/" + cepFormatado + "/json",
+            dateType: "json",
+            crossDomain: true,
+            statusCode: {
+              200: function (data) {
+                if (!("erro" in data)) {
+                  console.log("dfsdfaS")
+                  $('input[id="[[@{endereco.cep.numeroCep}]]"]').addClass("is-valid");
+                  if (data.logradouro !== "") {
+                    $('input[id="[[@{endereco.logradouro}]]"]').val(data.logradouro).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
+                    $('label[id="[[@{endereco.logradouro-error}]]"]').remove();
+                  }
+                  else
+                    $('input[id="[[@{endereco.logradouro}]]"]').val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
+
+                  if (data.complemento !== "")
+                    $('input[id="[[@{endereco.cep.complemento}]]"]').val(data.complemento).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
+                  else
+                    $('input[id="[[@{endereco.cep.complemento}]]"]').val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
+
+                  if (data.bairro !== "")
+                    $('input[id="[[@{endereco.cep.bairro}]]"]').val(data.bairro).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
+                  else
+                    $('input[id="[[@{endereco.cep.bairro}]]"]').val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
+
+                  if (data.localidade !== "") {
+                    $('input[id="[[@{endereco.cep.municipio}]]"]').val(data.localidade).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
+                    $('label[id="[[@{endereco.cep.municipio-error}]]"]').remove();
+                  } else
+                    $('input[id="[[@{endereco.cep.municipio}]]"]').val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
+
+                  if (data.uf !== "") {
+                    $('input[id="[[@{endereco.cep.estado}]]"]').val(data.uf).removeClass("is-invalid").addClass("is-valid").addClass('readOnly').attr('readOnly', true);
+                    $('label[id="[[@{endereco.cep.estado-error}]]"]').remove();
+                  } else
+                    $('input[id="[[@{endereco.cep.estado}]]"]').val("").val("").removeClass("is-valid").removeClass("readOnly").attr('readOnly', false);
+
+
+                } else {
+                  $('input[id="[[@{endereco.logradouro}]]"]').removeClass("is-valid").attr('readOnly', false);
+                  $('input[id="[[@{endereco.cep.complemento}]]"]').removeClass("is-valid").attr('readOnly', false);
+                  $('input[id="[[@{endereco.cep.bairro}]]"]').removeClass("is-valid").attr('readOnly', false);
+                  $('input[id="[[@{endereco.cep.municipio}]]"]').removeClass("is-valid").attr('readOnly', false);
+                  $('input[id="[[@{endereco.cep.estado}]]"]').removeClass("is-valid").attr('readOnly', false);
+                }
+
+              }
+            }
+          })
+        } else {
+          $("#cep").removeClass("is-valid").addClass("is-invalid")
+        }
+      });
+
+    })
+  </script>

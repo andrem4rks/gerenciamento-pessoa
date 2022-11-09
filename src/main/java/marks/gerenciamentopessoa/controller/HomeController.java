@@ -10,7 +10,7 @@ public class HomeController {
     @RequestMapping
     public String index(Model model) {
         model.addAttribute("msgBemVindo", "Bem-vindo!");
-        return "index";
+        return "home";
     }
 
 }

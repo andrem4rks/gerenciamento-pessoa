@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Bem Vindo</title>
+</head>
+
+<body class="h-100">
+  <main layout:fragment="main">
+  <div class="container-fluid h-100">
+    <h2 th:text="${msgBemVindo}" class="text-center mb-4"></h2>
+  </div>
+</main>
+</body>
+<script type="text/javascript" th:src="@{/extensions/jquery/jquery-3.6.1.min.js}"></script>
+<script language="javascript">
+  $(document).ready(function () {
+    $('#home').addClass('active');
+  })
+</script>
+
+</html>

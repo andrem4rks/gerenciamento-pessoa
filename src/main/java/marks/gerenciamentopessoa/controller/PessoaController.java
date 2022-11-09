@@ -62,7 +62,7 @@ public class PessoaController {
       popularAtributos(model);
       // attributes.addFlashAttribute("success", "Pessoa Cadastrada Com Sucesso!");
 
-      return "/cadastrar-pessoa";
+      return "/pessoa/cadastrar-pessoa";
     } 
 
     @RequestMapping(path = "/salvar", method = RequestMethod.POST)
@@ -74,7 +74,7 @@ public class PessoaController {
                                 {
       popularAtributos(model);      
       if (result.hasErrors()) {
-			  return "cadastrar-pessoa";
+			  return "/pessoa/cadastrar-pessoa";
 		  }
       verifCepExiste(pessoa);
       pessoaRepository.save(pessoa);
@@ -86,7 +86,7 @@ public class PessoaController {
     @RequestMapping(path = "/listar", method = RequestMethod.GET)
     public String listarPessoas(Model model) {
       model.addAttribute("pessoas", pessoaRepository.findAll());
-      return "listar-pessoas";
+      return "/pessoa/listar-pessoas";
     }
 
     @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
@@ -95,13 +95,13 @@ public class PessoaController {
       model.addAttribute("pessoa", pessoa);
       popularAtributos(model);
       System.out.println("Id pessoa = " + pessoa.get().getId());
-      return "cadastrar-pessoa";
+      return "/pessoa/cadastrar-pessoa";
     }
 
     @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
     public String editarPessoa(@PathVariable("id") Long id, @Valid Pessoa pessoa, BindingResult result, Model model, RedirectAttributes attr) {
       if(result.hasErrors()) {
-        return "cadastrar-dependente";
+        return "/pessoa/cadastrar-pessoa";
       }
       pessoaRepository.save(pessoa);
       attr.addFlashAttribute("alertMessage", "editar");
