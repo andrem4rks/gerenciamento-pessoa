@@ -4,9 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <style>
-
-  </style>
+  <link rel="stylesheet" th:href="~{}" th:fragment="css"></link>
 </head>
 
 <body>
@@ -188,8 +186,8 @@
     </form>
   </main>
   <script type="text/javascript" th:fragment="js"></script>
-  <script th:inline="javascript" th:fragment="inlinescript"></script>
-  <div th:insert="fragments/validacao/scripts :: validacao" layout:fragment="script"></div>
+  <script th:inline="javascript" th:src="~{}" th:fragment="inlinescript"></script>
+  <div th:insert="fragments/validacao/scripts :: cadastrar-pessoa" layout:fragment="script"></div>
 </body>
 
 </html>
