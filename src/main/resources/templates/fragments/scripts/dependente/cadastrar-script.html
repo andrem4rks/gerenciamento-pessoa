@@ -1,0 +1,127 @@
+<script th:fragment="cadastrar-dependente">
+  $(document).ready(function () {
+    $("#formCadastrar").validate({
+      rules: {
+        '[[@{cpf}]]': {
+          cpf: true,
+          required: true
+        },
+        '[[@{nome}]]': {
+          required: true,
+          minlength: 3
+        },
+        '[[@{sexo}]]': {
+          required: true
+        },
+        '[[@{dataNascimento}]]': {
+          required: true
+        },
+        '[[@{tipoDependente}]]': {
+          required: true
+        },
+
+        '[[@{deficiencias.deficienciaVisual}]]': {
+          required: true
+        },
+
+        '[[@{deficiencias.deficienciaFisica}]]': {
+          required: true
+        },
+
+        '[[@{deficiencias.deficienciaAuditiva}]]': {
+          required: true
+        },
+
+        '[[@{deficiencias.deficienciaMental}]]': {
+          required: true
+        },
+
+        '[[@{deficiencias.deficienciaIntelectual}]]': {
+          required: true
+        },
+
+        '[[@{deficiencias.reabilitado}]]': {
+          required: true
+        }
+
+      },
+      highlight: function (element) {
+        if (element.type !== "radio")
+          $(element).removeClass("is-valid").addClass("is-invalid");
+      },
+      unhighlight: function (element) {
+        if (element.type !== "radio")
+          $(element).removeClass("is-invalid").addClass("is-valid");
+      },
+
+      messages: {
+        '[[@{cpf}]]': { cpf: "Por valor, insira um CPF válido!", required: "Por valor, insira um CPF!" },
+        '[[@{nome}]]': { required: "Por favor, insira um nome!", minlength: "O nome deve ter no mínimo 3 caracteres!" },
+        '[[@{sexo}]]': { required: "Por favor, insira o sexo!" },
+        '[[@{dataNascimento}]]': { required: "Por favor, insira a data de nascimento!" },
+        '[[@{tipoDependente}]]': { required: "Por favor, insira o tipo de dependente!" },
+        '[[@{deficiencias.deficienciaFisica}]]': { required: "Escolha uma opção!" },
+        '[[@{deficiencias.deficienciaVisual}]]': { required: "Escolha uma opção!" },
+        '[[@{deficiencias.deficienciaAuditiva}]]': { required: "Escolha uma opção!" },
+        '[[@{deficiencias.deficienciaMental}]]': { required: "Escolha uma opção!" },
+        '[[@{deficiencias.deficienciaIntelectual}]]': { required: "Escolha uma opção!" },
+        '[[@{deficiencias.reabilitado}]]': { required: "Escolha uma opção!" },
+      }
+
+    })
+
+    //metodos - inputs CPF e CEP somente com numero e Masks
+
+    $('input[id="[[@{cpf}]]"]').on('keypress', function (e) {
+      let tecla = (event.keyCode || event.charCode);
+      let input = $('input[id="[[@{cpf}]]"]').val();
+      let inputLength = input.length;
+      if ((tecla > 47 && tecla < 58)) {
+        if (inputLength === 3 || inputLength === 7) {
+          $('input[id="[[@{cpf}]]"]').val(input + ".");
+        } else if (inputLength === 11) {
+          $('input[id="[[@{cpf}]]"]').val(input + "-");
+        }
+      } else {
+        e.preventDefault();
+      }
+    })
+
+
+    //metodo - validação de cpf
+    jQuery.validator.addMethod("cpf", function (value, element) {
+      value = jQuery.trim(value);
+
+      value = value.replace('.', '');
+      value = value.replace('.', '');
+      cpf = value.replace('-', '');
+      while (cpf.length < 11) cpf = "0" + cpf;
+      var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
+      var a = [];
+      var b = new Number;
+      var c = 11;
+      for (i = 0; i < 11; i++) {
+        a[i] = cpf.charAt(i);
+        if (i < 9) b += (a[i] * --c);
+      }
+      if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11 - x }
+      b = 0;
+      c = 11;
+      for (y = 0; y < 10; y++) b += (a[y] * c--);
+      if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11 - x; }
+
+      var retorno = true;
+      if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
+
+      return this.optional(element) || retorno;
+
+    }, "Informe um CPF válido");
+
+    if ($('input[id="[[@{cpf}]]"]').val() == '') {
+      $(':radio').each(function () {
+        $(this).removeAttr('checked');
+      })
+    }
+
+  })  
+</script>

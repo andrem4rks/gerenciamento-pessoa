@@ -1,6 +1,5 @@
 package marks.gerenciamentopessoa.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -15,23 +14,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import marks.gerenciamentopessoa.model.Dependente;
-import marks.gerenciamentopessoa.model.Pessoa;
-import marks.gerenciamentopessoa.repository.dependenteRepository;
-import marks.gerenciamentopessoa.repository.pessoaRepository;
-import marks.gerenciamentopessoa.repository.sexoRepository;
 import marks.gerenciamentopessoa.repository.tipoDependenteRepository;
+import marks.gerenciamentopessoa.service.DependenteService;
+import marks.gerenciamentopessoa.service.PessoaService;
+import marks.gerenciamentopessoa.service.SexoService;
 
 @Controller
 @RequestMapping("/dependente")
 public class DependenteController {
   @Autowired
-  private dependenteRepository dependenteRepository;
+  private DependenteService dependenteService;
 
   @Autowired
-  private pessoaRepository pessoaRepository;
+  private PessoaService pessoaService;
 
   @Autowired
-  private sexoRepository sexoRepository;
+  private SexoService sexoService;
 
   @Autowired
   private tipoDependenteRepository tipoDependenteRepository;
@@ -41,65 +39,68 @@ public class DependenteController {
   @RequestMapping(path = "/novo", method = RequestMethod.GET)
   public String adicionarDependente(Model model) {
     model.addAttribute("dependente", new Dependente());
-    model.addAttribute("cpfRepresentante", pessoaRepository.findById(globalId).get().getCpf());
+    model.addAttribute("cpfRepresentante", pessoaService.findById(globalId).get().getCpf());
     popularAtributos(model);
-    return "/cadastrar-dependente";
+    return "dependente/cadastrar-dependente";
   }
 
   @RequestMapping(path = "/salvar", method = RequestMethod.POST)
-  public String salvarPessoa(@Valid Dependente dependente,
+  public String salvarDependente(@Valid Dependente dependente,
       BindingResult result,
       RedirectAttributes attributes,
-      Model model) {
+      Model model,
+      RedirectAttributes attr) {
     popularAtributos(model);
 
     if (result.hasErrors()) {
-      return "cadastrar-dependente";
+      return "dependente/cadastrar-dependente";
     }
-    dependenteRepository.save(dependente);
 
-    Pessoa pessoa = pessoaRepository.findById(globalId).get();
-    List<Dependente> dependentesLst = pessoa.getDependente();
-    dependentesLst.add(dependente);
-    pessoa.setDependente(dependentesLst);
-    pessoaRepository.save(pessoa);
+    attr.addFlashAttribute("alertIcon", "success");
+    attr.addFlashAttribute("alertMessage", "Dependente cadastrado com sucesso!");
+    dependente.setPessoa(pessoaService.findById(globalId).get());
+    dependenteService.save(dependente);
 
     return "redirect:/dependente/listar/" + globalId;
   }
 
   @RequestMapping(path = "/listar/{id}", method = RequestMethod.GET)
   public String listarPessoas(@PathVariable("id") Long id, Model model) {
-    model.addAttribute("dependentes", pessoaRepository.findById(id).get().getDependente());
-    model.addAttribute("nomeRepresentante", pessoaRepository.findById(id).get().getNome());
+    model.addAttribute("dependentes", pessoaService.findById(id).get().getDependente());
+    model.addAttribute("nomeRepresentante", pessoaService.findById(id).get().getNome());
     globalId = id;
-    return "listar-dependentes";
+    return "dependente/listar-dependentes";
   }
 
   @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
   public String editarDependente(@PathVariable("id") Long id, Model model) {
-    Optional<Dependente> dependente = dependenteRepository.findById(id);
-    model.addAttribute("pessoa", dependente);
+    Dependente dependente = dependenteService.findById(id).get();
+    model.addAttribute("dependente", dependente);
     popularAtributos(model);
-    return "cadastrar-dependente";
+    return "dependente/cadastrar-dependente";
   }
 
   @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
-  public String editarDependente(@PathVariable("id") Long id, @Valid Dependente dependente, BindingResult result) {
-      if(result.hasErrors()) {
-        return "editar-dependente";
-      }
-      dependenteRepository.save(dependente);
-      return "redirect:/dependente/listar";
+  public String editarDependente(@PathVariable("id") Long id, @Valid Dependente dependente, BindingResult result, RedirectAttributes attr) {
+    if (result.hasErrors()) {
+      return "dependente/editar-dependente";
+    }
+    dependenteService.save(dependente);
+    attr.addFlashAttribute("alertIcon", "success");
+    attr.addFlashAttribute("alertMessage", "Dependente editado com sucesso!");
+    return "redirect:/dependente/listar/" + globalId;
   }
 
   @RequestMapping(path = "/apagar/{id}", method = RequestMethod.GET)
-  public String apagarDependente(@PathVariable("id") Long id, Model model) {
-    dependenteRepository.deleteById(id);
-    return "redirect:/listar/" + globalId;
+  public String apagarDependente(@PathVariable("id") Long id, Model model, RedirectAttributes attr) {
+    dependenteService.remove(id);
+    attr.addFlashAttribute("alertIcon", "success");
+    attr.addFlashAttribute("alertMessage", "Dependente apagado com sucesso!");
+    return "redirect:/dependente/listar/" + globalId;
   }
 
   public void popularAtributos(Model model) {
     model.addAttribute("listaTipo", tipoDependenteRepository.findAll());
-    model.addAttribute("listaSexo", sexoRepository.findAll());
+    model.addAttribute("listaSexo", sexoService.findAll());
   }
 }

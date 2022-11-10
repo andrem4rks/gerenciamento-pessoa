@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Lista de Usuários</title>
-  <link rel="stylesheet" th:href="@{/css/listar-pessoa.css}" th:fragment="css"></link>
+  <link rel="stylesheet" th:href="@{/css/listar-pessoa.css}" th:fragment="css">
+  </link>
 </head>
 
 <body>
@@ -14,6 +15,12 @@
 
       <div>
         <h3 th:if="${pessoas.empty}">Sem Pessoas Cadastradas!</h3>
+      </div>
+
+      <div class="col ms-0 mb-3">
+        <a class="btn btn-success" href="" th:href="@{/pessoa/novo}">
+          Cadastrar Pessoa
+        </a>
       </div>
 
       <table class="table table-striped " id="table1" th:if="${!pessoas.empty}">

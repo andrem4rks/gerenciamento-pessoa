@@ -1,26 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
 
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link th:href="@{/css/main.css}" rel="stylesheet" />
-  <link th:href="@{/extensions/bootstrap/css/bootstrap.css}" rel="stylesheet" />
-  <script type="text/javascript" th:src="@{/extensions/bootstrap/js/bootstrap.js}"></script>
+  <link rel="stylesheet" th:href="~{}" th:fragment="css">
   <style>
-    .container {
-      width: 1100px;
-    }
   </style>
 </head>
 
 <body>
 
-
-  <div th:insert="fragments/nav :: nav"></div>
-
-  <div class="container mt-4" id="form-cont">
-
+  <main class="container mt-4" layout:fragment="main">
     <h2 class="">Cadastrar dependente</h2>
 
     <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
@@ -28,9 +19,7 @@
       <span th:text="${mensagem}"></span>
     </div>
 
-
-
-    <form action="#" th:action="${id == null} ? @{/dependente/salvar} : @{/dependente/editar/{id}(id=${id})}"
+    <form action="#" th:action="${id == null} ? @{/dependente/salvar} : @{/dependente/atualizar/{id}(id=${id})}"
       th:object="${dependente}" method="post" id="formCadastrar">
 
       <div class="mb-5" name="Cadastro_Principal">
@@ -76,6 +65,7 @@
             </select>
             <span class="blink-1" th:if="${#fields.hasErrors('tipoDependente')}" th:errors="*{tipoDependente}"></span>
           </div>
+
         </div>
 
         <h4 class="">
@@ -88,6 +78,7 @@
         </h4>
 
         <div class="row">
+
           <div class="col">
             <div class="form-check-label">
               <h6>Deficiência Fisica <span>*</span></h4>
@@ -140,10 +131,10 @@
             </div>
             <label id="deficiencias.deficienciaMental-error" class="error" for="deficiencias.deficienciaMental"></label>
           </div>
+
         </div>
 
         <div class="row">
-
 
           <div class="col">
             <div class="form-check-label">
@@ -171,6 +162,7 @@
             </div>
             <label id="deficiencias.reabilitado-error" class="error" for="deficiencias.reabilitado"></label>
           </div>
+
           <div class="col">
             <div class="form-check-label">
               <h6>Preenche Cota </h4>
@@ -181,7 +173,6 @@
             </div>
           </div>
           <div class="col"></div>
-
 
         </div>
 
@@ -200,155 +191,28 @@
 
     </form>
 
-  </div>
-
+    </div>
+  </main>
 </body>
 
-<script type="text/javascript" th:src="@{/extensions/jquery/jquery-3.6.1.min.js}"></script>
-<script type="text/javascript" th:src="@{/extensions/jquery/validate/jquery.validate.min.js}"></script>
-<script type="text/javascript" th:src="@{/extensions/sweetalert/sweetalert2.js}"></script>
+<script type="text/javascript" th:fragment="js"></script>
+<div th:insert="fragments/scripts/dependente/cadastrar-script :: cadastrar-dependente" layout:fragment="script"></div>
+<script type="text/javascript" th:fragment="js">
+  $('#submeter').click(function () {
+    if (!($('#formCadastrar').valid())) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Insira as informações corretamente!',
+      })
+    }
+  })
+  $(document).ready(function () {
+    $('#cadastrar').addClass('active');
+  })
+</script>
 
 <script language="javascript">
-  $(document).ready(function () {
-  //   $('#submeter').click(function (e) {
-  //     e.preventDefault();
-  //     if ($('#formCadastrar').valid()) {
-  //       Swal.fire({
-  //         icon: 'success',
-  //         title: 'Dependente Cadastrado com Sucesso!',
-  //         showConfirmButton: false,
-  //       })
-  //       setInterval(function () { $("#formCadastrar").submit() }, 1000);
-  //     } else {
-  //       Swal.fire({
-  //         icon: 'info',
-  //         title: 'Insira as Informações Corretamente!',
-  //       })
-  //     }
-  //   })
 
-    // Jquery Validator
-    $("#formCadastrar").validate({
-      rules: {
-        '[[@{cpf}]]': {
-          cpf: true,
-          required: true
-        },
-        '[[@{nome}]]': {
-          required: true,
-          minlength: 3
-        },
-        '[[@{sexo}]]': {
-          required: true
-        },
-        '[[@{dataNascimento}]]': {
-          required: true
-        },
-        '[[@{tipoDependente}]]': {
-          required: true
-        },
-
-        '[[@{deficiencias.deficienciaVisual}]]': {
-          required: true
-        },
-
-        '[[@{deficiencias.deficienciaFisica}]]': {
-          required: true
-        },
-
-        '[[@{deficiencias.deficienciaAuditiva}]]': {
-          required: true
-        },
-
-        '[[@{deficiencias.deficienciaMental}]]': {
-          required: true
-        },
-
-        '[[@{deficiencias.deficienciaIntelectual}]]': {
-          required: true
-        },
-
-        '[[@{deficiencias.reabilitado}]]': {
-          required: true
-        }
-
-      },
-      highlight: function (element) {
-        if (element.type !== "radio")
-          $(element).removeClass("is-valid").addClass("is-invalid");
-      },
-      unhighlight: function (element) {
-        if (element.type !== "radio")
-          $(element).removeClass("is-invalid").addClass("is-valid");
-      },
-
-      messages: {
-        '[[@{cpf}]]': { cpf: "Por valor, insira um CPF válido!", required: "Por valor, insira um CPF!" },
-        '[[@{nome}]]': { required: "Por favor, insira um nome!", minlength: "O nome deve ter no mínimo 3 caracteres!" },
-        '[[@{sexo}]]': { required: "Por favor, insira o sexo!" },
-        '[[@{dataNascimento}]]': { required: "Por favor, insira a data de nascimento!" },
-        '[[@{tipoDependente}]]': { required: "Por favor, insira o tipo de dependente!" },
-        '[[@{deficiencias.deficienciaFisica}]]': { required: "Escolha uma opção!" },
-        '[[@{deficiencias.deficienciaVisual}]]': { required: "Escolha uma opção!" },
-        '[[@{deficiencias.deficienciaAuditiva}]]': { required: "Escolha uma opção!" },
-        '[[@{deficiencias.deficienciaMental}]]': { required: "Escolha uma opção!" },
-        '[[@{deficiencias.deficienciaIntelectual}]]': { required: "Escolha uma opção!" },
-        '[[@{deficiencias.reabilitado}]]': { required: "Escolha uma opção!" },
-      }
-
-    })
-
-    //metodos - inputs CPF e CEP somente com numero e Masks
-
-    $('input[id="[[@{cpf}]]"]').on('keypress', function (e) {
-      let tecla = (event.keyCode || event.charCode);
-      let input = $('input[id="[[@{cpf}]]"]').val();
-      let inputLength = input.length;
-      if ((tecla > 47 && tecla < 58)) {
-        if (inputLength === 3 || inputLength === 7) {
-          $('input[id="[[@{cpf}]]"]').val(input + ".");
-        } else if (inputLength === 11) {
-          $('input[id="[[@{cpf}]]"]').val(input + "-");
-        }
-      } else {
-        e.preventDefault();
-      }
-    })
-
-
-    //metodo - validação de cpf
-    jQuery.validator.addMethod("cpf", function (value, element) {
-      value = jQuery.trim(value);
-
-      value = value.replace('.', '');
-      value = value.replace('.', '');
-      cpf = value.replace('-', '');
-      while (cpf.length < 11) cpf = "0" + cpf;
-      var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
-      var a = [];
-      var b = new Number;
-      var c = 11;
-      for (i = 0; i < 11; i++) {
-        a[i] = cpf.charAt(i);
-        if (i < 9) b += (a[i] * --c);
-      }
-      if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11 - x }
-      b = 0;
-      c = 11;
-      for (y = 0; y < 10; y++) b += (a[y] * c--);
-      if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11 - x; }
-
-      var retorno = true;
-      if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
-
-      return this.optional(element) || retorno;
-
-    }, "Informe um CPF válido");
-
-    $(':radio').each(function () {
-      $(this).removeAttr('checked');
-    })
-  })
 
 
 

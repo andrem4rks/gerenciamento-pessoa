@@ -1,10 +1,8 @@
 package marks.gerenciamentopessoa.model;
 
-import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -31,6 +29,7 @@ public class Dependente extends PessoaPrincipal {
     @JoinColumn(name = "id_deficiencia")
     private Deficiencia deficiencias;
 
-    @OneToOne
-    Pessoa pessoa;
+    @ManyToOne
+    @JoinColumn(name = "id_pessoa")
+    private Pessoa pessoa;
 }
