@@ -61,51 +61,16 @@
           </tr>
         </tfoot>
       </table>
-
-      <!-- Modal -->
-
-      <div class="modal fade" id="editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Confirmação</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Realmente Deseja Editar <strong id="bold-nome-editar"></strong> ?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-              <a type="button" class="btn btn-success" id="btn-editar-confirmar">Confirmar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="apagar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Confirmação</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Realmente Deseja Apagar <strong id="bold-nome-apagar"></strong> ?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-              <a type="button" class="btn btn-success" id="btn-apagar-confirmar">Confirmar</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </main>
-  <script type="text/javascript" th:fragment="js"></script>
+  <div th:replace="fragments/components/modal :: modal" layout:fragment="modal"></div>
   <script th:inline="javascript" th:fragment="inlinescript"></script>
-  <div th:insert="fragments/scripts/pessoa/listar :: listar-pessoas" layout:fragment="script"></div>
+  <div th:insert="fragments/scripts/pessoa/listar-script :: listar" layout:fragment="script"></div>
+  <script type="text/javascript" th:fragment="js">
+    $(document).ready(function () {
+      $('#listar').addClass('active');
+    })
+  </script>
 </body>
 
 <!--datable implements-->

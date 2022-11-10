@@ -23,9 +23,9 @@
   <script th:src="@{/js/jquery-validate/jquery.validate.min.js}"></script>
   <script th:src="@{/js/icons/icons.js}"></script>
   <script th:src="@{/js/datatable/datatables.js}"></script>
+  <div layout:fragment="modal"></div>
   <script th:replace=":: js"></script>
   <div layout:fragment="script"></div>
-  <script th:replace=":: inlinescript" th:inline="javascript"></script>
   <script type="text/javascript">
      $(function () {
       if ('[[${alertMessage}]]' != '') {

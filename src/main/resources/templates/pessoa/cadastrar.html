@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link rel="stylesheet" th:href="~{}" th:fragment="css"></link>
+  <link rel="stylesheet" th:href="~{}" th:fragment="css">
+  </link>
 </head>
 
 <body>
@@ -186,8 +187,20 @@
     </form>
   </main>
   <script type="text/javascript" th:fragment="js"></script>
-  <script th:inline="javascript" th:fragment="inlinescript"></script>
-  <div th:insert="fragments/scripts/pessoa/cadastrar :: cadastrar-pessoa" layout:fragment="script"></div>
+  <div th:insert="fragments/scripts/pessoa/cadastrar-script :: cadastrar-pessoa" layout:fragment="script"></div>
+  <script type="text/javascript" th:fragment="js">
+    $('#submeter').click(function () {
+      if (!($('#formCadastrar').valid())) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Insira as informações corretamente!',
+        })
+      }
+    })
+    $(document).ready(function () {
+      $('#cadastrar').addClass('active');
+    })
+  </script>
 </body>
 
 </html>

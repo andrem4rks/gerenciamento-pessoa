@@ -58,10 +58,7 @@ public class PessoaController {
     @RequestMapping(path = "/novo", method = RequestMethod.GET)
     public String adicionarPessoa(RedirectAttributes attributes, Model model){
       model.addAttribute("pessoa", new Pessoa());
-
       popularAtributos(model);
-      // attributes.addFlashAttribute("success", "Pessoa Cadastrada Com Sucesso!");
-
       return "/pessoa/cadastrar";
     } 
 
@@ -79,7 +76,7 @@ public class PessoaController {
 		  }
       verifCepExiste(pessoa);
       pessoaRepository.save(pessoa);
-
+      attr.addFlashAttribute("alertIcon", "success");
       attr.addFlashAttribute("alertMessage", "Pessoa cadastrada com sucesso!");
       return "redirect:/pessoa/novo";
     }
@@ -95,7 +92,6 @@ public class PessoaController {
       Optional<Pessoa> pessoa = pessoaRepository.findById(id);
       model.addAttribute("pessoa", pessoa);
       popularAtributos(model);
-      System.out.println("Id pessoa = " + pessoa.get().getId());
       return "/pessoa/cadastrar";
     }
 

@@ -1,5 +1,6 @@
-<script th:fragment="listar-pessoas">
+<script th:fragment="listar">
 
+  //invocar modais
   function editarModal(id, nome) {
     console.log(nome + " editar");
     $('#bold-nome-editar').text(nome);
@@ -10,31 +11,10 @@
     console.log(nome + " apgar");
     $('#bold-nome-apagar').text(nome);
     $('#apagar').modal('show');
-    // $('#btn-apagar-confirmar').attr('href', 'apagar/' + id);
-    $('#btn-apagar-confirmar').click(function (e) {
-      e.preventDefault;
-      animacao(id);
-    })
-  }
-
-  function animacao(id) {
-    Swal.fire({
-      icon: 'success',
-      title: 'Usuario Apagado com Sucesso!',
-      showConfirmButton: false,
-    })
-    setInterval(function () { window.location.href = 'apagar/' + id }, 1000);
+    $('#btn-apagar-confirmar').attr('href', 'apagar/' + id);
   }
 
   $(document).ready(function () {
-
-    $('#btn-apagar-confirmar').click(function (e) {
-      e.preventDefault();
-
-
-    })
-
-
     $('#listar').addClass('active');
     $('#table1').DataTable({
       "language": {
@@ -281,9 +261,6 @@
           "renameTitle": "Renomear estado"
         }
       }
-
-
-
     })
   });
 </script>

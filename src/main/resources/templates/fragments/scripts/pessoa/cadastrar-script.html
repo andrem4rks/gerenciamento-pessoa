@@ -24,6 +24,9 @@
           '[[@{dataNascimento}]]': {
             required: true
           },
+          '[[@{instrucao}]]': {
+            required: true
+          },
           '[[@{paisNascimento}]]': {
             required: true
           },
@@ -59,14 +62,15 @@
         },
 
         messages: {
-          '[[@{cpf}]]': { cpf: "Por valor, insira um CPF válido!", required: "Por valor, insira um CPF!" },
-          '[[@{nome}]]': { required: "Por favor, insira um nome!", minlength: "O nome deve ter no mínimo 3 caracteres!" },
+          '[[@{cpf}]]': { cpf: "Por valor, insira um CPF válido!", required: "Por valor, insira o CPF!" },
+          '[[@{nome}]]': { required: "Por favor, insira o nome!", minlength: "O nome deve ter no mínimo 3 caracteres!" },
           '[[@{sexo}]]': { required: "Por favor, insira o sexo!" },
           '[[@{raca}]]': { required: "Por favor, insira a raça!" },
           '[[@{estadoCivil}]]': { required: "Por favor, insira o estado civil!" },
           '[[@{dataNascimento}]]': { required: "Por favor, insira a data de nascimento!" },
-          '[[@{paisNascimento}]]': { required: "Por favor, insira a data de nascimento!" },
-          '[[@{paisNacionalidade}]]': { required: "Por favor, insira a data de nascimento!" },
+          '[[@{instrucao}]]': { required: "Por favor, insira o nível de instrução!" },
+          '[[@{paisNascimento}]]': { required: "Por favor, insira o país de nascimento!" },
+          '[[@{paisNacionalidade}]]': { required: "Por favor, insira o país de nacionalidade!" },
           '[[@{endereco.cep.numeroCep}]]': { required: "Por favor, insira o CEP!", minlength: "O CEP deve estar completo!" },
           '[[@{endereco.tipoEndereco}]]': { required: "Por favor, insira a data de nascimento!" },
           '[[@{endereco.logradouro}]]': { required: "Por favor, insira o logradouro!" },
