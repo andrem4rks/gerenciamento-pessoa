@@ -59,9 +59,9 @@ public class DependenteController {
     dependenteRepository.save(dependente);
 
     Pessoa pessoa = pessoaRepository.findById(globalId).get();
-    List<Dependente> dependentesLst = pessoa.getDependentes();
+    List<Dependente> dependentesLst = pessoa.getDependente();
     dependentesLst.add(dependente);
-    pessoa.setDependentes(dependentesLst);
+    pessoa.setDependente(dependentesLst);
     pessoaRepository.save(pessoa);
 
     return "redirect:/dependente/listar/" + globalId;
@@ -69,7 +69,7 @@ public class DependenteController {
 
   @RequestMapping(path = "/listar/{id}", method = RequestMethod.GET)
   public String listarPessoas(@PathVariable("id") Long id, Model model) {
-    model.addAttribute("dependentes", pessoaRepository.findById(id).get().getDependentes());
+    model.addAttribute("dependentes", pessoaRepository.findById(id).get().getDependente());
     model.addAttribute("nomeRepresentante", pessoaRepository.findById(id).get().getNome());
     globalId = id;
     return "listar-dependentes";

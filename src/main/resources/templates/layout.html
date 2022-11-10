@@ -7,11 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerencimento Pessoa</title>
   <style layout:fragment=":: inlinecss"></style>
-  <link th:replace=":: css"></link>
-  <link th:href="@{/css/bootstrap/bootstrap.css}" rel="stylesheet" >
-  <link th:href="@{/css/datatable/datatables.css}" rel="stylesheet" >
+  <link th:replace=":: css">
+  </link>
+  <link th:href="@{/css/bootstrap/bootstrap.css}" rel="stylesheet">
+  <link th:href="@{/css/datatable/datatables.css}" rel="stylesheet">
   <link th:href="@{/css/main.css}" rel="stylesheet">
 </head>
+
 <body>
   <nav th:replace="fragments/components/header :: header"></nav>
   <main role="main" layout:fragment="main"></main>
@@ -22,7 +24,23 @@
   <script th:src="@{/js/icons/icons.js}"></script>
   <script th:src="@{/js/datatable/datatables.js}"></script>
   <script th:replace=":: js"></script>
-	<script th:replace=":: inlinescript" th:inline="javascript"></script>
   <div layout:fragment="script"></div>
+  <script th:replace=":: inlinescript" th:inline="javascript"></script>
+  <script th:inline="javascript">
+     $(function () {
+      if ('[[${alertMessage}]]' != 'null') {
+        var text = '[[${alertMessage}]]';
+        text.replace(/[\\"]/g, '');
+        console.log(text.val())
+        Swal.fire({
+          icon: 'success',
+          title: text,
+          showConfirmButton: true
+        });
+      }
+    })
+  </script>
+
 </body>
+
 </html>

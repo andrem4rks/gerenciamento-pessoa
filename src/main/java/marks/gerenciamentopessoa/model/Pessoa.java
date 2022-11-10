@@ -30,7 +30,7 @@ public class Pessoa extends PessoaPrincipal {
     private String nomeSocial;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Dependente> dependentes;
+    private List<Dependente> dependente;
 
     @NotNull(message = "Selecione pelo menos uma opção")
     @OneToOne

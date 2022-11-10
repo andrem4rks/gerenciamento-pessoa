@@ -1,20 +1,4 @@
 <script th:fragment="listar-pessoas">
-  switch ('[[${alertMessage}]]') {
-    case 'apagar':
-      sweetIcon("success", "Usuário deletado com sucesso!");
-      break;
-    case 'editar':
-      sweetIcon("success", "Usuário editado com sucesso!");
-      break;
-  }
-
-  function sweetIcon(iconText, titleText) {
-    Swal.fire({
-      icon: iconText,
-      title: titleText,
-      showConfirmButton: true
-    });
-  }
 
   function editarModal(id, nome) {
     console.log(nome + " editar");

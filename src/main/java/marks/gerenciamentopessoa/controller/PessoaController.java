@@ -69,7 +69,8 @@ public class PessoaController {
     public String salvarPessoa( @Valid Pessoa pessoa,
                                 BindingResult result,
                                 RedirectAttributes attributes,
-                                Model model
+                                Model model,
+                                RedirectAttributes attr
                                 )  
                                 {
       popularAtributos(model);      
@@ -79,7 +80,7 @@ public class PessoaController {
       verifCepExiste(pessoa);
       pessoaRepository.save(pessoa);
 
-      attributes.addFlashAttribute("cadastroSucess", "Pessoa Cadastrada Com Sucesso!");
+      attr.addFlashAttribute("alertMessage", "Pessoa cadastrada com sucesso!");
       return "redirect:/pessoa/novo";
     }
 
@@ -104,7 +105,7 @@ public class PessoaController {
         return "/pessoa/cadastrar-pessoa";
       }
       pessoaRepository.save(pessoa);
-      attr.addFlashAttribute("alertMessage", "editar");
+      attr.addFlashAttribute("alertMessage", "Pessoa editada com sucesso!");
       return "redirect:/pessoa/listar";
     }
 
