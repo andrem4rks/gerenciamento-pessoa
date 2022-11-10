@@ -62,7 +62,7 @@ public class PessoaController {
       popularAtributos(model);
       // attributes.addFlashAttribute("success", "Pessoa Cadastrada Com Sucesso!");
 
-      return "/pessoa/cadastrar-pessoa";
+      return "/pessoa/cadastrar";
     } 
 
     @RequestMapping(path = "/salvar", method = RequestMethod.POST)
@@ -75,7 +75,7 @@ public class PessoaController {
                                 {
       popularAtributos(model);      
       if (result.hasErrors()) {
-			  return "/pessoa/cadastrar-pessoa";
+			  return "/pessoa/cadastrar";
 		  }
       verifCepExiste(pessoa);
       pessoaRepository.save(pessoa);
@@ -87,7 +87,7 @@ public class PessoaController {
     @RequestMapping(path = "/listar", method = RequestMethod.GET)
     public String listarPessoas(Model model) {
       model.addAttribute("pessoas", pessoaRepository.findAll());
-      return "/pessoa/listar-pessoas";
+      return "/pessoa/listar";
     }
 
     @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
@@ -96,15 +96,16 @@ public class PessoaController {
       model.addAttribute("pessoa", pessoa);
       popularAtributos(model);
       System.out.println("Id pessoa = " + pessoa.get().getId());
-      return "/pessoa/cadastrar-pessoa";
+      return "/pessoa/cadastrar";
     }
 
     @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
     public String editarPessoa(@PathVariable("id") Long id, @Valid Pessoa pessoa, BindingResult result, Model model, RedirectAttributes attr) {
       if(result.hasErrors()) {
-        return "/pessoa/cadastrar-pessoa";
+        return "/pessoa/cadastrar";
       }
       pessoaRepository.save(pessoa);
+      attr.addFlashAttribute("alertIcon", "success");
       attr.addFlashAttribute("alertMessage", "Pessoa editada com sucesso!");
       return "redirect:/pessoa/listar";
     }
@@ -112,7 +113,8 @@ public class PessoaController {
     @RequestMapping(path = "/apagar/{id}", method = RequestMethod.GET)
     public String apagarUsuario(@PathVariable("id") Long id, Model model, RedirectAttributes attr) {
       pessoaRepository.deleteById(id);
-      attr.addFlashAttribute("alertMessage", "apagar");
+      attr.addFlashAttribute("alertIcon", "success");
+      attr.addFlashAttribute("alertMessage", "Pessoa deletada com sucesso!");
       return "redirect:/pessoa/listar";
     }
 

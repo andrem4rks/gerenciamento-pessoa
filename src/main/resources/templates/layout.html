@@ -26,15 +26,13 @@
   <script th:replace=":: js"></script>
   <div layout:fragment="script"></div>
   <script th:replace=":: inlinescript" th:inline="javascript"></script>
-  <script th:inline="javascript">
+  <script type="text/javascript">
      $(function () {
-      if ('[[${alertMessage}]]' != 'null') {
-        var text = '[[${alertMessage}]]';
-        text.replace(/[\\"]/g, '');
-        console.log(text.val())
+      if ('[[${alertMessage}]]' != '') {
+        console.log('[[${alertMessage}]]');
         Swal.fire({
-          icon: 'success',
-          title: text,
+          icon: '[[${alertIcon}]]',
+          title: '[[${alertMessage}]]',
           showConfirmButton: true
         });
       }
