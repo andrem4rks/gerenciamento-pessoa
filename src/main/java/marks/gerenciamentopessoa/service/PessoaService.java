@@ -19,9 +19,13 @@ public class PessoaService {
   @Autowired
   private cepRepository cepRepository;
 
-  public Pessoa save(Pessoa pessoa) {
+  public Boolean save(Pessoa pessoa) {
     verifCepExiste(pessoa);
-    return pessoaRepository.save(pessoa);
+    if (verifCpfExiste(pessoa)) {
+      pessoaRepository.save(pessoa);
+      return true;
+    }
+    return false;
   }
 
   public Optional<Pessoa> findById(Long id) {
@@ -32,11 +36,37 @@ public class PessoaService {
     return pessoaRepository.findAll();
   }
 
+  public Boolean atualiza(Pessoa pessoa, String cpf) {
+    if (verifCpfIgual(pessoa, cpf)) {
+      pessoaRepository.save(pessoa);
+      return true;
+    } else if (verifCpfExiste(pessoa)) {
+      pessoaRepository.save(pessoa);
+      return true;
+    } 
+    return false;
+  }
+
+
   public void remove(Long id) {
     pessoaRepository.deleteById(id);
   }
 
-  public Pessoa verifCepExiste(Pessoa pessoa) {
+  public Boolean verifCpfExiste(Pessoa pessoa) {
+    if (pessoaRepository.findByCpf(pessoa.getCpf()) == null) {
+      return true;
+    }
+    return false;
+  }
+
+  public Boolean verifCpfIgual(Pessoa pessoa, String cpf) {
+    if(pessoa.getCpf().equals(cpf)) {
+      return true;
+    } 
+    return false;
+  }
+
+  public void verifCepExiste(Pessoa pessoa) {
     List<CEP> tempRepoCep = cepRepository.findAllByNumeroCep(pessoa.getEndereco().getCep().getNumeroCep());
 
     for (CEP item : tempRepoCep) {
@@ -46,12 +76,11 @@ public class PessoaService {
             && normalizaString(item.getMunicipio()).equals(normalizaString(tmpPessoaCep.getMunicipio()))
             && normalizaString(item.getBairro()).equals(normalizaString(tmpPessoaCep.getBairro()))) {
           pessoa.getEndereco().setCep(item);
-          return pessoa;
+        } else {
+          cepRepository.save(pessoa.getEndereco().getCep());
         }
       }
     }
-    cepRepository.save(pessoa.getEndereco().getCep());
-    return pessoa;
   }
 
   public String normalizaString(String s) {

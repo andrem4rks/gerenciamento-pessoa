@@ -2,111 +2,111 @@
     $(document).ready(function () {
 
       //validate-rules
-      $("#formCadastrar").validate({
-        rules: {
-          '[[@{cpf}]]': {
-            cpf: true,
-            required: true
-          },
-          '[[@{nome}]]': {
-            required: true,
-            minlength: 3
-          },
-          '[[@{sexo}]]': {
-            required: true
-          },
-          '[[@{raca}]]': {
-            required: true
-          },
-          '[[@{estadoCivil}]]': {
-            required: true
-          },
-          '[[@{dataNascimento}]]': {
-            required: true
-          },
-          '[[@{instrucao}]]': {
-            required: true
-          },
-          '[[@{paisNascimento}]]': {
-            required: true
-          },
-          '[[@{paisNacionalidade}]]': {
-            required: true
-          },
-          '[[@{endereco.cep.numeroCep}]]': {
-            required: true,
-            minlength: 9
-          },
-          '[[@{endereco.tipoEndereco}]]': {
-            required: true
-          },
-          '[[@{endereco.logradouro}]]': {
-            required: true,
-            minlength: 3,
-          },
-          '[[@{endereco.numero}]]': {
-            required: true
-          },
-          '[[@{endereco.cep.estado}]]': {
-            required: true
-          },
-          '[[@{endereco.cep.municipio}]]': {
-            required: true
-          }
-        },
-        highlight: function (element) {
-          $(element).removeClass("is-valid").addClass("is-invalid");
-        },
-        unhighlight: function (element) {
-          $(element).removeClass("is-invalid").addClass("is-valid");
-        },
+      // $("#formCadastrar").validate({
+      //   rules: {
+      //     '[[@{cpf}]]': {
+      //       cpf: true,
+      //       required: true
+      //     },
+      //     '[[@{nome}]]': {
+      //       required: true,
+      //       minlength: 3
+      //     },
+      //     '[[@{sexo}]]': {
+      //       required: true
+      //     },
+      //     '[[@{raca}]]': {
+      //       required: true
+      //     },
+      //     '[[@{estadoCivil}]]': {
+      //       required: true
+      //     },
+      //     '[[@{dataNascimento}]]': {
+      //       required: true
+      //     },
+      //     '[[@{instrucao}]]': {
+      //       required: true
+      //     },
+      //     '[[@{paisNascimento}]]': {
+      //       required: true
+      //     },
+      //     '[[@{paisNacionalidade}]]': {
+      //       required: true
+      //     },
+      //     '[[@{endereco.cep.numeroCep}]]': {
+      //       required: true,
+      //       minlength: 9
+      //     },
+      //     '[[@{endereco.tipoEndereco}]]': {
+      //       required: true
+      //     },
+      //     '[[@{endereco.logradouro}]]': {
+      //       required: true,
+      //       minlength: 3,
+      //     },
+      //     '[[@{endereco.numero}]]': {
+      //       required: true
+      //     },
+      //     '[[@{endereco.cep.estado}]]': {
+      //       required: true
+      //     },
+      //     '[[@{endereco.cep.municipio}]]': {
+      //       required: true
+      //     }
+      //   },
+      //   highlight: function (element) {
+      //     $(element).removeClass("is-valid").addClass("is-invalid");
+      //   },
+      //   unhighlight: function (element) {
+      //     $(element).removeClass("is-invalid").addClass("is-valid");
+      //   },
 
-        messages: {
-          '[[@{cpf}]]': { cpf: "Por valor, insira um CPF válido!", required: "Por valor, insira o CPF!" },
-          '[[@{nome}]]': { required: "Por favor, insira o nome!", minlength: "O nome deve ter no mínimo 3 caracteres!" },
-          '[[@{sexo}]]': { required: "Por favor, insira o sexo!" },
-          '[[@{raca}]]': { required: "Por favor, insira a raça!" },
-          '[[@{estadoCivil}]]': { required: "Por favor, insira o estado civil!" },
-          '[[@{dataNascimento}]]': { required: "Por favor, insira a data de nascimento!" },
-          '[[@{instrucao}]]': { required: "Por favor, insira o nível de instrução!" },
-          '[[@{paisNascimento}]]': { required: "Por favor, insira o país de nascimento!" },
-          '[[@{paisNacionalidade}]]': { required: "Por favor, insira o país de nacionalidade!" },
-          '[[@{endereco.cep.numeroCep}]]': { required: "Por favor, insira o CEP!", minlength: "O CEP deve estar completo!" },
-          '[[@{endereco.tipoEndereco}]]': { required: "Por favor, insira a data de nascimento!" },
-          '[[@{endereco.logradouro}]]': { required: "Por favor, insira o logradouro!" },
-          '[[@{endereco.numero}]]': { required: "Por favor, insira numero!" },
-          '[[@{endereco.cep.estado}]]': { required: "Por favor, insira o estado!" },
-          '[[@{endereco.cep.municipio}]]': { required: "Por favor, insira municipio!" },
-        },
-      }),
+      //   messages: {
+      //     '[[@{cpf}]]': { cpf: "Por valor, insira um CPF válido!", required: "Por valor, insira o CPF!" },
+      //     '[[@{nome}]]': { required: "Por favor, insira o nome!", minlength: "O nome deve ter no mínimo 3 caracteres!" },
+      //     '[[@{sexo}]]': { required: "Por favor, insira o sexo!" },
+      //     '[[@{raca}]]': { required: "Por favor, insira a raça!" },
+      //     '[[@{estadoCivil}]]': { required: "Por favor, insira o estado civil!" },
+      //     '[[@{dataNascimento}]]': { required: "Por favor, insira a data de nascimento!" },
+      //     '[[@{instrucao}]]': { required: "Por favor, insira o nível de instrução!" },
+      //     '[[@{paisNascimento}]]': { required: "Por favor, insira o país de nascimento!" },
+      //     '[[@{paisNacionalidade}]]': { required: "Por favor, insira o país de nacionalidade!" },
+      //     '[[@{endereco.cep.numeroCep}]]': { required: "Por favor, insira o CEP!", minlength: "O CEP deve estar completo!" },
+      //     '[[@{endereco.tipoEndereco}]]': { required: "Por favor, insira a data de nascimento!" },
+      //     '[[@{endereco.logradouro}]]': { required: "Por favor, insira o logradouro!" },
+      //     '[[@{endereco.numero}]]': { required: "Por favor, insira numero!" },
+      //     '[[@{endereco.cep.estado}]]': { required: "Por favor, insira o estado!" },
+      //     '[[@{endereco.cep.municipio}]]': { required: "Por favor, insira municipio!" },
+      //   },
+      // }),
 
-      jQuery.validator.addMethod("cpf", function (value, element) {
-        value = jQuery.trim(value);
+      // jQuery.validator.addMethod("cpf", function (value, element) {
+      //   value = jQuery.trim(value);
 
-        value = value.replace('.', '');
-        value = value.replace('.', '');
-        cpf = value.replace('-', '');
-        while (cpf.length < 11) cpf = "0" + cpf;
-        var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
-        var a = [];
-        var b = new Number;
-        var c = 11;
-        for (i = 0; i < 11; i++) {
-          a[i] = cpf.charAt(i);
-          if (i < 9) b += (a[i] * --c);
-        }
-        if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11 - x }
-        b = 0;
-        c = 11;
-        for (y = 0; y < 10; y++) b += (a[y] * c--);
-        if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11 - x; }
+      //   value = value.replace('.', '');
+      //   value = value.replace('.', '');
+      //   cpf = value.replace('-', '');
+      //   while (cpf.length < 11) cpf = "0" + cpf;
+      //   var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
+      //   var a = [];
+      //   var b = new Number;
+      //   var c = 11;
+      //   for (i = 0; i < 11; i++) {
+      //     a[i] = cpf.charAt(i);
+      //     if (i < 9) b += (a[i] * --c);
+      //   }
+      //   if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11 - x }
+      //   b = 0;
+      //   c = 11;
+      //   for (y = 0; y < 10; y++) b += (a[y] * c--);
+      //   if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11 - x; }
 
-        var retorno = true;
-        if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
+      //   var retorno = true;
+      //   if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
 
-        return this.optional(element) || retorno;
+      //   return this.optional(element) || retorno;
 
-      }, "Informe um CPF válido");
+      // }, "Informe um CPF válido");
 
       //formatacao de inputs
       $('input[id="[[@{cpf}]]"]').on('keypress', function (e) {

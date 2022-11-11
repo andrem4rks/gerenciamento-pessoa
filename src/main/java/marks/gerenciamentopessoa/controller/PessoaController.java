@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import marks.gerenciamentopessoa.model.Pessoa;
+import marks.gerenciamentopessoa.repository.pessoaRepository;
 import marks.gerenciamentopessoa.service.EstadoCivilService;
 import marks.gerenciamentopessoa.service.InstrucaoService;
 import marks.gerenciamentopessoa.service.PaisService;
@@ -47,6 +50,11 @@ public class PessoaController {
   @Autowired
   private InstrucaoService instrucaoService;
 
+  @Autowired
+  private pessoaRepository pessoaRepository;
+
+  private String TempCpf;
+
   @RequestMapping(path = "/novo", method = RequestMethod.GET)
   public String adicionarPessoa(RedirectAttributes attributes, Model model) {
     model.addAttribute("pessoa", new Pessoa());
@@ -61,10 +69,12 @@ public class PessoaController {
       Model model,
       RedirectAttributes attr) {
     popularAtributos(model);
+    if(!(pessoaService.save(pessoa))) {
+      result.addError(new FieldError("pessoa", "cpf", "CPF já existe cadastrado!"));
+    }
     if (result.hasErrors()) {
       return "/pessoa/cadastrar-pessoa";
     }
-    pessoaService.save(pessoa);
     attr.addFlashAttribute("alertIcon", "success");
     attr.addFlashAttribute("alertMessage", "Pessoa cadastrada com sucesso!");
     return "redirect:/pessoa/novo";
@@ -78,15 +88,20 @@ public class PessoaController {
 
   @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
   public String editarPessoa(@PathVariable("id") Long id, Model model) {
-    Optional<Pessoa> pessoa = pessoaService.findById(id);
+    Pessoa pessoa = pessoaService.findById(id).get();
     model.addAttribute("pessoa", pessoa);
+    model.addAttribute("pessoa_id", pessoa.getId());
     popularAtributos(model);
+    TempCpf = pessoa.getCpf();
     return "/pessoa/cadastrar-pessoa";
   }
 
   @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
   public String editarPessoa(@PathVariable("id") Long id, @Valid Pessoa pessoa, BindingResult result, Model model,
-      RedirectAttributes attr) {
+      RedirectAttributes attr) {    
+    if(!(pessoaService.atualiza(pessoa, TempCpf))) {
+      result.addError(new FieldError("pessoa", "cpf", "CPF já existe cadastrado!"));
+    }
     if (result.hasErrors()) {
       return "/pessoa/cadastrar-pessoa";
     }

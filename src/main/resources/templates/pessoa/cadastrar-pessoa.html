@@ -20,6 +20,9 @@
     <form action="#" th:action="${id == null} ? @{/pessoa/salvar} : @{/pessoa/atualizar/{id}(id=${id})}"
       th:object="${pessoa}" method="post" id="formCadastrar">
       <div class="mb-5" name="Cadastro_Principal">
+
+        <input th:id="@{id}" th:field="*{id}" type="hidden" class="form-control" />
+
         <div class="row mb-2">
           <div class="col-sm-3">
             <label class="form-label">CPF <span>*</span></label>

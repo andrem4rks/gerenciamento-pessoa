@@ -83,8 +83,9 @@ public class DependenteController {
   @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
   public String editarDependente(@PathVariable("id") Long id, @Valid Dependente dependente, BindingResult result, RedirectAttributes attr) {
     if (result.hasErrors()) {
-      return "dependente/editar-dependente";
+      return "dependente/cadastrar-dependente";
     }
+    dependente.setPessoa(pessoaService.findById(globalId).get());
     dependenteService.save(dependente);
     attr.addFlashAttribute("alertIcon", "success");
     attr.addFlashAttribute("alertMessage", "Dependente editado com sucesso!");

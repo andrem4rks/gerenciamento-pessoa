@@ -32,4 +32,6 @@ public class Dependente extends PessoaPrincipal {
     @ManyToOne
     @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
+
+    
 }
