@@ -19,9 +19,9 @@ public class PessoaService {
   @Autowired
   private cepRepository cepRepository;
 
-  public Boolean save(Pessoa pessoa) {
+  public Boolean save(Pessoa pessoa, Long id) {
     verifCepExiste(pessoa);
-    if (verifCpfExiste(pessoa)) {
+    if(testsCpf(pessoa, id)) {
       pessoaRepository.save(pessoa);
       return true;
     }
@@ -36,15 +36,8 @@ public class PessoaService {
     return pessoaRepository.findAll();
   }
 
-  public Boolean atualiza(Pessoa pessoa, String cpf) {
-    if (verifCpfIgual(pessoa, cpf)) {
-      pessoaRepository.save(pessoa);
-      return true;
-    } else if (verifCpfExiste(pessoa)) {
-      pessoaRepository.save(pessoa);
-      return true;
-    } 
-    return false;
+  public Boolean atualiza(Pessoa pessoa, Long id) {
+    
   }
 
 
@@ -52,18 +45,20 @@ public class PessoaService {
     pessoaRepository.deleteById(id);
   }
 
-  public Boolean verifCpfExiste(Pessoa pessoa) {
-    if (pessoaRepository.findByCpf(pessoa.getCpf()) == null) {
+  public Boolean testsCpf(Pessoa pessoa, Long id) {
+    if(pessoa.getCpf().equals(pessoaRepository.findById(id).get().getCpf())) {
       return true;
+    } else if (verifCpfExiste(pessoa.getCpf())) {
+      return false;
     }
-    return false;
+    return true;
   }
 
-  public Boolean verifCpfIgual(Pessoa pessoa, String cpf) {
-    if(pessoa.getCpf().equals(cpf)) {
-      return true;
-    } 
-    return false;
+  public Boolean verifCpfExiste(String cpf) {
+    if(pessoaRepository.findByCpf(cpf) != null) {
+      return false;
+    }
+    return true;
   }
 
   public void verifCepExiste(Pessoa pessoa) {

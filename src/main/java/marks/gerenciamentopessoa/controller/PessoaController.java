@@ -2,6 +2,8 @@ package marks.gerenciamentopessoa.controller;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,25 +89,25 @@ public class PessoaController {
   }
 
   @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
-  public String editarPessoa(@PathVariable("id") Long id, Model model) {
+  public String editarPessoa(@PathVariable("id") Long id, Model model, HttpSession session) {
     Pessoa pessoa = pessoaService.findById(id).get();
+    session.setAttribute("id_pessoa", pessoa.getId());
     model.addAttribute("pessoa", pessoa);
-    model.addAttribute("pessoa_id", pessoa.getId());
     popularAtributos(model);
-    TempCpf = pessoa.getCpf();
     return "/pessoa/cadastrar-pessoa";
   }
 
   @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
   public String editarPessoa(@PathVariable("id") Long id, @Valid Pessoa pessoa, BindingResult result, Model model,
-      RedirectAttributes attr) {    
-    if(!(pessoaService.atualiza(pessoa, TempCpf))) {
+      RedirectAttributes attr, HttpSession session) {    
+    Long id_tpm = Long.parseLong(session.getAttribute("id_pessoa").toString());
+    if(!(pessoaService.save(pessoa, id_tpm))) {
       result.addError(new FieldError("pessoa", "cpf", "CPF já existe cadastrado!"));
     }
     if (result.hasErrors()) {
       return "/pessoa/cadastrar-pessoa";
     }
-    pessoaService.save(pessoa);
+    pessoaService.save(pessoa, id_tpm);
     attr.addFlashAttribute("alertIcon", "success");
     attr.addFlashAttribute("alertMessage", "Pessoa editada com sucesso!");
     return "redirect:/pessoa/listar";
