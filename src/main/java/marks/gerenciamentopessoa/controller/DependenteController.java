@@ -1,7 +1,5 @@
 package marks.gerenciamentopessoa.controller;
 
-import java.util.Optional;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
