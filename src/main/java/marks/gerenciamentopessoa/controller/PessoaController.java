@@ -100,14 +100,13 @@ public class PessoaController {
   @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
   public String editarPessoa(@PathVariable("id") Long id, @Valid Pessoa pessoa, BindingResult result, Model model,
       RedirectAttributes attr, HttpSession session) {    
-    Long id_tpm = Long.parseLong(session.getAttribute("id_pessoa").toString());
-    if(!(pessoaService.save(pessoa, id_tpm))) {
-      result.addError(new FieldError("pessoa", "cpf", "CPF já existe cadastrado!"));
+    Long id_sessao = Long.parseLong(session.getAttribute("id_pessoa").toString());
+    if(!(pessoaService.atualiza(pessoa, id_sessao))) {
+      result.addError(new FieldError("pessoa", "cpf", "CPF já existe cadastrado, por favor, escolha outro!"));
     }
     if (result.hasErrors()) {
       return "/pessoa/cadastrar-pessoa";
     }
-    pessoaService.save(pessoa, id_tpm);
     attr.addFlashAttribute("alertIcon", "success");
     attr.addFlashAttribute("alertMessage", "Pessoa editada com sucesso!");
     return "redirect:/pessoa/listar";

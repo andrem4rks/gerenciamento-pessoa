@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import marks.gerenciamentopessoa.model.CEP;
 import marks.gerenciamentopessoa.model.Pessoa;
 import marks.gerenciamentopessoa.repository.cepRepository;
+import marks.gerenciamentopessoa.repository.dependenteRepository;
 import marks.gerenciamentopessoa.repository.pessoaRepository;
 
 @Service
@@ -19,9 +20,12 @@ public class PessoaService {
   @Autowired
   private cepRepository cepRepository;
 
-  public Boolean save(Pessoa pessoa, Long id) {
+  @Autowired
+  private dependenteRepository dependenteRepository;
+
+  public Boolean save(Pessoa pessoa) {
     verifCepExiste(pessoa);
-    if(testsCpf(pessoa, id)) {
+    if(testeCpfExiste(pessoa)) {
       pessoaRepository.save(pessoa);
       return true;
     }
@@ -36,29 +40,31 @@ public class PessoaService {
     return pessoaRepository.findAll();
   }
 
-  public Boolean atualiza(Pessoa pessoa, Long id) {
-    
+  public Boolean atualiza(Pessoa pessoa, Long id_sessao) {
+    if(testeCpfSessao(id_sessao, pessoa) || testeCpfExiste(pessoa)) {
+      pessoaRepository.save(pessoa);
+      return true;
+    }
+    return false;
   }
-
 
   public void remove(Long id) {
     pessoaRepository.deleteById(id);
   }
 
-  public Boolean testsCpf(Pessoa pessoa, Long id) {
-    if(pessoa.getCpf().equals(pessoaRepository.findById(id).get().getCpf())) {
+  //Funcoes de teste
+  public Boolean testeCpfExiste(Pessoa pessoa) {
+    if(pessoaRepository.findByCpf(pessoa.getCpf()) == null && dependenteRepository.findByCpf(pessoa.getCpf()) == null ) {
       return true;
-    } else if (verifCpfExiste(pessoa.getCpf())) {
-      return false;
-    }
-    return true;
+    } 
+    return false;
   }
 
-  public Boolean verifCpfExiste(String cpf) {
-    if(pessoaRepository.findByCpf(cpf) != null) {
-      return false;
-    }
-    return true;
+  public Boolean testeCpfSessao(Long id, Pessoa pessoa) {
+    if(pessoaRepository.findById(id).get().getCpf().equals(pessoa.getCpf())) {
+      return true;
+    } 
+    return false;
   }
 
   public void verifCepExiste(Pessoa pessoa) {
