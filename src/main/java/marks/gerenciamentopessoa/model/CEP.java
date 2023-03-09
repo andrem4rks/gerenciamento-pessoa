@@ -1,15 +1,14 @@
 package marks.gerenciamentopessoa.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,5 +31,8 @@ public class CEP {
   private String municipio;
 
   private String bairro;
+
+  @OneToMany(mappedBy = "cep")
+  private List<Endereco> endereco;
 
 }
