@@ -33,14 +33,14 @@ public class Endereco {
 
     @Valid
     @NotNull(message = "Informe um tipo de endereço!")
-    @OneToOne
-    @JoinColumn(name = "id_tipo_endereco")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tipo_endereco")
     private TipoEndereco tipoEndereco;
     
     @Valid
     @NotNull(message = "Informe um CEP!")
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_cep")
+    @JoinColumn(name = "cep")
     private CEP cep;
 
 }

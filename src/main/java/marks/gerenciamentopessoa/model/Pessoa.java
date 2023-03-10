@@ -57,4 +57,7 @@ public class Pessoa extends PessoaPrincipal {
     @OneToOne
     @JoinColumn(name = "id_instrucao")
     private Instrucao instrucao;
+
+    @OneToOne
+    private Credenciais credenciais;
 }
