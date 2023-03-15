@@ -9,7 +9,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
           <li class="nav-item">
             <a th:id="@{home}" class="nav-link" aria-current="page" href="/">Home</a>
           </li>
@@ -20,7 +20,13 @@
             <a th:id="@{listar}" class="nav-link" href="/pessoa/listar">Listar</a>
           </li>
         </ul>
+        <form class="d-flex" th:action="@{/logout}" method="post">
+          <button class="btn btn-outline-danger">
+            <i id="logout-icon" class="fa-solid fa-right-from-bracket" ></i>
+          </button>
+        </form>
       </div>
+
     </div>
   </nav>
 </div>
