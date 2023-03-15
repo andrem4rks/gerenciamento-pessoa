@@ -4,12 +4,14 @@ import marks.gerenciamentopessoa.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -17,11 +19,14 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig {
 
+  @Autowired
+  private UserService userService;
+
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests()
-        .anyRequest().authenticated()
-        .and()
+    http.authorizeHttpRequests((requests) -> requests
+        .antMatchers("/css/**").permitAll()
+        .anyRequest().authenticated())
         .formLogin()
             .loginPage("/login")
             .permitAll()
@@ -31,7 +36,10 @@ public class SecurityConfig {
           .logoutUrl("/logout")
           .permitAll()
           .deleteCookies("JSESSIONID")
-          .logoutSuccessUrl("/login");
+          .logoutSuccessUrl("/login")
+        .and()
+          .csrf()
+        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     return http.build();
   }
 
@@ -40,4 +48,11 @@ public class SecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
+  @Bean
+  public DaoAuthenticationProvider authProvider() {
+    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+    authProvider.setUserDetailsService(userService);
+    authProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+    return authProvider;
+  }
 }

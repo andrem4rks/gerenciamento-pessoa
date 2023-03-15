@@ -12,6 +12,9 @@ public class GerenciamentoPessoaApplication {
 
 
 		System.out.println(new BCryptPasswordEncoder().encode("admin"));
+
+
 	}
 
 }
+
