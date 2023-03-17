@@ -25,12 +25,12 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests((requests) -> requests
-        .antMatchers("/css/**").permitAll()
-        .anyRequest().authenticated())
+            .antMatchers("/css/**").permitAll()
+            .anyRequest().authenticated())
         .formLogin()
-            .loginPage("/login")
-            .permitAll()
-            .defaultSuccessUrl("/home")
+        .loginPage("/login")
+          .permitAll()
+          .defaultSuccessUrl("/home")
         .and()
         .logout()
           .logoutUrl("/logout")
@@ -38,8 +38,8 @@ public class SecurityConfig {
           .deleteCookies("JSESSIONID")
           .logoutSuccessUrl("/login")
         .and()
-          .csrf()
-        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+        .csrf()
+          .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     return http.build();
   }
 

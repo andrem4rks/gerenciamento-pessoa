@@ -31,15 +31,19 @@ public class Endereco {
 
     private String complemento;
 
+
+    @OneToOne (cascade = CascadeType.ALL, mappedBy = "endereco")
+    private Pessoa pessoa;
+
     @Valid
     @NotNull(message = "Informe um tipo de endereço!")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "tipo_endereco")
     private TipoEndereco tipoEndereco;
     
     @Valid
     @NotNull(message = "Informe um CEP!")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "cep")
     private CEP cep;
 

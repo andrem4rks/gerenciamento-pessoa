@@ -9,9 +9,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,34 +54,34 @@ public class PessoaController {
   @Autowired
   private InstrucaoService instrucaoService;
 
-  @Autowired
-  private pessoaRepository pessoaRepository;
 
-  private String TempCpf;
 
-  @RequestMapping(path = "/novo", method = RequestMethod.GET)
-  public String adicionarPessoa(RedirectAttributes attributes, Model model) {
-    model.addAttribute("pessoa", new Pessoa());
+  @RequestMapping(path = "/cadastrar", method = RequestMethod.GET)
+  public String cadastra(Pessoa pessoa, ModelMap model) {
+    model.addAttribute("pessoa", pessoa);
     popularAtributos(model);
     return "/pessoa/cadastrar-pessoa";
   }
 
   @RequestMapping(path = "/salvar", method = RequestMethod.POST)
-  public String salvarPessoa(@Valid Pessoa pessoa,
+  public String salva(@Valid Pessoa pessoa,
       BindingResult result,
       RedirectAttributes attributes,
-      Model model,
+      ModelMap model,
       RedirectAttributes attr) {
+
+    if (result.hasErrors())
+      return "/pessoa/cadastrar-pessoa";
+
     popularAtributos(model);
+
     if(!(pessoaService.save(pessoa))) {
       result.addError(new FieldError("pessoa", "cpf", "CPF já existe cadastrado!"));
-    }
-    if (result.hasErrors()) {
       return "/pessoa/cadastrar-pessoa";
     }
-    attr.addFlashAttribute("alertIcon", "success");
-    attr.addFlashAttribute("alertMessage", "Pessoa cadastrada com sucesso!");
-    return "redirect:/pessoa/novo";
+
+    attr.addFlashAttribute("success", "Pessoa cadastrada com sucesso!");
+    return "redirect:/pessoa/cadastrar";
   }
 
   @RequestMapping(path = "/listar", method = RequestMethod.GET)
@@ -89,7 +91,7 @@ public class PessoaController {
   }
 
   @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
-  public String editarPessoa(@PathVariable("id") Long id, Model model, HttpSession session) {
+  public String editarPessoa(@PathVariable("id") Long id, ModelMap model, HttpSession session) {
     Pessoa pessoa = pessoaService.findById(id).get();
     session.setAttribute("id_pessoa", pessoa.getId());
     model.addAttribute("pessoa", pessoa);
@@ -112,15 +114,16 @@ public class PessoaController {
     return "redirect:/pessoa/listar";
   }
 
-  @RequestMapping(path = "/apagar/{id}", method = RequestMethod.GET)
-  public String apagarUsuario(@PathVariable("id") Long id, Model model, RedirectAttributes attr) {
+  @CrossOrigin(origins = "http://localhost:8081")
+  @RequestMapping(path = "/apagar/{id}", method = RequestMethod.DELETE)
+  public String apagarUsuario(@PathVariable("id") Long id, RedirectAttributes attr) {
     pessoaService.remove(id);
     attr.addFlashAttribute("alertIcon", "success");
     attr.addFlashAttribute("alertMessage", "Pessoa deletada com sucesso!");
     return "redirect:/pessoa/listar";
   }
 
-  public void popularAtributos(Model model) {
+  public void popularAtributos(ModelMap model) {
     model.addAttribute("listaSexo", sexoService.findAll());
     model.addAttribute("listaRaca", racaService.findAll());
     model.addAttribute("listaEstadoCivil", estadoCivilService.findAll());

@@ -3,8 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="_csrf" content="XSRF-TOKEN"/>
-  <meta name="_csrf_header" content="${_csrf.headerName}"/>
   <title>Lista de Usuários</title>
   <link rel="stylesheet" th:href="@{/css/listar-pessoa.css}" th:fragment="css">
   </link>
@@ -20,7 +18,7 @@
       </div>
 
       <div class="col ms-0 mb-3">
-        <a class="btn btn-success" href="" th:href="@{/pessoa/novo}">
+        <a class="btn btn-success" href="" th:href="@{/pessoa/cadastrar}">
           Cadastrar Pessoa
         </a>
       </div>
@@ -72,9 +70,8 @@
       </table>
     </div>
   </main>
-  <div th:replace="fragments/components/modal :: modal" layout:fragment="modal"></div>
+  <div th:replace="components/modal :: modal" layout:fragment="modal"></div>
   <script th:inline="javascript" th:fragment="inlinescript"></script>
-  <div th:insert="fragments/scripts/pessoa/listar-script :: listar" layout:fragment="script"></div>
   <script type="text/javascript" th:fragment="js">
     $(document).ready(function () {
 
@@ -88,6 +85,8 @@
 
     })
   </script>
+  <div th:insert="scripts/pessoa/listar-script :: listar" layout:fragment="script"></div>
+
 </body>
 
 <!--datable implements-->

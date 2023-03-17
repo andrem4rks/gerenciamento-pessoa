@@ -70,9 +70,12 @@ public class PessoaService {
   public void verifCepExiste(Pessoa pessoa) {
     List<CEP> tempRepoCep = cepRepository.findAllByNumeroCep(pessoa.getEndereco().getCep().getNumeroCep());
 
-    for (CEP item : tempRepoCep) {
-      if (item != null) {
-        CEP tmpPessoaCep = pessoa.getEndereco().getCep();
+
+    if (tempRepoCep == null) {
+      cepRepository.save(pessoa.getEndereco().getCep());
+    } else {
+      CEP tmpPessoaCep = pessoa.getEndereco().getCep();
+      for (CEP item : tempRepoCep) {
         if (normalizaString(item.getEstado()).equals(normalizaString(tmpPessoaCep.getEstado()))
             && normalizaString(item.getMunicipio()).equals(normalizaString(tmpPessoaCep.getMunicipio()))
             && normalizaString(item.getBairro()).equals(normalizaString(tmpPessoaCep.getBairro()))) {
@@ -83,6 +86,18 @@ public class PessoaService {
       }
     }
   }
+
+
+
+//        CEP tmpPessoaCep = pessoa.getEndereco().getCep();
+//        } else {
+//          cepRepository.save(pessoa.getEndereco().getCep());
+//        }
+//      } else {
+//
+//      }
+//    }
+//  }
 
   public String normalizaString(String s) {
     return s = s.toLowerCase().trim();
