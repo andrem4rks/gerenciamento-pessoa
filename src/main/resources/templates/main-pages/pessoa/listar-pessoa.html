@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Lista de Usuários</title>
   <link rel="stylesheet" th:href="@{/css/listar-pessoa.css}" th:fragment="css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.3/dist/bootstrap-table.min.css">
   </link>
 </head>
 
@@ -17,14 +18,17 @@
         <h3 th:if="${pessoas.empty}">Sem Pessoas Cadastradas!</h3>
       </div>
 
+      <div id="teste"></div>
+
       <div class="col ms-0 mb-3">
         <a class="btn btn-success" href="" th:href="@{/pessoa/cadastrar}">
           Cadastrar Pessoa
         </a>
       </div>
 
+      <div class="table-responsive-sm">
       <table class="table table-striped " id="table1" th:if="${!pessoas.empty}">
-        <thead>
+        <thead id="theadprops" class="bg-light">
           <tr>
             <th class="cpf">CPF</th>
             <th>Nome</th>
@@ -35,7 +39,6 @@
           <tr th:each="pessoa : ${pessoas}">
             <td><span th:text="${pessoa.cpf}"> CPF </span></td>
             <td><span th:text="${pessoa.nome}"> Nome </span></td>
-
             <td>
               <button class="btn btn-warning btn-sm me-2" id="btn-editar"
                 th:onclick="editarModal([[${pessoa.id}]],[[${pessoa.nome}]])">
@@ -59,6 +62,29 @@
               </a>
             </td>
           </tr>
+          <tr th:each="i: ${#numbers.sequence(1, 100)}">
+            <td><span > CPF </span></td>
+            <td><span> Nome </span></td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2" id="btn-editar">
+                <span style="font-size: 15px; color: rgb(35, 39, 43);">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </span>
+              </button>
+
+              <button class="btn btn-danger btn-sm me-2" id="btn-apagar">
+                <span style="font-size: 15px; color: rgb(35, 39, 43);">
+                  <i class="fa-solid fa-trash"></i>
+                </span>
+              </button>
+
+              <a class="btn btn-info btn-sm" href="" id="btn-dependente">
+                <span style="font-size: 15px">
+                  Dependentes
+                </span>
+              </a>
+            </td>
+          </tr>
         </tbody>
         <tfoot>
           <tr>
@@ -69,9 +95,11 @@
         </tfoot>
       </table>
     </div>
+    </div>
   </main>
   <div th:replace="components/modal :: modal" layout:fragment="modal"></div>
   <script th:inline="javascript" th:fragment="inlinescript"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.21.3/dist/bootstrap-table.min.js"></script>
   <script type="text/javascript" th:fragment="js">
     $(document).ready(function () {
 

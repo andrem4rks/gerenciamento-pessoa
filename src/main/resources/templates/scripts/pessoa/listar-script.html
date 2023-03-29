@@ -8,7 +8,7 @@
     }
 
     function apagarModal(id, nome) {
-        $(document).ajaxSend(function(e, xhr) {
+        $(document).ajaxSend(function (e, xhr) {
             xhr.setRequestHeader(csrfName, csrfToken);
         });
         console.log(nome + " apagar");
@@ -34,8 +34,15 @@
 
     $(document).ready(function () {
 
+
         $('#listar').addClass('active');
         $('#table1').DataTable({
+            fixedHeader: {
+                true: true,
+                headerOffset: 52
+            },
+            paging: false,
+            scrollY: true,
             "language": {
                 "emptyTable": "Nenhum registro encontrado",
                 "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -281,5 +288,32 @@
                 }
             }
         })
+
+        $('<div id="scroller_anchor"></div>').insertBefore("#table1_filter");
+
+        function moveScroller() {
+            var $anchor = $("#scroller_anchor");
+            var $scroller = $('#table1_filter');
+            var move = function () {
+                console.log('teste')
+                var st = $(window).scrollTop();
+                var ot = $anchor.offset().top;
+                if (st > ot) {
+                    $("#table1_filter").addClass("pt-3 bg-light sticky-top text-end");
+                    $("#table1_filter").width($("#table1_wrapper").width());
+                    console.log($("#table1_wrapper").width())
+                } else {
+                    $("#table1_filter").removeClass("sticky-top");
+                }
+            };
+            $(window).scroll(move);
+            move();
+        }
+        $(function() {
+            moveScroller();
+        });
+
+
+
     });
 </script>

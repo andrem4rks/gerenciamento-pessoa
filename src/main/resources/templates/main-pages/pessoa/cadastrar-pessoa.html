@@ -10,7 +10,9 @@
 
 <body>
 <main class="container mt-4" layout:fragment="main">
-  <h2 class="page-header mb-3" th:text="${id == null} ? 'Cadastrar Pessoa' : 'Editar Pessoa'"></h2>
+  <div class="sticky-top">
+    <h2 class="page-header mb-3" th:text="${id == null} ? 'Cadastrar Pessoa' : 'Editar Pessoa'"></h2>
+  </div>
 
   <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -182,6 +184,8 @@
                 th:errors="*{endereco.cep.municipio}"></span>
         </div>
       </div>
+
+      <div style="height: 2000px"></div>
     </div>
 
     <div class="col mb-3">

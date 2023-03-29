@@ -23,6 +23,7 @@
 <script th:src="@{/js/jquery-validate/jquery.validate.min.js}"></script>
 <script th:src="@{/js/icons/icons.js}"></script>
 <script th:src="@{/js/datatable/datatables.js}"></script>
+<script th:src="@{/js/datatable/datatablesFixedHeader.min.js}"></script>
 <div layout:fragment="modal"></div>
 <script th:replace=":: js"></script>
 
@@ -31,15 +32,15 @@
     const csrfName = [[${ _csrf.headerName }]], csrfToken = [[${ _csrf.token }]];
 </script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        var mensagem = $("div#success").data("success");
-        if(mensagem.getValue() != "") {
-            swal.fire({
-                icon: 'success',
-                text: mensagem.getText()
-            });
-        }
-    })
+    // $(document).ready(function () {
+    //     var mensagem = $("div#success").data("success");
+    //     if(mensagem.getValue() != "") {
+    //         swal.fire({
+    //             icon: 'success',
+    //             text: mensagem.getText()
+    //         });
+    //     }
+    // })
 </script>
 
 

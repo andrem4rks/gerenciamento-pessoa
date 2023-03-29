@@ -1,8 +1,5 @@
 package marks.gerenciamentopessoa.controller;
 
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -12,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import marks.gerenciamentopessoa.model.Pessoa;
-import marks.gerenciamentopessoa.repository.pessoaRepository;
 import marks.gerenciamentopessoa.service.EstadoCivilService;
 import marks.gerenciamentopessoa.service.InstrucaoService;
 import marks.gerenciamentopessoa.service.PaisService;
@@ -60,7 +55,7 @@ public class PessoaController {
   public String cadastra(Pessoa pessoa, ModelMap model) {
     model.addAttribute("pessoa", pessoa);
     popularAtributos(model);
-    return "/pessoa/cadastrar-pessoa";
+    return "main-pages/pessoa/cadastrar-pessoa";
   }
 
   @RequestMapping(path = "/salvar", method = RequestMethod.POST)
@@ -71,13 +66,13 @@ public class PessoaController {
       RedirectAttributes attr) {
 
     if (result.hasErrors())
-      return "/pessoa/cadastrar-pessoa";
+      return "main-pages/pessoa/cadastrar-pessoa";
 
     popularAtributos(model);
 
     if(!(pessoaService.save(pessoa))) {
       result.addError(new FieldError("pessoa", "cpf", "CPF já existe cadastrado!"));
-      return "/pessoa/cadastrar-pessoa";
+      return "main-pages/pessoa/cadastrar-pessoa";
     }
 
     attr.addFlashAttribute("success", "Pessoa cadastrada com sucesso!");
@@ -87,7 +82,7 @@ public class PessoaController {
   @RequestMapping(path = "/listar", method = RequestMethod.GET)
   public String listarPessoas(Model model) {
     model.addAttribute("pessoas", pessoaService.findAll());
-    return "/pessoa/listar-pessoa";
+    return "main-pages/pessoa/listar-pessoa";
   }
 
   @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
@@ -96,7 +91,7 @@ public class PessoaController {
     session.setAttribute("id_pessoa", pessoa.getId());
     model.addAttribute("pessoa", pessoa);
     popularAtributos(model);
-    return "/pessoa/cadastrar-pessoa";
+    return "main-pages/pessoa/cadastrar-pessoa";
   }
 
   @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
@@ -107,14 +102,13 @@ public class PessoaController {
       result.addError(new FieldError("pessoa", "cpf", "CPF já existe cadastrado, por favor, escolha outro!"));
     }
     if (result.hasErrors()) {
-      return "/pessoa/cadastrar-pessoa";
+      return "main-pages/pessoa/cadastrar-pessoa";
     }
     attr.addFlashAttribute("alertIcon", "success");
     attr.addFlashAttribute("alertMessage", "Pessoa editada com sucesso!");
     return "redirect:/pessoa/listar";
   }
 
-  @CrossOrigin(origins = "http://localhost:8081")
   @RequestMapping(path = "/apagar/{id}", method = RequestMethod.DELETE)
   public String apagarUsuario(@PathVariable("id") Long id, RedirectAttributes attr) {
     pessoaService.remove(id);

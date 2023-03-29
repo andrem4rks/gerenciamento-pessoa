@@ -1,29 +1,39 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <title>Please Log In</title>
-  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}">
+  <link rel="stylesheet" th:href="~{}" th:fragment="css">
+  <link th:href="@{/css/bootstrap/bootstrap.css}" rel="stylesheet">
+  <link th:href="@{/css/main.css}" rel="stylesheet">
 
 </head>
-<body>
-<main class="m-auto">
+<body class="d-flex text-center">
+    <main class="form-signin w-100 m-auto">
+      <!-- <div th:if="${param.error}">
+        Invalid username and password.
+      </div>
+      <div th:if="${param.logout}">
+        You have been logged out.
+      </div> -->
+      <form th:action="@{/login}" method="post">
+        <h1 class="h-2 fw-normal">Faça Log In</h1>
 
-  <h1>Please Log In</h1>
-  <div th:if="${param.error}">
-    Invalid username and password.
-  </div>
-  <div th:if="${param.logout}">
-    You have been logged out.
-  </div>
-  <form th:action="@{/login}" method="post">
-    <div>
-      <input type="text" name="username" placeholder="Username"/>
-    </div>
-    <div>
-      <input type="password" name="password" placeholder="Password"/>
-    </div>
-    <input type="submit" value="Log in"/>
-  </form>
-</main>
+        <div class="form-floating">
+          <input class="form-control" id="floatingUsername" type="text" name="username" placeholder="Username"/>
+          <label for="floatingUsername">Username</label>
+        </div>
+        <div class="form-floating">
+          <input class="form-control" id="floatingPassword" type="password" name="password" placeholder="Password"/>
+          <label for="floatingPassword">Senha</label>
+        </div>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <input class="w-100 btn btn-lg btn-primary" value="Sign in" type="submit"></button>
+      </form>
+    </main>
 </body>
+<script type="text/javascript" th:fragment="js"></script>
 
 </html>
