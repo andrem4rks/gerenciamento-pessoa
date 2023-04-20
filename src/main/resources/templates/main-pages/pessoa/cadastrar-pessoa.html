@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<html data-bs-theme="dark" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
 
 <head>
   <meta charset="UTF-8">
@@ -8,192 +9,191 @@
   </link>
 </head>
 
-<body>
-<main class="container mt-4" layout:fragment="main">
-  <div class="sticky-top">
-    <h2 class="page-header mb-3" th:text="${id == null} ? 'Cadastrar Pessoa' : 'Editar Pessoa'"></h2>
-  </div>
-
-  <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    <span th:text="${mensagem}"></span>
-  </div>
-
-  <form action="#" th:action="${id == null} ? @{/pessoa/salvar} : @{/pessoa/atualizar/{id}(id=${id})}"
-        th:object="${pessoa}" method="post" id="formCadastrar">
-    <div class="mb-5" name="Cadastro_Principal">
-
-      <input th:id="@{id}" th:field="*{id}" type="hidden" class="form-control"/>
-
-      <div class="row mb-2">
-        <div class="col-sm-3">
-          <label class="form-label">CPF <span>*</span></label>
-          <input th:id="@{cpf}" th:field="*{cpf}" type="text" class="form-control" maxlength="14"
-                 autocomplete="off"/>
-          <span class="blink-1" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
-        </div>
-        <div class="col">
-          <label class="form-label">Nome <span>*</span></label>
-          <input th:id="@{nome}" th:field="*{nome}" type="text" class="form-control"/>
-          <span class="blink-1" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-        </div>
+<body class="bg-body-tertiary">
+<div layout:fragment="main" class="container">
+  <main role="main">
+      <div class="text-center mt-5">
+        <h2 class="page-header mb-3" th:text="${id == null} ? 'Cadastrar Pessoa' : 'Editar Pessoa'"></h2>
       </div>
 
-      <div class="row mb-2">
-        <div class="col-sm-3">
-          <label class="form-label">Sexo <span>*</span></label>
-          <select th:id="@{sexo}" th:field="*{sexo}" class="form-select">
-            <option selected th:value="${null}">Escolha um sexo</option>
-            <option th:each="sexo : ${listaSexo}" th:value="${sexo.id}" th:text="${sexo.descricao}" name="sexo">
-            </option>
-          </select>
-          <span class="blink-1" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></span>
-        </div>
-        <div class="col-sm-3 d-flex flex-column">
-          <label class="form-label">Raca <span>*</span></label>
-          <select th.id="@{raca}" th:field="*{raca}" class="form-select">
-            <option selected th:value="${null}">Escolha uma raça</option>
-            <option th:each="raca : ${listaRaca}" th:value="${raca.id}" th:text="${raca.descricao}" name="raca">
-            </option>
-          </select>
-          <span class="blink-1" th:if="${#fields.hasErrors('raca')}" th:errors="*{raca}"></span>
-        </div>
-        <div class="col d-flex flex-column">
-          <label class="form-label">Estado Civil <span>*</span></label>
-          <select th.id="@{estadoCivil}" th:field="*{estadoCivil}" class="form-select">
-            <option selected th:value="${null}">Escolha um estado civil</option>
-            <option th:each="estadoCivil: ${listaEstadoCivil}" th:value="${estadoCivil.id}"
-                    th:text="${estadoCivil.descricao}" name="estadoCivil">
-            </option>
-          </select>
-          <span class="blink-1" th:if="${#fields.hasErrors('estadoCivil')}" th:errors="*{estadoCivil}"></span>
-        </div>
-      </div>
 
-      <div class="row mb-3">
-        <div class="col-sm-9">
-          <label class="form-label">Nome Social:</label>
-          <input th:id="@{nomeSocial}" th:field="*{nomeSocial}" type="text" class="form-control"/>
-        </div>
-        <div class="col">
-          <label class="form-label">Data Nascimento <span>*</span></label>
-          <input th:id="@{dataNascimento}" th:field="*{dataNascimento}" type="date" class="form-control"/>
-          <span class="blink-1" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></span>
-        </div>
-      </div>
+    <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <span th:text="${mensagem}"></span>
+    </div>
 
-      <div class="row">
-        <div class="col">
-          <div class="col">
-            <label for="" class="form-label">Nível de Instrução <span>*</span></label>
-            <select th:id="@{instrucao}" th:field="*{instrucao}" class="form-select">
-              <option selected th:value="${null}">Escolha um nível de Instrução</option>
-              <option th:each="instrucao: ${listaInstrucao}" th:value="${instrucao.id}"
-                      th:text="${instrucao.descricao}" name="instrucao">
-              </option>
-            </select>
-            <span class="blink-1" th:if="${#fields.hasErrors('instrucao')}" th:errors="*{instrucao}"></span>
+    <div class="row g-5">
+
+      <div class="col-lg-12">
+
+        <form class="" action="#"
+              th:action="${id == null} ? @{/pessoa/salvar} : @{/pessoa/atualizar/{id}(id=${id})}"
+              th:object="${pessoa}" method="post" id="formCadastrar">
+
+          <input th:id="@{id}" th:field="*{id}" type="hidden" class="form-control"/>
+
+          <div class="row gx-3 gy-2 mb-5" name="cadastro-pessoa">
+            <div class="col-sm-3">
+              <label class="form-label">CPF <span>*</span></label>
+              <input th:id="@{cpf}" th:field="*{cpf}" type="text" class="form-control" maxlength="14"
+                     autocomplete="off"/>
+              <span class="blink-1" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+            </div>
+            <div class="col-sm-9">
+              <label class="form-label">Nome <span>*</span></label>
+              <input th:id="@{nome}" th:field="*{nome}" type="text" class="form-control"/>
+              <span class="blink-1" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label">Sexo <span>*</span></label>
+              <select th:id="@{sexo}" th:field="*{sexo}" class="form-select">
+                <option selected th:value="${null}">Escolha um sexo</option>
+                <option th:each="sexo : ${listaSexo}" th:value="${sexo.id}" th:text="${sexo.descricao}" name="sexo">
+                </option>
+              </select>
+              <span class="blink-1" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></span>
+            </div>
+            <div class="col-sm-3 d-flex flex-column">
+              <label class="form-label">Raca <span>*</span></label>
+              <select th.id="@{raca}" th:field="*{raca}" class="form-select">
+                <option selected th:value="${null}">Escolha uma raça</option>
+                <option th:each="raca : ${listaRaca}" th:value="${raca.id}" th:text="${raca.descricao}" name="raca">
+                </option>
+              </select>
+              <span class="blink-1" th:if="${#fields.hasErrors('raca')}" th:errors="*{raca}"></span>
+            </div>
+            <div class="col d-flex flex-column">
+              <label class="form-label">Estado Civil <span>*</span></label>
+              <select th.id="@{estadoCivil}" th:field="*{estadoCivil}" class="form-select">
+                <option selected th:value="${null}">Escolha um estado civil</option>
+                <option th:each="estadoCivil: ${listaEstadoCivil}" th:value="${estadoCivil.id}"
+                        th:text="${estadoCivil.descricao}" name="estadoCivil">
+                </option>
+              </select>
+              <span class="blink-1" th:if="${#fields.hasErrors('estadoCivil')}" th:errors="*{estadoCivil}"></span>
+            </div>
+
+            <div class="col-md-9">
+              <label class="form-label">Nome Social:</label>
+              <input th:id="@{nomeSocial}" th:field="*{nomeSocial}" type="text" class="form-control"/>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Data Nascimento <span>*</span></label>
+              <input th:id="@{dataNascimento}" th:field="*{dataNascimento}" type="date" class="form-control"/>
+              <span class="blink-1" th:if="${#fields.hasErrors('dataNascimento')}"
+                    th:errors="*{dataNascimento}"></span>
+            </div>
+
+            <div class="col">
+              <label for="" class="form-label">Nível de Instrução <span>*</span></label>
+              <select th:id="@{instrucao}" th:field="*{instrucao}" class="form-select">
+                <option selected th:value="${null}">Escolha um nível de Instrução</option>
+                <option th:each="instrucao: ${listaInstrucao}" th:value="${instrucao.id}"
+                        th:text="${instrucao.descricao}" name="instrucao">
+                </option>
+              </select>
+              <span class="blink-1" th:if="${#fields.hasErrors('instrucao')}" th:errors="*{instrucao}"></span>
+            </div>
           </div>
-        </div>
+
+
+          <div class="row gx-3 gy-2 mb-4" name="cadastro-endereco">
+            <div class="col-sm-6">
+              <label for="" class="form-label">Pais Nascimento <span>*</span></label>
+              <select th:id="@{paisNascimento}" th:field="*{paisNascimento}" class="form-select">
+                <option selected th:value="${null}">Escolha um pais de nascimento</option>
+                <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
+                        name="paisNascimento">
+                </option>
+              </select>
+              <span class="blink-1" th:if="${#fields.hasErrors('paisNascimento')}"
+                    th:errors="*{paisNascimento}"></span>
+            </div>
+            <div class="col-sm-6">
+              <label for="" class="form-label">Pais Nacionalidade <span>*</span></label>
+              <select th:id="@{paisNacionalidade}" th:field="*{paisNacionalidade}" class="form-select">
+                <option selected th:value="${null}">Escolha um pais de nacionalidade</option>
+                <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
+                        name="paisNacionalidade">
+                </option>
+              </select>
+              <span class="blink-1" th:if="${#fields.hasErrors('paisNacionalidade')}"
+                    th:errors="*{paisNacionalidade}"></span>
+            </div>
+
+            <div class="col-sm-2">
+              <label class="form-label">CEP <span>*</span></label>
+              <input autocomplete="nope" th:id="@{endereco.cep.numeroCep}" th:field="*{endereco.cep.numeroCep}"
+                     type="text"
+                     class="form-control" maxLength="9"/>
+              <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.numeroCep')}"
+                    th:errors="*{endereco.cep.numeroCep}"></span>
+            </div>
+            <div class="col-sm-3">
+              <label class="form-label">Tipo <span>*</span></label>
+              <select th:id="@{endereco.tipoEndereco}" th:field="*{endereco.tipoEndereco}" class="form-select">
+                <option selected th:value="${null}">Escolha um tipo</option>
+                <option th:each="tipo: ${listaTipoEndereco}" th:value="${tipo.id}" th:text="${tipo.descricao}">
+                </option>
+              </select>
+              <span class="blink-1" th:if="${#fields.hasErrors('endereco.tipoEndereco')}"
+                    th:errors="*{endereco.tipoEndereco}"></span>
+            </div>
+            <div class="col-sm-7" id="logradouro">
+              <label class="form-label">Logradouro <span>*</span></label>
+              <input th:id="@{endereco.logradouro}" th:field="*{endereco.logradouro}" type="text"
+                     class="form-control"/>
+              <span class="blink-1" th:if="${#fields.hasErrors('endereco.logradouro')}"
+                    th:errors="*{endereco.logradouro}"></span>
+            </div>
+
+            <div class="col-sm-2">
+              <label class="form-label">Numero <span>*</span></label>
+              <input autofill="off" th:id="@{endereco.numero}" th:field="*{endereco.numero}" type="text"
+                     class="form-control"/>
+              <span class="blink-1" th:if="${#fields.hasErrors('endereco.numero')}"
+                    th:errors="*{endereco.numero}"></span>
+            </div>
+            <div class="col-sm-7">
+              <label class="form-label">Complemento </label>
+              <input th:id="@{endereco.complemento}" th:field="*{endereco.complemento}" type="text"
+                     class="form-control"/>
+              <span class="blink-1" th:if="${#fields.hasErrors('endereco.complemento')}"
+                    th:errors="*{endereco.complemento}"></span>
+            </div>
+            <div class="col-sm-3">
+              <label class="form-label">Bairro </label>
+              <input th:id="@{endereco.cep.bairro}" th:field="*{endereco.cep.bairro}" type="text"
+                     class="form-control"/>
+            </div>
+
+            <div class="col-sm-6">
+              <label class="form-label">UF <span>*</span></label>
+              <input th:id="@{endereco.cep.estado}" th:field="*{endereco.cep.estado}" type="text"
+                     class="form-control"/>
+              <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.estado')}"
+                    th:errors="*{endereco.cep.estado}"></span>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label">Municipio <span>*</span></label>
+              <input th:id="@{endereco.cep.municipio}" th:field="*{endereco.cep.municipio}" type="text"
+                     class="form-control"/>
+              <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.municipio')}"
+                    th:errors="*{endereco.cep.municipio}"></span>
+            </div>
+          </div>
+
+          <div class="col mb-3">
+            <input type="submit" class="w-100 btn btn-primary btn-lg mt-3"
+                   th:value="${id == null} ? 'Cadastrar' : 'Editar'"
+                   id="submeter"/>
+          </div>
+        </form>
       </div>
     </div>
-
-    <div class="CadastroEndereco">
-      <div class="row mb-3">
-        <div class="col">
-          <label for="" class="form-label">Pais Nascimento <span>*</span></label>
-          <select th:id="@{paisNascimento}" th:field="*{paisNascimento}" class="form-select">
-            <option selected th:value="${null}">Escolha um pais de nascimento</option>
-            <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
-                    name="paisNascimento">
-            </option>
-          </select>
-          <span class="blink-1" th:if="${#fields.hasErrors('paisNascimento')}" th:errors="*{paisNascimento}"></span>
-        </div>
-        <div class="col">
-          <label for="" class="form-label">Pais Nacionalidade <span>*</span></label>
-          <select th:id="@{paisNacionalidade}" th:field="*{paisNacionalidade}" class="form-select">
-            <option selected th:value="${null}">Escolha um pais de nacionalidade</option>
-            <option th:each="pais: ${listaPaises}" th:value="${pais.id}" th:text="${pais.descricao}"
-                    name="paisNacionalidade">
-            </option>
-          </select>
-          <span class="blink-1" th:if="${#fields.hasErrors('paisNacionalidade')}"
-                th:errors="*{paisNacionalidade}"></span>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-sm-2">
-          <label class="form-label">CEP <span>*</span></label>
-          <input autocomplete="nope" th:id="@{endereco.cep.numeroCep}" th:field="*{endereco.cep.numeroCep}" type="text"
-                 class="form-control" maxLength="9"/>
-          <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.numeroCep')}"
-                th:errors="*{endereco.cep.numeroCep}"></span>
-        </div>
-        <div class="col-sm-3">
-          <label class="form-label">Tipo <span>*</span></label>
-          <select th:id="@{endereco.tipoEndereco}" th:field="*{endereco.tipoEndereco}" class="form-select">
-            <option selected th:value="${null}">Escolha um tipo</option>
-            <option th:each="tipo: ${listaTipoEndereco}" th:value="${tipo.id}" th:text="${tipo.descricao}">
-            </option>
-          </select>
-          <span class="blink-1" th:if="${#fields.hasErrors('endereco.tipoEndereco')}"
-                th:errors="*{endereco.tipoEndereco}"></span>
-        </div>
-        <div class="col" id="logradouro">
-          <label class="form-label">Logradouro <span>*</span></label>
-          <input th:id="@{endereco.logradouro}" th:field="*{endereco.logradouro}" type="text" class="form-control"/>
-          <span class="blink-1" th:if="${#fields.hasErrors('endereco.logradouro')}"
-                th:errors="*{endereco.logradouro}"></span>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-sm-2">
-          <label class="form-label">Numero <span>*</span></label>
-          <input autofill="off" th:id="@{endereco.numero}" th:field="*{endereco.numero}" type="text"
-                 class="form-control"/>
-          <span class="blink-1" th:if="${#fields.hasErrors('endereco.numero')}" th:errors="*{endereco.numero}"></span>
-        </div>
-        <div class="col-sm-7">
-          <label class="form-label">Complemento </label>
-          <input th:id="@{endereco.complemento}" th:field="*{endereco.complemento}" type="text"
-                 class="form-control"/>
-          <span class="blink-1" th:if="${#fields.hasErrors('endereco.complemento')}"
-                th:errors="*{endereco.complemento}"></span>
-        </div>
-        <div class="col">
-          <label class="form-label">Bairro </label>
-          <input th:id="@{endereco.cep.bairro}" th:field="*{endereco.cep.bairro}" type="text" class="form-control"/>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col">
-          <label class="form-label">UF <span>*</span></label>
-          <input th:id="@{endereco.cep.estado}" th:field="*{endereco.cep.estado}" type="text" class="form-control"/>
-          <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.estado')}"
-                th:errors="*{endereco.cep.estado}"></span>
-        </div>
-        <div class="col">
-          <label class="form-label">Municipio <span>*</span></label>
-          <input th:id="@{endereco.cep.municipio}" th:field="*{endereco.cep.municipio}" type="text"
-                 class="form-control"/>
-          <span class="blink-1" th:if="${#fields.hasErrors('endereco.cep.municipio')}"
-                th:errors="*{endereco.cep.municipio}"></span>
-        </div>
-      </div>
-
-      <div style="height: 2000px"></div>
-    </div>
-
-    <div class="col mb-3">
-      <input type="submit" class="w-100 btn btn-primary btn-lg mt-3" th:value="${id == null} ? 'Cadastrar' : 'Editar'"
-             id="submeter"/>
-    </div>
-  </form>
-</main>
+  </main>
+</div>
 <script type="text/javascript" th:fragment="js"></script>
 <div th:insert="scripts/pessoa/cadastrar-script :: cadastrar-pessoa" layout:fragment="script"></div>
 <script type="text/javascript" th:fragment="js">

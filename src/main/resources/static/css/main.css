@@ -25,7 +25,7 @@ span {
 }
 
 .container {
-  width: 1100px;
+  max-width: 1100px;
 }
 
 .readOnly {

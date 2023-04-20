@@ -68,7 +68,7 @@ public class DependenteController {
     model.addAttribute("dependentes", pessoaService.findById(id).get().getDependente());
     model.addAttribute("nomeRepresentante", pessoaService.findById(id).get().getNome());
     session.setAttribute("id_representante", id);
-    return "dependente/listar-dependentes";
+    return "/main-pages/dependente/listar-dependentes";
   }
 
   @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
@@ -77,7 +77,7 @@ public class DependenteController {
     session.setAttribute("id_sessao", dependente.getId());
     model.addAttribute("dependente", dependente);
     popularAtributos(model);
-    return "dependente/cadastrar-dependente";
+    return "/main-pages/dependente/cadastrar-dependente";
   }
 
   @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
@@ -88,7 +88,7 @@ public class DependenteController {
       result.addError(new FieldError("pessoa", "cpf", "CPF já existe cadastrado!"));
     }
     if (result.hasErrors()) {
-      return "dependente/cadastrar-dependente";
+      return "/main-pages/dependente/cadastrar-dependente";
     }
     dependente.setPessoa(pessoaService.findById(id_representante).get());
     attr.addFlashAttribute("alertIcon", "success");

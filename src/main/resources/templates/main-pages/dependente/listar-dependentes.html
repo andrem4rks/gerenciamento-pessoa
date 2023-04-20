@@ -9,83 +9,86 @@
 </head>
 
 <body>
-  <main class="container" layout:fragment="main">
-    <div class="row justify-content-md-center">
-      <div class="col mt-4">
-        <h1>Lista de Dependentes</h1>
+<main class="container" layout:fragment="main">
+  <div class="row justify-content-md-center">
+    <div class="col mt-4">
+      <h1>Lista de Dependentes</h1>
 
-        <div class="row">
-          <div class="col-sm-1" id="return">
-            <a class="btn btn-secondary btn-sm me-2" style="height: 37px" href="/pessoa/listar">
+      <div class="row">
+        <div class="col-sm-1" id="return">
+          <a class="btn btn-secondary btn-sm me-2" style="height: 37px" href="/pessoa/listar">
               <span style="font-size: 16px; color: rgb(255, 255, 255);">
                 <i class="fa-solid fa-arrow-left"></i>
               </span>
-            </a>
-          </div>
-          <div class="col-sm-2">
-            <a class="btn btn-success" href="" id="btn-dependente" th:href="@{/dependente/novo}">
-              Novo Dependente
-            </a>
-          </div>
-          <div class="col mb-3">
-            <h4 class="text-end">Representante: <span th:text="${nomeRepresentante}"></span></h4>
+          </a>
+        </div>
+        <div class="col-sm-2">
+          <a class="btn btn-success" href="" id="btn-dependente" th:href="@{/dependente/novo}">
+            Novo Dependente
+          </a>
+        </div>
+        <div class="col mb-3 text-end">
+          <div class="d-flex justify-content-end flex-row">
+            <h4 class="text-end">Representante: </h4>
+            <h4 class="ms-2 fw-bold" th:text="${nomeRepresentante}"></h4>
           </div>
         </div>
+      </div>
 
-        <div>
-          <h3 th:if="${dependentes.empty}">Sem Dependentes Cadastrados!</h3>
-        </div>
+      <div>
+        <h3 th:if="${dependentes.empty}">Sem Dependentes Cadastrados!</h3>
+      </div>
 
-        <table class="table table-striped " id="table1" th:if="${!dependentes.empty}">
-          <thead>
-            <tr>
-              <th class="cpf">CPF</th>
-              <th>Nome</th>
-              <th class="acoes">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:if="${dependentes.empty}">
+      <table class="table table-striped " id="table1" th:if="${!dependentes.empty}">
+        <thead>
+        <tr>
+          <th class="cpf">CPF</th>
+          <th>Nome</th>
+          <th class="acoes">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${dependentes.empty}">
 
-            </tr>
-            <tr th:each="dependente : ${dependentes}">
-              <td><span th:text="${dependente.cpf}"> CPF </span></td>
-              <td><span th:text="${dependente.nome}"> Nome </span></td>
+        </tr>
+        <tr th:each="dependente : ${dependentes}">
+          <td><span th:text="${dependente.cpf}"> CPF </span></td>
+          <td><span th:text="${dependente.nome}"> Nome </span></td>
 
-              <td>
-                <button class="btn btn-warning btn-sm me-2" id="btn-editar"
-                  th:onclick="editarModal([[${dependente.id}]],[[${dependente.nome}]])">
+          <td>
+            <button class="btn btn-warning btn-sm me-2" id="btn-editar"
+                    th:onclick="editarModal([[${dependente.id}]],[[${dependente.nome}]])">
                   <span style="font-size: 15px; color: rgb(35, 39, 43);">
                     <i class="fa-regular fa-pen-to-square"></i>
                   </span>
-                </button>
+            </button>
 
-                <button class="btn btn-danger btn-sm me-2" id="btn-apagar"
-                  th:onclick="apagarModal([[${dependente.id}]],[[${dependente.nome}]])">
+            <button class="btn btn-danger btn-sm me-2" id="btn-apagar"
+                    th:onclick="apagarModal([[${dependente.id}]],[[${dependente.nome}]])">
                   <span style="font-size: 15px; color: rgb(35, 39, 43);">
                     <i class="fa-solid fa-trash"></i>
                   </span>
-                </button>
-              </td>
+            </button>
+          </td>
 
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>CPF</th>
-              <th>Nome</th>
-              <th>Ações</th>
-            </tr>
-          </tfoot>
-        </table>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <th>CPF</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+        </tfoot>
+      </table>
 
 
-      </div>
     </div>
-  </main>
-  <div th:replace="fragments/components/modal :: modal" layout:fragment="modal"></div>
-  <script type="text/javascript" th:fragment="js"></script>
-  <div th:insert="fragments/scripts/dependente/listar-script :: listar-dependentes" layout:fragment="script"></div>
+  </div>
+</main>
+<div th:replace="components/modal :: modal" layout:fragment="modal"></div>
+<script type="text/javascript" th:fragment="js"></script>
+<div th:insert="scripts/dependente/listar-script :: listar-dependentes" layout:fragment="script"></div>
 </body>
 
 

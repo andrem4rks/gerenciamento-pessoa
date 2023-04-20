@@ -10,9 +10,7 @@ public class GerenciamentoPessoaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GerenciamentoPessoaApplication.class, args);
 
-
 		System.out.println(new BCryptPasswordEncoder().encode("admin"));
-
 
 	}
 
