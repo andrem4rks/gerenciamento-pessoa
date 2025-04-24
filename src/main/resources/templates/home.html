@@ -9,8 +9,10 @@
 
 <body class="h-100">
   <main layout:fragment="main">
-  <div class="container-fluid h-100">
-    <h2 th:text="${msgBemVindo}" class="text-center mb-4"></h2>
+  <div class="container-fluid d-flex flex-column h-100 gap-2">
+    <h2 th:text="${msgBemVindo}" class="text-center"></h2>
+    <a href="/pessoa/cadastrar" class="btn btn-lg btn-outline-success align-self-center">Cadastrar Pessoa</a>
+    <a href="/pessoa/listar" class="btn btn-lg btn-outline-primary align-self-center">Listar Pessoas</a>
   </div>
 </main>
 <script th:inline="javascript" th:src="~{}" th:fragment="inlinescript"></script>
