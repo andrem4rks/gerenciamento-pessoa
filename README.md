@@ -6,15 +6,15 @@
 
 ## 📑 Índice
 
-- [📌 Descrição](#descrição)
-- [👨‍💻 Autor](#autor)
-- [✅ Funcionalidades](#funcionalidades)
-- [🖼️ Screenshots](#screenshots)
-- ⚙️ [Requisitos](#requisitos)
-- [🚀 Como executar](#como-executar)
-- [🛠️ Tecnologias utilizadas](#tecnologias-utilizadas)
-- 🔩[Estrutura](#estrutura)
-- [📄 Licença](#licença)
+- [📌 Descrição](#-descrição)
+- [👨‍💻 Autor](#-autor)
+- [✅ Funcionalidades](#-funcionalidades)
+- [🖼️ Screenshots](#-screenshots)
+- ⚙️ [Requisitos](#-requisitos)
+- [🚀 Como executar](#-como-executar)
+- [🛠️ Tecnologias utilizadas](#-tecnologias-utilizadas)
+- 🔩[Estrutura](#-estrutura)
+- [📄 Licença](#-licença)
 
   
 ---  
