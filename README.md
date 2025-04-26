@@ -85,7 +85,7 @@ Entre em contato:
 - **Exclusão** - ✅ Concluído
 
 
-[Voltar ao índice](#-indice)
+[Voltar ao índice](#-índice)
 
 ---  
 
@@ -132,7 +132,7 @@ Entre em contato:
 - Tela de exclusão:  
   ![Tela de listagem](/screenshots/pessoa/tela-excluir-pessoa.png)
 
-[Voltar ao índice](#-indice)
+[Voltar ao índice](#-índice)
 
 ---
 
@@ -144,7 +144,7 @@ Antes de executar o projeto, verifique se você tem os seguintes itens instalado
 - [✅] [Docker Compose](https://docs.docker.com/compose/) (opcional, mas recomendado)
 - [❌] Java, etc. (não é necessário instalar localmente se usar Docker)
 
-[Voltar ao índice](#indice)
+[Voltar ao índice](#-índice)
 
 ---  
 ## 🚀 Como executar
@@ -167,7 +167,7 @@ usuario: admin
 senha: admin  
 ```  
 
-[Voltar ao índice](#-indice)
+[Voltar ao índice](#-índice)
 
 ## 🔩Estrutura
 
@@ -281,7 +281,7 @@ src
 │                   └── listar-script.html
 ```
 
-[Voltar ao índice](#-indice)
+[Voltar ao índice](#-índice)
 
 ## 📄 Licença
 Este projeto está sob a licença Attribution-NonCommercial 4.0 International.
@@ -290,6 +290,6 @@ Copyright (c) 2025 André Marks Santos de Lima
 
 Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-[Voltar ao índice](#-indice)
+[Voltar ao índice](#-índice)
 
   
