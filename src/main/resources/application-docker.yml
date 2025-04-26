@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://DB:5432/gerenciamento-pessoa
+    username: user
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      encoding: UTF-8
+      mode: always
+      data-locations: classpath*:data.sql
+
+server:
+  port: 8080
