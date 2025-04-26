@@ -182,16 +182,27 @@ senha: admin
 [Voltar ao índice](#índice)
 
 **Java**: Linguagem de programação principal.
+
 **Spring Boot**: Framework para construir a aplicação.
+
 **Spring Web**: Para criar serviços web RESTful.
+
 **Spring Data JPA**: Para acesso e gerenciamento de banco de dados.
+
 **Spring Security**: Para autenticação e autorização.
+
 **Thymeleaf**: Template engine para desenvolvimento WEB.
+
 **Bootstrap**: Framework front-end para criação de layouts responsivos e interfaces de usuário modernas.
+
 **jQuery**: Biblioteca JavaScript para simplificar a manipulação de DOM, eventos, animações e chamadas AJAX.
+
 **jQuery Validation**: Plugin jQuery para validar formulários e campos de entrada em tempo real.
+
 **Datatables**: Plugin jQuery para criar tabelas interativas com recursos como paginação, ordenação, pesquisa e filtros em tempo real. Ele facilita a exibição e manipulação de grandes conjuntos de dados de maneira eficiente e personalizável em páginas web.
+
 **SweetAlert**: Biblioteca para criar alertas e caixas de diálogo bonitas e personalizadas em JavaScript.
+
 **PostgreSQL**: Banco de dados relacional
 
 ---
