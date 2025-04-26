@@ -40,7 +40,7 @@ public class DependenteController {
     model.addAttribute("dependente", new Dependente());
     model.addAttribute("cpfRepresentante", pessoaService.findById(id_representante).get().getCpf());
     popularAtributos(model);
-    return "dependente/cadastrar-dependente";
+    return "main-pages/dependente/cadastrar-dependente";
   }
 
   @RequestMapping(path = "/salvar", method = RequestMethod.POST)
@@ -56,18 +56,18 @@ public class DependenteController {
       result.addError(new FieldError("pessoa", "cpf", "CPF já existe cadastrado!"));
     }
     if (result.hasErrors()) {
-      return "dependente/cadastrar-dependente";
+      return "main-pages/dependente/cadastrar-dependente";
     }
     attr.addFlashAttribute("alertIcon", "success");
     attr.addFlashAttribute("alertMessage", "Dependente cadastrado com sucesso!");
     return "redirect:/dependente/listar/" + id_representante;
   }
 
-  @RequestMapping(path = "/listar/{id}", method = RequestMethod.GET)
-  public String listarPessoas(@PathVariable("id") Long id, Model model, HttpSession session) {
-    model.addAttribute("dependentes", pessoaService.findById(id).get().getDependente());
-    model.addAttribute("nomeRepresentante", pessoaService.findById(id).get().getNome());
-    session.setAttribute("id_representante", id);
+  @RequestMapping(path = "/listar/{idRepresentante}", method = RequestMethod.GET)
+  public String listarPessoas(@PathVariable("idRepresentante") Long idRepresentante, Model model, HttpSession session) {
+    model.addAttribute("dependentes", pessoaService.findById(idRepresentante).get().getDependente());
+    model.addAttribute("nomeRepresentante", pessoaService.findById(idRepresentante).get().getNome());
+    session.setAttribute("id_representante", idRepresentante);
     return "/main-pages/dependente/listar-dependentes";
   }
 

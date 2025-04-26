@@ -196,7 +196,7 @@
 </body>
 
 <script type="text/javascript" th:fragment="js"></script>
-<div th:insert="fragments/scripts/dependente/cadastrar-script :: cadastrar-dependente" layout:fragment="script"></div>
+<div th:insert="/scripts/dependente/cadastrar-script :: cadastrar-dependente" layout:fragment="script"></div>
 <script type="text/javascript" th:fragment="js">
   $('#submeter').click(function () {
     if (!($('#formCadastrar').valid())) {

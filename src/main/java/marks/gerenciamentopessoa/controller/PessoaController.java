@@ -76,7 +76,7 @@ public class PessoaController {
     }
 
     attr.addFlashAttribute("success", "Pessoa cadastrada com sucesso!");
-    return "redirect:/pessoa/cadastrar";
+    return "redirect:/pessoa/listar";
   }
 
   @RequestMapping(path = "/listar", method = RequestMethod.GET)
@@ -91,7 +91,7 @@ public class PessoaController {
     session.setAttribute("id_pessoa", pessoa.getId());
     model.addAttribute("pessoa", pessoa);
     popularAtributos(model);
-    return "main-pages/pessoa/cadastrar-pessoa";
+     return "main-pages/pessoa/cadastrar-pessoa";
   }
 
   @RequestMapping(path = "/atualizar/{id}", method = RequestMethod.POST)
@@ -109,7 +109,7 @@ public class PessoaController {
     return "redirect:/pessoa/listar";
   }
 
-  @RequestMapping(path = "/apagar/{id}", method = RequestMethod.DELETE)
+  @RequestMapping(path = "/apagar/{id}", method = RequestMethod.GET)
   public String apagarUsuario(@PathVariable("id") Long id, RedirectAttributes attr) {
     pessoaService.remove(id);
     attr.addFlashAttribute("alertIcon", "success");

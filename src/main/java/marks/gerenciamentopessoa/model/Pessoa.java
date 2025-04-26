@@ -49,7 +49,7 @@ public class Pessoa extends PessoaPrincipal {
 
     @Valid
     @NotNull(message = "Selecione pelo menos uma opção")
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne (cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 

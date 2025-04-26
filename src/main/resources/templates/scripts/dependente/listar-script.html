@@ -2,13 +2,11 @@
 
   //invocar modais
   function editarModal(id, nome) {
-    console.log(nome + " editar");
     $('#bold-nome-editar').text(nome);
     $('#btn-editar-confirmar').attr('href', '../editar/' + id);
     $('#editar').modal('show');
   }
   function apagarModal(id, nome) {
-    console.log(nome + " apgar");
     $('#bold-nome-apagar').text(nome);
     $('#apagar').modal('show');
     $('#btn-apagar-confirmar').attr('href', '../apagar/' + id);

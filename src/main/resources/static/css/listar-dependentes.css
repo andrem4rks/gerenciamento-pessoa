@@ -10,10 +10,6 @@
   width: 10%;
 }
 
-span {
-  color: black;
-}
-
 .table {
   --bs-table-striped-bg: rgba(235, 231, 231, 0.05);
 }

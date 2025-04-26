@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Getter
@@ -31,10 +32,6 @@ public class Endereco {
 
     private String complemento;
 
-
-    @OneToOne (cascade = CascadeType.ALL, mappedBy = "endereco")
-    private Pessoa pessoa;
-
     @Valid
     @NotNull(message = "Informe um tipo de endereço!")
     @ManyToOne
@@ -43,7 +40,7 @@ public class Endereco {
     
     @Valid
     @NotNull(message = "Informe um CEP!")
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cep")
     private CEP cep;
 

@@ -1,35 +1,16 @@
 <script th:fragment="listar">
 
     function editarModal(id, nome) {
-        console.log(nome + " editar");
         $('#bold-nome-editar').text(nome);
-        $('#btn-editar-confirmar').attr('href', 'editar/' + id);
+        $('#btn-editar-confirmar').attr('href', '/pessoa/editar/' + id);
         $('#editar').modal('show');
     }
 
     function apagarModal(id, nome) {
-        $(document).ajaxSend(function (e, xhr) {
-            xhr.setRequestHeader(csrfName, csrfToken);
-        });
-        console.log(nome + " apagar");
+        console.log('chamei')
         $('#bold-nome-apagar').text(nome);
+        $('#btn-apagar-confirmar').attr('href', '/pessoa/apagar/' + id);
         $('#apagar').modal('show');
-        //$('#btn-apagar-confirmar').attr('href', 'apagar/' + id);
-        $.ajax({
-            type: 'DELETE',
-            url: "/pessoa/apagar/" + id,
-            headers: {
-                "X-XSRF-TOKEN": csrfToken
-            },
-            success: function (data) {
-                swal("Sucesso!", data, "success");
-                console.log("sucesso!");
-            },
-            //em caso de erro
-            error: (data) => {
-                console.log("erro!");
-            }
-        })
     }
 
     $(document).ready(function () {

@@ -1,24 +1,28 @@
 INSERT INTO usuario (id, username, password, account_non_locked)
-VALUES (1, 'admin', '$2a$10$0HPsbIfHuDHUcZXibsIfbe7SfzBj5MPinSifc4oXWOklILNTmnMT2', true);
+VALUES (1, 'admin', '$2a$10$0HPsbIfHuDHUcZXibsIfbe7SfzBj5MPinSifc4oXWOklILNTmnMT2', true)
+ON CONFLICT DO NOTHING;
 
 INSERT INTO sexo (descricao)
 VALUES ('Masculino'),
        ('Feminino'),
-       ('Outro');
+       ('Outro')
+ON CONFLICT DO NOTHING;
 
 INSERT INTO estado_civil (descricao)
 VALUES ('Solteiro'),
        ('Casado'),
        ('Divorciado'),
        ('Separado'),
-       ('Viúvo');
+       ('Viúvo')
+ON CONFLICT DO NOTHING;
 
 INSERT INTO raca (descricao)
 VALUES ('Preto'),
        ('Pardo'),
        ('Branco'),
        ('Amarelo'),
-       ('Indígena');
+       ('Indígena')
+ON CONFLICT DO NOTHING;
 
 INSERT INTO pais (descricao)
 VALUES (' Afeganistão '),
@@ -55,7 +59,7 @@ VALUES (' Afeganistão '),
        (' Bouvet, Ilha '),
        (' Brasil '),
        (' Brunei '),
-       (' Bulgária, República da '),
+       (' Bulgária, RepúblCREATE SCHEMA IF NOT EXISTS "pessoa";ica da '),
        (' Burkina Faso '),
        (' Burundi '),
        (' Butão '),
@@ -269,7 +273,8 @@ VALUES (' Afeganistão '),
        (' Virgens, Ilhas (EUA) '),
        (' Wallis e Futuna, Ilhas '),
        (' Zâmbia '),
-       (' Zimbábue ');
+       (' Zimbábue ')
+ON CONFLICT DO NOTHING;
 
 INSERT INTO instrucao (descricao)
 VALUES (' Analfabeto, inclusive o que, embora tenha recebido instrução, não se alfabetizou '),
@@ -283,7 +288,8 @@ VALUES (' Analfabeto, inclusive o que, embora tenha recebido instrução, não s
        (' Educação Superior completa '),
        (' Pós '),
        (' Mestrado completo '),
-       (' Doutorado completo ');
+       (' Doutorado completo ')
+ON CONFLICT DO NOTHING;
 
 INSERT INTO tipo_endereco (descricao)
 VALUES (' Área '),
@@ -467,7 +473,8 @@ VALUES (' Área '),
        (' Via Litorânea '),
        (' Via de Pedestre '),
        (' Variante '),
-       (' Zigue-Zague ');
+       (' Zigue-Zague ')
+ON CONFLICT DO NOTHING;
 
 INSERT INTO tipo_dependente (descricao)
 VALUES (' Cônjuge '),
@@ -480,4 +487,5 @@ VALUES (' Cônjuge '),
        (' Menor pobre do qual detenha a guarda judicial '),
        (' A pessoa absolutamente incapaz, da qual seja tutor ou curador '),
        (' Ex cônjuge '),
-       (' Agregado/Outros ');
+       (' Agregado/Outros ')
+ON CONFLICT DO NOTHING;

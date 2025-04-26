@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}" class="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -28,7 +28,7 @@
 
       <div class="table-responsive-sm">
       <table class="table table-striped " id="table1" th:if="${!pessoas.empty}">
-        <thead id="theadprops" class="bg-light">
+        <thead id="theadprops">
           <tr>
             <th class="cpf">CPF</th>
             <th>Nome</th>
@@ -62,29 +62,6 @@
               </a>
             </td>
           </tr>
-          <!-- <tr th:each="i: ${#numbers.sequence(1, 100)}">
-            <td><span > CPF </span></td>
-            <td><span> Nome </span></td>
-            <td>
-              <button class="btn btn-warning btn-sm me-2" id="btn-editar">
-                <span style="font-size: 15px; color: rgb(35, 39, 43);">
-                  <i class="fa-regular fa-pen-to-square"></i>
-                </span>
-              </button>
-
-              <button class="btn btn-danger btn-sm me-2" id="btn-apagar">
-                <span style="font-size: 15px; color: rgb(35, 39, 43);">
-                  <i class="fa-solid fa-trash"></i>
-                </span>
-              </button>
-
-              <a class="btn btn-info btn-sm" href="" id="btn-dependente">
-                <span style="font-size: 15px">
-                  Dependentes
-                </span>
-              </a>
-            </td>
-          </tr> -->
         </tbody>
         <tfoot>
           <tr>

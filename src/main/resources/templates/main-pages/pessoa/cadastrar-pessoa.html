@@ -122,6 +122,7 @@
                     th:errors="*{paisNacionalidade}"></span>
             </div>
 
+            <input type="hidden" th:field="*{endereco.id}"/>
             <div class="col-sm-2">
               <label class="form-label">CEP <span>*</span></label>
               <input autocomplete="nope" th:id="@{endereco.cep.numeroCep}" th:field="*{endereco.cep.numeroCep}"
@@ -202,6 +203,7 @@
             Swal.fire({
                 icon: 'info',
                 title: 'Insira as informações corretamente!',
+                theme: 'dark'
             })
         }
     })
