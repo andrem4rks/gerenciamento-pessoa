@@ -4,22 +4,22 @@
 
 ---
 
-## 📑 Índice
+## Índice
 
-- [📌 Descrição](#-descrição)
-- [👨‍💻 Autor](#-autor)
-- [✅ Funcionalidades](#-funcionalidades)
-- [🖼️ Screenshots](#-screenshots)
-- ⚙️ [Requisitos](#-requisitos)
-- [🚀 Como executar](#-como-executar)
-- [🛠️ Tecnologias utilizadas](#-tecnologias-utilizadas)
-- 🔩[Estrutura](#-estrutura)
-- [📄 Licença](#-licença)
+- [Descrição](#-descrição)
+- [Autor](#-autor)
+- [Funcionalidades](#-funcionalidades)
+- [Screenshots](#-screenshots)
+- [Requisitos](#-requisitos)
+- [Como executar](#-como-executar)
+- [Tecnologias utilizadas](#-tecnologias-utilizadas)
+- [Estrutura](#-estrutura)
+- [Licença](#-licença)
 
   
 ---  
 
-## 📌 Descrição
+## Descrição
 Este sistema foi desenvolvido para gerenciar pessoas, possuindo autenticação, cadastro de pessoas, cadastro de dependentes,  
 listagem de pessoas e listagem de dependentes relacionados.  
 Foi um projeto desenvolvido durante minha função como desenvolvedor Java na assembléia legislativa do estado do Acre. Com  
@@ -27,7 +27,7 @@ o objetivo de me tornar proeficiente no desenvolvimento utilizando as ferramenta
 
 [Voltar ao índice](#-índice)
 
-## 👨‍💻 Autor
+## Autor
 
 Desenvolvido por [André Marks](https://github.com/andrem4rks)
 
@@ -37,7 +37,7 @@ Entre em contato:
 
 [Voltar ao índice](#-índice)
 
-## ✅ Funcionalidades
+## Funcionalidades
 ### 1. **Autenticação**
 - **Login com e-mail e senha** – ✅ Concluído
 - **Cadastro de novos usuários** 🛠️ Em desenvolvimento
@@ -89,7 +89,7 @@ Entre em contato:
 
 ---  
 
-## 🖼️ Screenshots
+## Screenshots
 ### Tela de Login
 ![Tela de Login](/screenshots/tela-login.png)
 
@@ -136,7 +136,7 @@ Entre em contato:
 
 ---
 
-## ⚙️ Requisitos
+## Requisitos
 
 Antes de executar o projeto, verifique se você tem os seguintes itens instalados:
 
@@ -147,7 +147,7 @@ Antes de executar o projeto, verifique se você tem os seguintes itens instalado
 [Voltar ao índice](#-índice)
 
 ---  
-## 🚀 Como executar
+## Como executar
 
 Passos para rodar o projeto localmente:
 
@@ -169,7 +169,7 @@ senha: admin
 
 [Voltar ao índice](#-índice)
 
-## 🔩Estrutura
+## Estrutura
 
 ```
 src
@@ -283,7 +283,7 @@ src
 
 [Voltar ao índice](#-índice)
 
-## 📄 Licença
+## Licença
 Este projeto está sob a licença Attribution-NonCommercial 4.0 International.
 
 Copyright (c) 2025 André Marks Santos de Lima
