@@ -16,18 +16,22 @@
 - [Estrutura](#estrutura)
 - [Licença](#licença)
 
-  
 ---  
 
 ## Descrição
+
+[Voltar ao índice](#índice)
+
 Este sistema foi desenvolvido para gerenciar pessoas, possuindo autenticação, cadastro de pessoas, cadastro de dependentes,  
 listagem de pessoas e listagem de dependentes relacionados.  
 Foi um projeto desenvolvido durante minha função como desenvolvedor Java na assembléia legislativa do estado do Acre. Com  
 o objetivo de me tornar proeficiente no desenvolvimento utilizando as ferramentas da casa.
 
-[Voltar ao índice](#índice)
+---
 
 ## Autor
+
+[Voltar ao índice](#índice)
 
 Desenvolvido por [André Marks](https://github.com/andrem4rks)
 
@@ -35,9 +39,12 @@ Entre em contato:
 - 📧 andrem4rks@gmail.com
 - 💼 [LinkedIn](https://linkedin.com/in/andrem4rks)
 
-[Voltar ao índice](#índice)
+---
 
 ## Funcionalidades
+
+[Voltar ao índice](#índice)
+
 ### 1. **Autenticação**
 - **Login com e-mail e senha** – ✅ Concluído
 - **Cadastro de novos usuários** 🛠️ Em desenvolvimento
@@ -84,12 +91,12 @@ Entre em contato:
 
 - **Exclusão** - ✅ Concluído
 
-
-[Voltar ao índice](#índice)
-
 ---  
 
 ## Screenshots
+
+[Voltar ao índice](#índice)
+
 ### Tela de Login
 ![Tela de Login](/screenshots/tela-login.png)
 
@@ -132,11 +139,11 @@ Entre em contato:
 - Tela de exclusão:  
   ![Tela de listagem](/screenshots/pessoa/tela-excluir-pessoa.png)
 
-[Voltar ao índice](#índice)
-
 ---
 
 ## Requisitos
+
+[Voltar ao índice](#índice)
 
 Antes de executar o projeto, verifique se você tem os seguintes itens instalados:
 
@@ -144,10 +151,11 @@ Antes de executar o projeto, verifique se você tem os seguintes itens instalado
 - [✅] [Docker Compose](https://docs.docker.com/compose/) (opcional, mas recomendado)
 - [❌] Java, etc. (não é necessário instalar localmente se usar Docker)
 
-[Voltar ao índice](#índice)
-
 ---  
+
 ## Como executar
+
+[Voltar ao índice](#índice)
 
 Passos para rodar o projeto localmente:
 
@@ -167,9 +175,30 @@ usuario: admin
 senha: admin  
 ```  
 
+---
+
+## Tecnologias Utilizadas
+
 [Voltar ao índice](#índice)
 
+**Java**: Linguagem de programação principal.
+**Spring Boot**: Framework para construir a aplicação.
+**Spring Web**: Para criar serviços web RESTful.
+**Spring Data JPA**: Para acesso e gerenciamento de banco de dados.
+**Spring Security**: Para autenticação e autorização.
+**Thymeleaf**: Template engine para desenvolvimento WEB.
+**Bootstrap**: Framework front-end para criação de layouts responsivos e interfaces de usuário modernas.
+**jQuery**: Biblioteca JavaScript para simplificar a manipulação de DOM, eventos, animações e chamadas AJAX.
+**jQuery Validation**: Plugin jQuery para validar formulários e campos de entrada em tempo real.
+**Datatables**: Plugin jQuery para criar tabelas interativas com recursos como paginação, ordenação, pesquisa e filtros em tempo real. Ele facilita a exibição e manipulação de grandes conjuntos de dados de maneira eficiente e personalizável em páginas web.
+**SweetAlert**: Biblioteca para criar alertas e caixas de diálogo bonitas e personalizadas em JavaScript.
+**PostgreSQL**: Banco de dados relacional
+
+---
+
 ## Estrutura
+
+[Voltar ao índice](#índice)
 
 ```
 src
@@ -281,15 +310,16 @@ src
 │                   └── listar-script.html
 ```
 
-[Voltar ao índice](#índice)
+---
 
 ## Licença
+
+[Voltar ao índice](#índice)
+
 Este projeto está sob a licença Attribution-NonCommercial 4.0 International.
 
 Copyright (c) 2025 André Marks Santos de Lima
 
 Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-[Voltar ao índice](#indice)
 
   
