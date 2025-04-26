@@ -25,7 +25,7 @@ listagem de pessoas e listagem de dependentes relacionados.
 Foi um projeto desenvolvido durante minha função como desenvolvedor Java na assembléia legislativa do estado do Acre. Com  
 o objetivo de me tornar proeficiente no desenvolvimento utilizando as ferramentas da casa.
 
-[Voltar ao índice](#-indice)
+[Voltar ao índice](#-índice)
 
 ## 👨‍💻 Autor
 
@@ -35,7 +35,7 @@ Entre em contato:
 - 📧 andrem4rks@gmail.com
 - 💼 [LinkedIn](https://linkedin.com/in/andrem4rks)
 
-[Voltar ao índice](#-indice)
+[Voltar ao índice](#-índice)
 
 ## ✅ Funcionalidades
 ### 1. **Autenticação**
