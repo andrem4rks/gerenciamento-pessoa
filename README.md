@@ -22,10 +22,8 @@
 
 [Voltar ao índice](#índice)
 
-Este sistema foi desenvolvido para gerenciar pessoas, possuindo autenticação, cadastro de pessoas, cadastro de dependentes,  
-listagem de pessoas e listagem de dependentes relacionados.  
-Foi um projeto desenvolvido durante minha função como desenvolvedor Java na assembléia legislativa do estado do Acre. Com  
-o objetivo de me tornar proeficiente no desenvolvimento utilizando as ferramentas da casa.
+Este sistema foi desenvolvido para gerenciar pessoas, possuindo autenticação, cadastro de pessoas, cadastro de dependentes, listagem de pessoas e listagem de dependentes relacionados. <br> 
+Foi um projeto desenvolvido durante minha função como desenvolvedor Java na assembléia legislativa do estado do Acre. Com  o objetivo de me tornar proeficiente no desenvolvimento utilizando as ferramentas da casa.
 
 ---
 
@@ -181,31 +179,19 @@ senha: admin
 
 [Voltar ao índice](#índice)
 
-**Java**: Linguagem de programação principal.
-
-**Spring Boot**: Framework para construir a aplicação.
-
-**Spring Web**: Para criar serviços web RESTful.
-
-**Spring Data JPA**: Para acesso e gerenciamento de banco de dados.
-
-**Spring Security**: Para autenticação e autorização.
-
-**Thymeleaf**: Template engine para desenvolvimento WEB.
-
-**Bootstrap**: Framework front-end para criação de layouts responsivos e interfaces de usuário modernas.
-
-**jQuery**: Biblioteca JavaScript para simplificar a manipulação de DOM, eventos, animações e chamadas AJAX.
-
-**jQuery Validation**: Plugin jQuery para validar formulários e campos de entrada em tempo real.
-
-**Datatables**: Plugin jQuery para criar tabelas interativas com recursos como paginação, ordenação, pesquisa e filtros em tempo real. Ele facilita a exibição e manipulação de grandes conjuntos de dados de maneira eficiente e personalizável em páginas web.
-
-**SweetAlert**: Biblioteca para criar alertas e caixas de diálogo bonitas e personalizadas em JavaScript.
-
-**PostgreSQL**: Banco de dados relacional.
-
-**Docker**: Plataforma para criar, empacotar e executar aplicações em contêineres, garantindo que funcionem de forma consistente em diferentes ambientes de desenvolvimento, teste e produção.
+**Java**: Linguagem de programação principal. <br> 
+**Spring Boot**: Framework para construir a aplicação. <br> 
+**Spring Web**: Para criar serviços web RESTful. <br> 
+**Spring Data JPA**: Para acesso e gerenciamento de banco de dados. <br> 
+**Spring Security**: Para autenticação e autorização. <br> 
+**Thymeleaf**: Template engine para desenvolvimento WEB. <br> 
+**Bootstrap**: Framework front-end para criação de layouts responsivos e interfaces de usuário modernas. <br> 
+**jQuery**: Biblioteca JavaScript para simplificar a manipulação de DOM, eventos, animações e chamadas AJAX. <br> 
+**jQuery Validation**: Plugin jQuery para validar formulários e campos de entrada em tempo real. <br> 
+**Datatables**: Plugin jQuery para criar tabelas interativas com recursos como paginação, ordenação, pesquisa e filtros em tempo real. Ele facilita a exibição e manipulação de grandes conjuntos de dados de maneira eficiente e personalizável em páginas web. <br> 
+**SweetAlert**: Biblioteca para criar alertas e caixas de diálogo bonitas e personalizadas em JavaScript. <br> 
+**PostgreSQL**: Banco de dados relacional. <br> 
+**Docker**: Plataforma para criar, empacotar e executar aplicações em contêineres, garantindo que funcionem de forma consistente em diferentes ambientes de desenvolvimento, teste e produção. <br> 
 
 ---
 
