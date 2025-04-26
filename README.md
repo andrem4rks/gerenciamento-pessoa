@@ -7,7 +7,7 @@
 ## 📑 Índice
 
 - [📌 Descrição](#descrição)
--  [👨‍💻 Autor](#autor)
+- [👨‍💻 Autor](#autor)
 - [✅ Funcionalidades](#funcionalidades)
 - [🖼️ Screenshots](#screenshots)
 - ⚙️ [Requisitos](#requisitos)
@@ -170,6 +170,8 @@ senha: admin
 [Voltar ao índice](#indice)
 
 ## 🔩Estrutura
+
+```
 src
 ├── main
 │   ├── java
@@ -277,7 +279,7 @@ src
 │               └── pessoa
 │                   ├── cadastrar-script.html
 │                   └── listar-script.html
-
+```
 
 [Voltar ao índice](#indice)
 
