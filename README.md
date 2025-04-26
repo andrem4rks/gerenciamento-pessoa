@@ -203,7 +203,9 @@ senha: admin
 
 **SweetAlert**: Biblioteca para criar alertas e caixas de diálogo bonitas e personalizadas em JavaScript.
 
-**PostgreSQL**: Banco de dados relacional
+**PostgreSQL**: Banco de dados relacional.
+
+**Docker**: Plataforma para criar, empacotar e executar aplicações em contêineres, garantindo que funcionem de forma consistente em diferentes ambientes de desenvolvimento, teste e produção.
 
 ---
 
