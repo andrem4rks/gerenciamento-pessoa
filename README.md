@@ -1,4 +1,4 @@
-# Nome do Projeto
+# Gerenciamento de Pessoas
 
 > CRUD estudo montado durante meu período de desenvolvimento na Assembléia Legislativa do Estado do Acre.
 
@@ -170,6 +170,114 @@ senha: admin
 [Voltar ao índice](#indice)
 
 ## 🔩Estrutura
+src
+├── main
+│   ├── java
+│   │   └── marks
+│   │       └── gerenciamentopessoa
+│   │           ├── config
+│   │           │   ├── SecurityConfig.java
+│   │           │   └── UserService.java
+│   │           ├── controller
+│   │           │   ├── DependenteController.java
+│   │           │   ├── HomeController.java
+│   │           │   ├── LoginController.java
+│   │           │   └── PessoaController.java
+│   │           ├── GerenciamentoPessoaApplication.java
+│   │           ├── model
+│   │           │   ├── Campos.java
+│   │           │   ├── CEP.java
+│   │           │   ├── Credenciais.java
+│   │           │   ├── Deficiencia.java
+│   │           │   ├── Dependente.java
+│   │           │   ├── Endereco.java
+│   │           │   ├── EstadoCivil.java
+│   │           │   ├── Instrucao.java
+│   │           │   ├── Pais.java
+│   │           │   ├── Pessoa.java
+│   │           │   ├── PessoaPrincipal.java
+│   │           │   ├── Raca.java
+│   │           │   ├── Sexo.java
+│   │           │   ├── TipoDependente.java
+│   │           │   ├── TipoEndereco.java
+│   │           │   └── Usuario.java
+│   │           ├── repository
+│   │           │   ├── cepRepository.java
+│   │           │   ├── credenciaisRepository.java
+│   │           │   ├── dependenteRepository.java
+│   │           │   ├── enderecoRepository.java
+│   │           │   ├── estadoCivilRepository.java
+│   │           │   ├── instrucaoRepository.java
+│   │           │   ├── paisRepository.java
+│   │           │   ├── pessoaRepository.java
+│   │           │   ├── racaRepository.java
+│   │           │   ├── sexoRepository.java
+│   │           │   ├── tipoDependenteRepository.java
+│   │           │   ├── tipoEnderecoRepository.java
+│   │           │   └── UsuarioRepository.java
+│   │           └── service
+│   │               ├── DependenteService.java
+│   │               ├── EstadoCivilService.java
+│   │               ├── InstrucaoService.java
+│   │               ├── PaisService.java
+│   │               ├── PessoaService.java
+│   │               ├── RacaService.java
+│   │               ├── SexoService.java
+│   │               ├── TipoDependenteService.java
+│   │               └── TipoEnderecoService.java
+│   └── resources
+│       ├── application-docker.yml
+│       ├── application.yml
+│       ├── data.sql
+│       ├── static
+│       │   ├── css
+│       │   │   ├── bootstrap
+│       │   │   │   ├── bootstrap.css
+│       │   │   │   └── bootstrap.css.map
+│       │   │   ├── datatable
+│       │   │   │   └── datatables.css
+│       │   │   ├── listar-dependentes.css
+│       │   │   ├── listar-pessoa.css
+│       │   │   └── main.css
+│       │   └── js
+│       │       ├── bootstrap
+│       │       │   ├── bootstrap.js
+│       │       │   └── bootstrap.js.map
+│       │       ├── datatable
+│       │       │   ├── datatablesFixedHeader.min.js
+│       │       │   ├── datatables.js
+│       │       │   ├── datatables.min.js
+│       │       │   └── pt-BR.json
+│       │       ├── icons
+│       │       │   └── icons.js
+│       │       ├── jquery
+│       │       │   └── jquery-3.6.1.min.js
+│       │       ├── jquery-validate
+│       │       │   └── jquery.validate.min.js
+│       │       └── sweetalert
+│       │           └── sweetalert2.min.js
+│       └── templates
+│           ├── components
+│           │   ├── header.html
+│           │   └── modal.html
+│           ├── home.html
+│           ├── layout.html
+│           ├── login.html
+│           ├── main-pages
+│           │   ├── dependente
+│           │   │   ├── cadastrar-dependente.html
+│           │   │   └── listar-dependentes.html
+│           │   └── pessoa
+│           │       ├── cadastrar-pessoa.html
+│           │       └── listar-pessoa.html
+│           └── scripts
+│               ├── dependente
+│               │   ├── cadastrar-script.html
+│               │   └── listar-script.html
+│               └── pessoa
+│                   ├── cadastrar-script.html
+│                   └── listar-script.html
+
 
 [Voltar ao índice](#indice)
 
