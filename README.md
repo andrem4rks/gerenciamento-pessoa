@@ -25,7 +25,7 @@ listagem de pessoas e listagem de dependentes relacionados.
 Foi um projeto desenvolvido durante minha função como desenvolvedor Java na assembléia legislativa do estado do Acre. Com  
 o objetivo de me tornar proeficiente no desenvolvimento utilizando as ferramentas da casa.
 
-[Voltar ao índice](#indice)
+[Voltar ao índice](#-indice)
 
 ## 👨‍💻 Autor
 
@@ -35,7 +35,7 @@ Entre em contato:
 - 📧 andrem4rks@gmail.com
 - 💼 [LinkedIn](https://linkedin.com/in/andrem4rks)
 
-[Voltar ao índice](#indice)
+[Voltar ao índice](#-indice)
 
 ## ✅ Funcionalidades
 ### 1. **Autenticação**
@@ -85,7 +85,7 @@ Entre em contato:
 - **Exclusão** - ✅ Concluído
 
 
-[Voltar ao índice](#indice)
+[Voltar ao índice](#-indice)
 
 ---  
 
@@ -132,7 +132,7 @@ Entre em contato:
 - Tela de exclusão:  
   ![Tela de listagem](/screenshots/pessoa/tela-excluir-pessoa.png)
 
-[Voltar ao índice](#indice)
+[Voltar ao índice](#-indice)
 
 ---
 
@@ -167,7 +167,7 @@ usuario: admin
 senha: admin  
 ```  
 
-[Voltar ao índice](#indice)
+[Voltar ao índice](#-indice)
 
 ## 🔩Estrutura
 
@@ -281,7 +281,7 @@ src
 │                   └── listar-script.html
 ```
 
-[Voltar ao índice](#indice)
+[Voltar ao índice](#-indice)
 
 ## 📄 Licença
 Este projeto está sob a licença Attribution-NonCommercial 4.0 International.
@@ -290,6 +290,6 @@ Copyright (c) 2025 André Marks Santos de Lima
 
 Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-[Voltar ao índice](#indice)
+[Voltar ao índice](#-indice)
 
   
