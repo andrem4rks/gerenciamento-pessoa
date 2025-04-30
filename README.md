@@ -157,21 +157,28 @@ Antes de executar o projeto, verifique se você tem os seguintes itens instalado
 
 Passos para rodar o projeto localmente:
 
+1° passo:
 ```bash  
 # Clone o repositório  
-git clone https://github.com/andrem4rks/gerenciamento-pessoa.git  
-  
+git clone https://github.com/andrem4rks/gerenciamento-pessoa.git
+```
+
+2° passo:
+```bash
 # Acesse a pasta do projeto  
-cd gerencimento-pessoa/  
-  
+cd gerencimento-pessoa/
+``` 
+
+3° passo:
+```bash
 # Execute o docker compose  
-docker compose -f docker/gerenciamento-pessoa-pg/docker-compose.yml up -d  
+docker compose -f docker/gerenciamento-pessoa-pg/docker-compose.yml up -d
+```
   
-# Acesso  
+**Finalmente**:
 Acesse atrávez da seguinte url: localhost:8080/login  
 usuario: admin  
 senha: admin  
-```  
 
 ---
 
