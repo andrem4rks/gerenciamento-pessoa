@@ -175,10 +175,19 @@ cd gerencimento-pessoa/
 docker compose -f docker/gerenciamento-pessoa-pg/docker-compose.yml up -d
 ```
   
-**Finalmente**:
-Acesse atrávez da seguinte url: localhost:8080/login  
-usuario: admin  
-senha: admin  
+**Dados para acesso:**:
+Acesse atrávez da seguinte [URL](localhost:8080/login): <br>
+```bash
+localhost:8080/login
+```
+usuario: 
+```bash
+admin
+```
+senha: 
+```bash
+admin
+```
 
 ---
 
